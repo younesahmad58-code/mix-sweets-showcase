@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Award, Package, Truck, ShieldCheck, Star, Users, Calendar, Box } from 'lucide-react';
+import { Award, Package, Truck, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
 import { categories, demoProducts } from '@/data/products';
@@ -18,20 +18,13 @@ const Index: React.FC = () => {
     { icon: Truck, title: t('why.distribution.title'), desc: t('why.distribution.desc') },
   ];
 
-  const stats = [
-    { icon: Users, value: '150+', label: t('trust.partners') },
-    { icon: Calendar, value: '25+', label: t('trust.fairs') },
-    { icon: Star, value: '30+', label: t('trust.years') },
-    { icon: Box, value: '200+', label: t('trust.products') },
-  ];
-
   const seasonalProducts = demoProducts.filter(p => p.badges.includes('seasonal') || p.badges.includes('new'));
 
   return (
     <main>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-chocolate to-cocoa opacity-95" />
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(20,20%,18%)] via-[hsl(15,15%,22%)] to-[hsl(20,10%,28%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(var(--gold)/0.15),_transparent_60%)]" />
         <div className="relative z-10 container mx-auto px-4 text-center py-32">
           <motion.h1
@@ -161,28 +154,14 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      {/* Trust / Stats */}
+      {/* Experience & Tradition (replaces Trust/Stats) */}
       <section className="py-24 bg-primary">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
           <ScrollReveal>
-            <div className="text-center">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-cream">{t('trust.title')}</h2>
-              <p className="mt-4 text-cream/60 max-w-xl mx-auto">{t('trust.subtitle')}</p>
-            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground">{t('tradition.title')}</h2>
+            <p className="mt-8 text-primary-foreground/70 leading-relaxed">{t('tradition.p1')}</p>
+            <p className="mt-4 text-primary-foreground/70 leading-relaxed">{t('tradition.p2')}</p>
           </ScrollReveal>
-          <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="text-center">
-                  <div className="w-14 h-14 mx-auto rounded-xl bg-accent/15 flex items-center justify-center mb-4">
-                    <stat.icon className="w-7 h-7 text-accent" />
-                  </div>
-                  <div className="font-display text-3xl md:text-4xl font-bold text-cream">{stat.value}</div>
-                  <p className="mt-2 text-sm text-cream/60">{stat.label}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
         </div>
       </section>
 

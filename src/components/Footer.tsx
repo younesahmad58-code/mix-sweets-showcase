@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
-import logo from '@/assets/logo.jpg';
+import logo from '@/assets/logo_2.png';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -14,7 +14,9 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img src={logo} alt="MIX SWEETS" className="h-10 w-auto rounded" />
+              <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1.5 shadow-sm inline-block">
+                <img src={logo} alt="MIX SWEETS" className="h-10 w-auto rounded" />
+              </div>
               <span className="font-display text-xl font-bold">MIX SWEETS</span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">

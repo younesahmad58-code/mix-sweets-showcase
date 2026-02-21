@@ -13,10 +13,9 @@ export interface Product {
 export const categories = [
   { id: 'biscuits', label: { ro: 'Biscuiți', en: 'Biscuits', ar: 'بسكويت' } },
   { id: 'cakes', label: { ro: 'Prăjituri', en: 'Cakes', ar: 'كعك' } },
-  { id: 'candies', label: { ro: 'Bomboane', en: 'Candies', ar: 'حلوى' } },
-  { id: 'seasonal', label: { ro: 'Sezoniere', en: 'Seasonal', ar: 'موسمية' } },
+  { id: 'chocolate', label: { ro: 'Ciocolată', en: 'Chocolate', ar: 'شوكولاتة' } },
   { id: 'lollipops', label: { ro: 'Acadele', en: 'Lollipops', ar: 'مصاصات' } },
-  { id: 'wafers', label: { ro: 'Napolitane', en: 'Wafers', ar: 'ويفر' } },
+  { id: 'jellies', label: { ro: 'Jeleuri', en: 'Jellies', ar: 'جيلي' } },
 ];
 
 export const demoProducts: Product[] = [
@@ -39,7 +38,7 @@ export const demoProducts: Product[] = [
       en: 'Traditional Romanian gingerbread with cinnamon and honey, prepared following old family recipes.',
       ar: 'خبز الزنجبيل الروماني التقليدي بالقرفة والعسل، محضر وفق وصفات عائلية قديمة.',
     },
-    category: 'seasonal', images: ['/placeholder.svg'], grammage: '300g',
+    category: 'cakes', images: ['/placeholder.svg'], grammage: '300g',
     badges: ['seasonal'], variants: ['300g', '500g'],
   },
   {
@@ -83,7 +82,7 @@ export const demoProducts: Product[] = [
       en: 'Crispy wafers with multiple layers of rich chocolate cream.',
       ar: 'ويفر مقرمش بطبقات متعددة من كريمة الشوكولاتة الغنية.',
     },
-    category: 'wafers', images: ['/placeholder.svg'], grammage: '200g',
+    category: 'chocolate', images: ['/placeholder.svg'], grammage: '200g',
     badges: ['popular'], variants: ['200g', '400g'],
   },
   {
@@ -94,7 +93,7 @@ export const demoProducts: Product[] = [
       en: 'Elegant mix of candies with various fillings: caramel, chocolate, fruit, and mint.',
       ar: 'مزيج أنيق من الحلويات بحشوات متنوعة: كراميل، شوكولاتة، فواكه، ونعناع.',
     },
-    category: 'candies', images: ['/placeholder.svg'], grammage: '400g',
+    category: 'chocolate', images: ['/placeholder.svg'], grammage: '400g',
     badges: [], variants: ['400g', '800g'],
   },
   {
@@ -105,7 +104,7 @@ export const demoProducts: Product[] = [
       en: 'Soft and aromatic jellies with natural fruit extract, coated in fine sugar.',
       ar: 'جيلي طري وعطري بخلاصة فواكه طبيعية، مغطى بالسكر الناعم.',
     },
-    category: 'candies', images: ['/placeholder.svg'], grammage: '300g',
+    category: 'jellies', images: ['/placeholder.svg'], grammage: '300g',
     badges: ['new'], variants: ['300g', '600g'],
   },
   {
@@ -116,7 +115,7 @@ export const demoProducts: Product[] = [
       en: 'Artisanal pralines with Belgian chocolate, filled with ganache and crunchy hazelnuts.',
       ar: 'برالين حرفية من الشوكولاتة البلجيكية، محشوة بالغاناش والبندق المقرمش.',
     },
-    category: 'candies', images: ['/placeholder.svg'], grammage: '200g',
+    category: 'chocolate', images: ['/placeholder.svg'], grammage: '200g',
     badges: ['popular'], variants: ['200g', '400g'],
   },
   {
