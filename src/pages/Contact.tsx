@@ -124,8 +124,8 @@ const Contact: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
             {infoCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
-                <div className="bg-white/40 backdrop-blur-lg border border-gold/[0.15] rounded-[20px] p-8 text-center shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.2)] hover:-translate-y-2 transition-all duration-500 h-full flex flex-col items-center" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
-                  <Icon3D icon={card.icon} variant="crimson" delay={i * 0.1} className="mb-5" />
+                <div className="card-3d p-8 text-center h-full flex flex-col items-center">
+                  <Icon3D icon={card.icon} variant="crimson" size="lg" delay={i * 0.1} className="mb-5" />
                   <h3 className="font-display text-lg font-semibold text-foreground mb-4">{card.title}</h3>
                   {card.content}
                 </div>
