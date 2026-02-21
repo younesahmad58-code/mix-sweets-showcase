@@ -7,6 +7,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
+import Icon3D from '@/components/Icon3D';
 import { categories, demoProducts } from '@/data/products';
 import { Language } from '@/i18n/translations';
 
@@ -99,9 +100,7 @@ const Index: React.FC = () => {
             {whyCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
                 <div className="relative bg-card rounded-[20px] p-8 shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.2)] hover:-translate-y-2 transition-all duration-[400ms] h-full border border-gold/[0.15]" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
-                  <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mb-6">
-                    <card.icon className="w-6 h-6 text-gold" />
-                  </div>
+                  <Icon3D icon={card.icon} variant="gold" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
+import Icon3D from '@/components/Icon3D';
 import logo from '@/assets/logo_2.png';
 
 const Footer: React.FC = () => {
@@ -41,17 +42,17 @@ const Footer: React.FC = () => {
           {/* Contact */}
           <div className="space-y-4">
             <h4 className="font-display text-lg font-semibold text-cream">{t('footer.contact')}</h4>
-            <div className="space-y-3 text-sm text-cream/35">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-gold/60" />
-                <span>Bdul. Voluntari 86, Sc. 1, Et. 1, Ap. BIR. 9, Cod 077190, Voluntari, Ilfov</span>
+            <div className="space-y-4 text-sm text-cream/35">
+              <div className="flex items-start gap-3">
+                <Icon3D icon={MapPin} variant="gold" size="sm" />
+                <span className="pt-2.5">Bdul. Voluntari 86, Sc. 1, Et. 1, Ap. BIR. 9, Cod 077190, Voluntari, Ilfov</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 shrink-0 text-gold/60" />
+              <div className="flex items-center gap-3">
+                <Icon3D icon={Phone} variant="gold" size="sm" />
                 <a href="tel:+40728980123" className="hover:text-gold transition-colors duration-200">0728 980 123</a>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 shrink-0 text-gold/60" />
+              <div className="flex items-center gap-3">
+                <Icon3D icon={Mail} variant="gold" size="sm" />
                 <a href="mailto:Contact.mixsweets@gmail.com" className="hover:text-gold transition-colors duration-200">Contact.mixsweets@gmail.com</a>
               </div>
             </div>
