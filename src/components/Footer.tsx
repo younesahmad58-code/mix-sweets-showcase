@@ -10,8 +10,6 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-cocoa text-cream relative">
-      {/* Gold gradient top line */}
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(to right, transparent, hsl(var(--gold)) 30%, hsl(var(--gold)) 70%, transparent)' }} />
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
@@ -22,7 +20,7 @@ const Footer: React.FC = () => {
               </div>
               <span className="font-display text-xl font-bold text-cream">MIX SWEETS</span>
             </div>
-            <div className="w-12 h-px bg-gold/20 mt-4" />
+            <div className="w-12 h-px bg-gold/10 mt-4" />
             <p className="text-sm text-cream/35 leading-relaxed">
               MIX SWEETS SRL<br />
               CUI: 46078008<br />
@@ -72,7 +70,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-cream/8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-8 border-t border-cream/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-cream/20">{t('footer.rights')}</p>
           <Link to="/admin" className="text-xs text-cream/10 hover:text-cream/25 transition-colors duration-200">
             {t('footer.admin')}

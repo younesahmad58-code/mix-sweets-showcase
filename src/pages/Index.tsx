@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Award, Sparkles, Truck, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-import WaveDivider from '@/components/WaveDivider';
+
 import FloatingBlobs from '@/components/FloatingBlobs';
 import GoldParticles from '@/components/GoldParticles';
 import SquishyCard from '@/components/SquishyCard';
@@ -102,7 +102,6 @@ const Index: React.FC = () => {
             {[
               { value: '30+', label: t('stats.years') },
               { value: '500+', label: t('stats.products') },
-              { value: '41', label: t('stats.counties') },
             ].map((stat, i) => (
               <React.Fragment key={i}>
                 {i > 0 && <div className="w-px h-8 bg-cream/15" />}
@@ -115,7 +114,6 @@ const Index: React.FC = () => {
           </motion.div>
         </div>
 
-        <WaveDivider variant="drip" className="absolute bottom-0 left-0 right-0" />
       </section>
 
       {/* ─── Why MIX SWEETS ─── */}
@@ -133,7 +131,7 @@ const Index: React.FC = () => {
             {whyCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
                 <div className="relative bg-card rounded-[20px] p-8 shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.2)] hover:-translate-y-2 transition-all duration-[400ms] h-full border border-gold/[0.15]" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
-                  <Icon3D icon={card.icon} variant="gold" delay={i * 0.1} className="mb-6" />
+                  <Icon3D icon={card.icon} variant="crimson" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </div>
@@ -144,7 +142,6 @@ const Index: React.FC = () => {
       </section>
 
       {/* ─── Categories ─── */}
-      <WaveDivider variant="glaze" color="hsl(var(--cocoa))" flip />
       <section className="py-28 bg-cocoa">
         <div className="container mx-auto px-4">
           <ScrollReveal>
@@ -187,7 +184,6 @@ const Index: React.FC = () => {
           </div>
         </div>
       </section>
-      <WaveDivider variant="drip" color="hsl(var(--background))" />
 
       {/* ─── Seasonal / New Products ─── */}
       <section className="py-28 bg-background">
@@ -235,7 +231,6 @@ const Index: React.FC = () => {
       </section>
 
       {/* ─── Experience & Tradition with Stats Grid ─── */}
-      <WaveDivider variant="glaze" color="hsl(var(--cocoa))" flip />
       <section className="py-28 bg-cocoa relative overflow-hidden">
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
@@ -253,12 +248,10 @@ const Index: React.FC = () => {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0">
               {[
                 { value: 30, suffix: '+', label: t('stats.years') },
                 { value: 500, suffix: '+', label: t('stats.products') },
-                { value: 41, suffix: '', label: t('stats.counties') },
-                { value: 150, suffix: '+', label: t('stats.partners') },
               ].map((stat, i) => (
                 <ScrollReveal key={i} delay={i * 0.1}>
                   <div className="bg-cream/[0.04] border border-cream/10 rounded-[20px] p-6 text-center hover:-translate-y-1 transition-all duration-300 group">
@@ -275,7 +268,6 @@ const Index: React.FC = () => {
           </div>
         </div>
       </section>
-      <WaveDivider variant="drip" color="hsl(var(--primary))" />
 
       {/* ─── CTA Strip ─── */}
       <section className="py-24 bg-primary relative overflow-hidden">

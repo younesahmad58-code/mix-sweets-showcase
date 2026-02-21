@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -92,9 +92,7 @@ const Header: React.FC = () => {
               transition={{ type: 'spring', stiffness: 200, damping: 18 }}
               className="flex items-center gap-1.5 text-sm font-medium text-cream/60 hover:text-gold transition-colors"
             >
-              <Globe className="w-4 h-4" />
-              <span>{currentLang.flag}</span>
-              <ChevronDown className="w-3 h-3" />
+              <span>{currentLang.flag} {currentLang.code.toUpperCase()}</span>
             </motion.button>
             <AnimatePresence>
               {langOpen && (

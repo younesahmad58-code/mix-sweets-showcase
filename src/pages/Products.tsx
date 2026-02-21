@@ -5,7 +5,7 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { demoProducts, categories } from '@/data/products';
 import ScrollReveal from '@/components/ScrollReveal';
-import WaveDivider from '@/components/WaveDivider';
+
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import { motion } from 'framer-motion';
@@ -44,7 +44,7 @@ const Products: React.FC = () => {
             {t('products.title')}
           </h1>
         </div>
-        <WaveDivider variant="drip" className="absolute bottom-0 left-0 right-0" />
+        
       </section>
 
       <section className="py-16 bg-background">
