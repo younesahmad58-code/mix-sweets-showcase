@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Award, Package, Truck, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
+import WaveDivider from '@/components/WaveDivider';
 import { categories, demoProducts } from '@/data/products';
 import { Language } from '@/i18n/translations';
 
@@ -24,14 +25,19 @@ const Index: React.FC = () => {
     <main>
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(20,20%,18%)] via-[hsl(15,15%,22%)] to-[hsl(20,10%,28%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(var(--gold)/0.15),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#8B1A1A] via-[#A0153E] to-[#C62E65]" />
+        {/* Floating blur circles */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-pink-400/20 blur-3xl rounded-full" />
+        <div className="absolute bottom-32 right-16 w-96 h-96 bg-red-300/15 blur-3xl rounded-full" />
+        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-rose-400/10 blur-3xl rounded-full" />
+        <div className="absolute bottom-10 left-1/2 w-48 h-48 bg-pink-300/20 blur-3xl rounded-full" />
+
         <div className="relative z-10 container mx-auto px-4 text-center py-32">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-cream leading-tight max-w-4xl mx-auto"
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight max-w-4xl mx-auto"
           >
             {t('hero.title')}
           </motion.h1>
@@ -39,7 +45,7 @@ const Index: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 text-lg md:text-xl text-cream/70 max-w-2xl mx-auto leading-relaxed"
+            className="mt-6 text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed"
           >
             {t('hero.subtitle')}
           </motion.p>
@@ -51,19 +57,19 @@ const Index: React.FC = () => {
           >
             <Link
               to="/products"
-              className="inline-flex items-center justify-center px-8 py-4 bg-accent text-accent-foreground font-semibold rounded-lg hover:bg-gold-dark transition-colors text-base"
+              className="shine-effect inline-flex items-center justify-center px-8 py-4 bg-white text-candy-red font-semibold rounded-3xl hover:shadow-lg hover:shadow-white/20 transition-all text-base"
             >
               {t('hero.cta.products')}
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-cream/30 text-cream font-semibold rounded-lg hover:bg-cream/10 transition-colors text-base"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/40 text-white font-semibold rounded-3xl hover:bg-white/10 transition-all text-base"
             >
               {t('hero.cta.offer')}
             </Link>
           </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+        <WaveDivider className="absolute bottom-0 left-0 right-0" />
       </section>
 
       {/* Why MIX SWEETS */}
@@ -75,9 +81,9 @@ const Index: React.FC = () => {
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {whyCards.map((card, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="group relative bg-card rounded-2xl p-8 border border-border hover:border-accent/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                  <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
-                    <card.icon className="w-7 h-7 text-accent" />
+                <div className="group relative bg-white rounded-3xl p-8 shadow-lg shadow-pink-100/50 hover:shadow-xl hover:shadow-pink-200/40 transition-all duration-300 hover:-translate-y-3">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[hsl(var(--candy-red)/0.1)] to-[hsl(var(--candy-pink)/0.1)] flex items-center justify-center mb-6 group-hover:from-[hsl(var(--candy-red)/0.2)] group-hover:to-[hsl(var(--candy-pink)/0.2)] transition-colors">
+                    <card.icon className="w-7 h-7 text-candy-red" />
                   </div>
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
@@ -89,7 +95,7 @@ const Index: React.FC = () => {
       </section>
 
       {/* Featured Categories */}
-      <section className="py-24 bg-muted">
+      <section className="py-24 bg-[#FFF5F5]">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-center text-foreground">{t('categories.title')}</h2>
@@ -99,10 +105,10 @@ const Index: React.FC = () => {
               <ScrollReveal key={cat.id} delay={i * 0.08}>
                 <Link
                   to={`/products?category=${cat.id}`}
-                  className="snap-start flex-shrink-0 w-48 h-48 bg-card rounded-2xl border border-border hover:border-accent/40 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                  className="snap-start flex-shrink-0 w-48 h-48 bg-white rounded-3xl shadow-md hover:shadow-xl hover:shadow-pink-200/30 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-3"
                 >
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
-                    <Package className="w-8 h-8 text-accent" />
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--candy-red)/0.1)] to-[hsl(var(--candy-pink)/0.2)] flex items-center justify-center">
+                    <Package className="w-8 h-8 text-candy-red" />
                   </div>
                   <span className="font-display text-base font-semibold text-foreground">{cat.label[lang]}</span>
                 </Link>
@@ -125,7 +131,7 @@ const Index: React.FC = () => {
             {seasonalProducts.slice(0, 3).map((product, i) => (
               <ScrollReveal key={product.id} delay={i * 0.1}>
                 <Link to={`/products/${product.slug}`} className="group block">
-                  <div className="bg-card rounded-2xl border border-border overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="bg-white rounded-3xl overflow-hidden shadow-md shadow-pink-100/30 hover:shadow-xl hover:-translate-y-3 transition-all duration-300">
                     <div className="aspect-[4/3] bg-muted flex items-center justify-center relative overflow-hidden">
                       <img
                         src={product.images[0]}
@@ -135,7 +141,7 @@ const Index: React.FC = () => {
                       />
                       <div className="absolute top-3 start-3 flex gap-2">
                         {product.badges.map(badge => (
-                          <span key={badge} className="px-2.5 py-1 bg-accent text-accent-foreground text-xs font-semibold rounded-full">
+                          <span key={badge} className="px-2.5 py-1 bg-candy-red text-white text-xs font-semibold rounded-full">
                             {t(`badge.${badge}`)}
                           </span>
                         ))}
@@ -154,26 +160,28 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      {/* Experience & Tradition (replaces Trust/Stats) */}
-      <section className="py-24 bg-primary">
+      {/* Experience & Tradition */}
+      <WaveDivider color="#8B1A1A" flip />
+      <section className="py-24 bg-gradient-to-r from-[#8B1A1A] to-[#A0153E]">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <ScrollReveal>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground">{t('tradition.title')}</h2>
-            <p className="mt-8 text-primary-foreground/70 leading-relaxed">{t('tradition.p1')}</p>
-            <p className="mt-4 text-primary-foreground/70 leading-relaxed">{t('tradition.p2')}</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">{t('tradition.title')}</h2>
+            <p className="mt-8 text-white/80 leading-relaxed">{t('tradition.p1')}</p>
+            <p className="mt-4 text-white/80 leading-relaxed">{t('tradition.p2')}</p>
           </ScrollReveal>
         </div>
       </section>
+      <WaveDivider color="hsl(var(--candy-red))" />
 
       {/* CTA Strip */}
-      <section className="py-20 bg-accent">
+      <section className="py-20 bg-candy-red">
         <div className="container mx-auto px-4 text-center">
           <ScrollReveal>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-accent-foreground">{t('cta.title')}</h2>
-            <p className="mt-4 text-accent-foreground/70 max-w-xl mx-auto">{t('cta.subtitle')}</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">{t('cta.title')}</h2>
+            <p className="mt-4 text-white/70 max-w-xl mx-auto">{t('cta.subtitle')}</p>
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-chocolate-light transition-colors text-base"
+              className="shine-effect mt-8 inline-flex items-center justify-center px-8 py-4 bg-white text-candy-red font-semibold rounded-3xl hover:shadow-lg hover:shadow-white/20 transition-all text-base"
             >
               {t('cta.button')}
             </Link>
