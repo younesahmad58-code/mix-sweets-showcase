@@ -2,7 +2,7 @@ import React from 'react';
 import { Award, Heart, Shield } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-import WaveDivider from '@/components/WaveDivider';
+
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
@@ -30,7 +30,7 @@ const About: React.FC = () => {
             </h1>
           </ScrollReveal>
         </div>
-        <WaveDivider variant="drip" className="absolute bottom-0 left-0 right-0" />
+        
       </section>
 
       {/* Story */}
@@ -50,7 +50,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Values */}
-      <WaveDivider variant="glaze" color="hsl(var(--cocoa))" flip />
+      
       <section className="py-28 bg-cocoa">
         <div className="container mx-auto px-4">
           <ScrollReveal>
@@ -65,7 +65,7 @@ const About: React.FC = () => {
             {values.map((v, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
                 <div className="bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-[20px] p-8 text-center hover:bg-cream/8 hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 h-full flex flex-col items-center" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
-                  <Icon3D icon={v.icon} variant="gold" delay={i * 0.1} className="mb-6" />
+                  <Icon3D icon={v.icon} variant="crimson" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-cream mb-3">{v.title}</h3>
                   <p className="text-sm text-cream/45 leading-relaxed">{v.desc}</p>
                 </div>
@@ -74,7 +74,7 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
-      <WaveDivider variant="drip" color="hsl(var(--background))" />
+      
     </main>
   );
 };

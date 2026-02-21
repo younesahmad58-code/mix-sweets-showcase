@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-import WaveDivider from '@/components/WaveDivider';
+
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
@@ -105,13 +105,11 @@ const Contact: React.FC = () => {
         <div className="absolute top-0 left-0 right-0 h-[120px] z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(18,8,4,0.6) 0%, transparent 100%)' }} />
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('contact.eyebrow')}</span>
-          <h1 className="mt-3 font-display text-4xl md:text-6xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
+          <h1 className="font-display text-4xl md:text-6xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
             {t('contact.title')}
           </h1>
           <p className="mt-4 text-cream/50 max-w-xl mx-auto text-lg">{t('contact.subtitle')}</p>
         </div>
-        <WaveDivider variant="drip" className="absolute bottom-0 left-0 right-0" />
       </section>
 
       {/* Info Cards */}
