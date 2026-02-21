@@ -105,6 +105,10 @@ export const translations: Record<Language, Record<string, string>> = {
     'badge.new': 'Nou',
     'badge.seasonal': 'Sezonier',
     'badge.popular': 'Popular',
+    'stats.years': 'Ani Experiență',
+    'stats.products': 'Produse',
+    'stats.counties': 'Județe',
+    'stats.partners': 'Parteneri',
   },
   en: {
     'nav.home': 'Home',
@@ -197,6 +201,10 @@ export const translations: Record<Language, Record<string, string>> = {
     'badge.new': 'New',
     'badge.seasonal': 'Seasonal',
     'badge.popular': 'Popular',
+    'stats.years': 'Years Experience',
+    'stats.products': 'Products',
+    'stats.counties': 'Counties',
+    'stats.partners': 'Partners',
   },
   ar: {
     'nav.home': 'الرئيسية',
@@ -289,5 +297,9 @@ export const translations: Record<Language, Record<string, string>> = {
     'badge.new': 'جديد',
     'badge.seasonal': 'موسمي',
     'badge.popular': 'مشهور',
+    'stats.years': 'سنوات خبرة',
+    'stats.products': 'منتج',
+    'stats.counties': 'محافظة',
+    'stats.partners': 'شريك',
   },
 };

@@ -9,7 +9,9 @@ const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-cocoa text-cream">
+    <footer className="bg-cocoa text-cream relative">
+      {/* Gold gradient top line */}
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(to right, transparent, hsl(var(--gold)) 30%, hsl(var(--gold)) 70%, transparent)' }} />
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
