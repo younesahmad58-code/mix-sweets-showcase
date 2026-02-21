@@ -19,7 +19,7 @@ const ProductDetail: React.FC = () => {
       <main className="pt-20 min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-display text-2xl font-bold text-foreground">Product not found</h1>
-          <Link to="/products" className="mt-4 inline-block text-candy-red hover:underline">{t('nav.products')}</Link>
+          <Link to="/products" className="mt-4 inline-block text-primary hover:underline">{t('nav.products')}</Link>
         </div>
       </main>
     );
@@ -31,14 +31,14 @@ const ProductDetail: React.FC = () => {
     <main className="pt-20">
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-candy-red transition-colors mb-8">
+          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
             <ArrowLeft className="w-4 h-4" /> {t('nav.products')}
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             {/* Image */}
             <ScrollReveal>
-              <div className="aspect-square bg-muted rounded-[2.5rem] overflow-hidden candy-shadow">
+              <div className="aspect-square bg-muted rounded-3xl overflow-hidden candy-shadow border border-border/50">
                 <img
                   src={product.images[0]}
                   alt={product.name[lang]}
@@ -53,7 +53,7 @@ const ProductDetail: React.FC = () => {
               <div className="lg:sticky lg:top-28">
                 <div className="flex gap-2 mb-4">
                   {product.badges.map(badge => (
-                    <span key={badge} className="px-3 py-1 bg-candy-red text-white text-xs font-bold rounded-full shadow-lg">
+                    <span key={badge} className="px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
                       {t(`badge.${badge}`)}
                     </span>
                   ))}
@@ -79,9 +79,9 @@ const ProductDetail: React.FC = () => {
                       {product.variants.map(v => (
                         <motion.span
                           key={v}
-                          whileHover={{ scale: 1.06, y: -2 }}
-                          transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                          className="px-5 py-2.5 bg-cream rounded-[1.5rem] text-sm font-medium text-foreground candy-shadow cursor-default"
+                          whileHover={{ scale: 1.04 }}
+                          transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+                          className="px-5 py-2.5 bg-muted rounded-full text-sm font-medium text-foreground border border-border/50 cursor-default"
                         >
                           {v}
                         </motion.span>
@@ -92,7 +92,7 @@ const ProductDetail: React.FC = () => {
 
                 <Link
                   to="/contact"
-                  className="shine-auto relative mt-10 inline-flex items-center justify-center px-10 py-4.5 bg-candy-red text-white font-bold rounded-[2rem] hover:shadow-[0_15px_40px_rgba(220,38,38,0.3)] transition-all duration-300 text-base"
+                  className="shine-auto relative mt-10 inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:shadow-[0_8px_32px_rgba(178,24,48,0.25)] transition-all duration-500 text-sm tracking-wide"
                 >
                   {t('products.request')}
                 </Link>
@@ -110,9 +110,9 @@ const ProductDetail: React.FC = () => {
                 {related.map((p, i) => (
                   <SquishyCard key={p.id} delay={i * 0.1}>
                     <Link to={`/products/${p.slug}`} className="group block">
-                      <div className="bg-white rounded-[2rem] overflow-hidden candy-shadow hover:candy-shadow-hover transition-shadow duration-500">
+                      <div className="bg-background rounded-3xl overflow-hidden candy-shadow hover:candy-shadow-hover transition-all duration-500 border border-border/50">
                         <div className="aspect-[4/3] bg-muted overflow-hidden">
-                          <img src={p.images[0]} alt={p.name[lang]} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }} />
+                          <img src={p.images[0]} alt={p.name[lang]} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }} />
                         </div>
                         <div className="p-5">
                           <h3 className="font-display text-base font-semibold text-foreground">{p.name[lang]}</h3>

@@ -8,7 +8,7 @@ const WhatsAppButton: React.FC = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 1500);
+    const timer = setTimeout(() => setVisible(true), 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -20,8 +20,7 @@ const WhatsAppButton: React.FC = () => {
     <AnimatePresence>
       {visible && (
         <div className="fixed bottom-6 end-6 z-50">
-          {/* Pulse ring */}
-          <div className="absolute inset-0 rounded-full bg-[#25D366] animate-[pulse_2s_ease-in-out_infinite] opacity-40" />
+          <div className="absolute inset-0 rounded-full bg-whatsapp/20 animate-[pulse_3s_ease-in-out_infinite]" />
           <motion.a
             href={url}
             target="_blank"
@@ -29,9 +28,10 @@ const WhatsAppButton: React.FC = () => {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-[0_0_20px_rgba(37,211,102,0.5)] animate-whatsapp-glow transition-shadow"
+            transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+            className="relative flex items-center justify-center w-14 h-14 rounded-full bg-whatsapp text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] animate-whatsapp-glow transition-shadow"
             aria-label="WhatsApp"
           >
             <MessageCircle className="w-7 h-7" />

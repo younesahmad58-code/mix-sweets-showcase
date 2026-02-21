@@ -18,11 +18,12 @@ const About: React.FC = () => {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="py-28 bg-gradient-to-br from-[#8B1A1A] via-[#B91C4A] to-[#E0336E] relative overflow-hidden">
-        <FloatingBlobs className="opacity-30" />
+      <section className="py-28 bg-cocoa relative overflow-hidden">
+        <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <ScrollReveal>
-            <h1 className="font-display text-4xl md:text-6xl font-bold text-white" style={{ letterSpacing: '-0.04em' }}>
+            <span className="text-gold text-xs font-medium tracking-[0.2em] uppercase">Our Story</span>
+            <h1 className="mt-4 font-display text-4xl md:text-6xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
               {t('about.title')}
             </h1>
           </ScrollReveal>
@@ -47,29 +48,33 @@ const About: React.FC = () => {
       </section>
 
       {/* Values */}
-      <WaveDivider variant="glaze" color="hsl(var(--cream))" flip />
-      <section className="py-28 bg-cream">
+      <WaveDivider variant="glaze" color="hsl(var(--cocoa))" flip />
+      <section className="py-28 bg-cocoa">
         <div className="container mx-auto px-4">
           <ScrollReveal>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-center text-foreground mb-16" style={{ letterSpacing: '-0.03em' }}>
+            <div className="text-center mb-4">
+              <span className="text-gold text-xs font-medium tracking-[0.2em] uppercase">What We Stand For</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-center text-cream mb-16" style={{ letterSpacing: '-0.03em' }}>
               {t('about.values.title')}
             </h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {values.map((v, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
-                <div className="bg-white rounded-[2rem] p-8 text-center candy-shadow hover:candy-shadow-hover transition-shadow duration-500 h-full">
-                  <div className="w-16 h-16 mx-auto rounded-[1.25rem] bg-gradient-to-br from-candy-red/10 to-candy-pink/15 flex items-center justify-center mb-6">
-                    <v.icon className="w-7 h-7 text-candy-red" />
+                <div className="bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-3xl p-8 text-center hover:bg-cream/10 hover:border-gold/20 transition-all duration-500 h-full">
+                  <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-gold/10 to-primary/10 flex items-center justify-center mb-6">
+                    <v.icon className="w-6 h-6 text-gold" />
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">{v.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+                  <h3 className="font-display text-xl font-semibold text-cream mb-3">{v.title}</h3>
+                  <p className="text-sm text-cream/50 leading-relaxed">{v.desc}</p>
                 </div>
               </SquishyCard>
             ))}
           </div>
         </div>
       </section>
+      <WaveDivider variant="drip" color="hsl(var(--background))" />
     </main>
   );
 };
