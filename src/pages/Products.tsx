@@ -36,6 +36,7 @@ const Products: React.FC = () => {
   return (
     <main className="pt-20">
       <section className="py-16 bg-cocoa relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-[120px] z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(18,8,4,0.6) 0%, transparent 100%)' }} />
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('products.eyebrow')}</span>

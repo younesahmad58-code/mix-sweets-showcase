@@ -1,3 +1,14 @@
+import rainbowCanes from '@/assets/products/rainbow-canes.jpeg';
+import flashlightCandy from '@/assets/products/flashlight-candy.jpeg';
+import sprayCandy from '@/assets/products/spray-candy.jpeg';
+import bulletSpray from '@/assets/products/bullet-spray.jpeg';
+import monkeyPudding from '@/assets/products/monkey-pudding.jpeg';
+import loveLollipop from '@/assets/products/love-lollipop.jpeg';
+import balloonGummy from '@/assets/products/balloon-gummy.jpeg';
+import fruitSticks from '@/assets/products/fruit-sticks.jpeg';
+import iceCreamMarshmallow from '@/assets/products/ice-cream-marshmallow.jpeg';
+import flowerLollipops from '@/assets/products/flower-lollipops.jpeg';
+
 export interface Product {
   id: string;
   slug: string;
@@ -20,113 +31,113 @@ export const categories = [
 
 export const demoProducts: Product[] = [
   {
-    id: '1', slug: 'biscuiti-glazurati',
-    name: { ro: 'Biscuiți Glazurați', en: 'Glazed Biscuits', ar: 'بسكويت مزجج' },
+    id: '1', slug: 'rainbow-candy-canes',
+    name: { ro: 'Acadele Baston Rainbow', en: 'Rainbow Candy Canes', ar: 'عصا حلوى قوس قزح' },
     description: {
-      ro: 'Biscuiți crocanți acoperiți cu un strat fin de glazură de ciocolată. Perfecti pentru momentele de răsfăț alături de o ceașcă de cafea.',
-      en: 'Crunchy biscuits coated with a fine layer of chocolate glaze. Perfect for indulgent moments with a cup of coffee.',
-      ar: 'بسكويت مقرمش مغطى بطبقة رقيقة من الشوكولاتة. مثالي للحظات الاستمتاع مع فنجان قهوة.',
+      ro: 'Acadele în formă de baston, colorate în culorile curcubeului. Pachet de 60 bucăți, ideale pentru cadouri și evenimente.',
+      en: 'Rainbow-colored candy canes in a jar. Pack of 60 pieces, perfect for gifts and events.',
+      ar: 'عصا حلوى ملونة بألوان قوس قزح. عبوة من 60 قطعة، مثالية للهدايا والمناسبات.',
     },
-    category: 'biscuits', images: ['/placeholder.svg'], grammage: '200g',
-    badges: ['popular'], variants: ['200g', '400g', '1kg'],
+    category: 'lollipops', images: [rainbowCanes], grammage: '60 buc',
+    badges: ['popular'], variants: ['60 buc'],
   },
   {
-    id: '2', slug: 'turta-dulce',
-    name: { ro: 'Turtă Dulce', en: 'Gingerbread', ar: 'خبز الزنجبيل' },
+    id: '2', slug: 'flashlight-toy-candy',
+    name: { ro: 'Flashlight Toy CC Stick', en: 'Flashlight Toy CC Stick', ar: 'حلوى مصباح يدوي' },
     description: {
-      ro: 'Turtă dulce tradițională românească cu scorțișoară și miere, preparată după rețete vechi de familie.',
-      en: 'Traditional Romanian gingerbread with cinnamon and honey, prepared following old family recipes.',
-      ar: 'خبز الزنجبيل الروماني التقليدي بالقرفة والعسل، محضر وفق وصفات عائلية قديمة.',
+      ro: 'Bomboane CC Stick cu jucărie lanternă inclusă. Un mix distractiv pentru copii — dulciuri și joc într-un singur produs.',
+      en: 'CC Stick candies with a flashlight toy included. A fun mix for kids — sweets and play in one product.',
+      ar: 'حلوى CC Stick مع لعبة مصباح يدوي. مزيج ممتع للأطفال — حلويات ولعب في منتج واحد.',
     },
-    category: 'cakes', images: ['/placeholder.svg'], grammage: '300g',
-    badges: ['seasonal'], variants: ['300g', '500g'],
+    category: 'lollipops', images: [flashlightCandy], grammage: '20 buc',
+    badges: ['new'], variants: ['20 buc'],
   },
   {
-    id: '3', slug: 'fursecuri-asortate',
-    name: { ro: 'Fursecuri Asortate', en: 'Assorted Cookies', ar: 'كعك متنوع' },
+    id: '3', slug: 'spray-candy',
+    name: { ro: 'Spray Candy Fructat', en: 'Fruit Spray Candy', ar: 'حلوى رذاذ الفواكه' },
     description: {
-      ro: 'Selecție rafinată de fursecuri cu diverse arome: vanilie, cacao, fructe de pădure și caramel.',
-      en: 'Refined selection of cookies with various flavors: vanilla, cocoa, berries, and caramel.',
-      ar: 'مجموعة مختارة من الكعك بنكهات متنوعة: فانيليا، كاكاو، توت، وكراميل.',
+      ro: 'Bomboane lichide spray cu arome de cola, lămâie și portocală. Format distractiv care aduce zâmbete.',
+      en: 'Liquid spray candies with cola, lemon, and orange flavors. Fun format that brings smiles.',
+      ar: 'حلوى رذاذ سائلة بنكهات الكولا والليمون والبرتقال. تنسيق ممتع يجلب الابتسامات.',
     },
-    category: 'biscuits', images: ['/placeholder.svg'], grammage: '350g',
-    badges: ['popular'], variants: ['350g', '700g'],
+    category: 'lollipops', images: [sprayCandy], grammage: '24 buc',
+    badges: ['popular'], variants: ['24 buc'],
   },
   {
-    id: '4', slug: 'rulouri-cu-crema',
-    name: { ro: 'Rulouri cu Cremă', en: 'Cream Rolls', ar: 'لفائف الكريمة' },
+    id: '4', slug: 'bullet-spray-candy',
+    name: { ro: 'Mini Bullet Spray Candy', en: 'Mini Bullet Spray Candy', ar: 'حلوى رذاذ الرصاصة' },
     description: {
-      ro: 'Rulouri fine de patiserie umplute cu cremă de vanilie și acoperite cu ciocolată.',
-      en: 'Fine pastry rolls filled with vanilla cream and coated with chocolate.',
-      ar: 'لفائف معجنات فاخرة محشوة بكريمة الفانيليا ومغطاة بالشوكولاتة.',
+      ro: 'Bomboane spray în formă de glonț, cu arome intense de fructe. Design unic și gust irezistibil.',
+      en: 'Bullet-shaped spray candies with intense fruit flavors. Unique design and irresistible taste.',
+      ar: 'حلوى رذاذ على شكل رصاصة بنكهات فواكه مكثفة. تصميم فريد وطعم لا يقاوم.',
     },
-    category: 'cakes', images: ['/placeholder.svg'], grammage: '250g',
-    badges: ['new'], variants: ['250g', '500g'],
+    category: 'lollipops', images: [bulletSpray], grammage: '30 buc',
+    badges: ['new'], variants: ['30 buc'],
   },
   {
-    id: '5', slug: 'acadele-fructate',
-    name: { ro: 'Acadele Fructate', en: 'Fruit Lollipops', ar: 'مصاصات الفواكه' },
+    id: '5', slug: 'monkey-pudding',
+    name: { ro: 'Monkey Pudding', en: 'Monkey Pudding', ar: 'بودنغ القرد' },
     description: {
-      ro: 'Acadele colorate cu arome naturale de fructe: căpșuni, portocale, lămâie și mere verzi.',
-      en: 'Colorful lollipops with natural fruit flavors: strawberry, orange, lemon, and green apple.',
-      ar: 'مصاصات ملونة بنكهات فواكه طبيعية: فراولة، برتقال، ليمون، وتفاح أخضر.',
+      ro: 'Budincă fructată în borcan, cu arome variate. 65 de bucăți colorate și delicioase, perfecte pentru copii.',
+      en: 'Fruit pudding in a jar with various flavors. 65 colorful and delicious pieces, perfect for kids.',
+      ar: 'بودنغ فاكهة في برطمان بنكهات متنوعة. 65 قطعة ملونة ولذيذة، مثالية للأطفال.',
     },
-    category: 'lollipops', images: ['/placeholder.svg'], grammage: '150g',
-    badges: [], variants: ['150g', '300g'],
+    category: 'jellies', images: [monkeyPudding], grammage: '65 buc',
+    badges: ['popular'], variants: ['65 buc'],
   },
   {
-    id: '6', slug: 'napolitane-cu-ciocolata',
-    name: { ro: 'Napolitane cu Ciocolată', en: 'Chocolate Wafers', ar: 'ويفر بالشوكولاتة' },
+    id: '6', slug: 'love-lollipop',
+    name: { ro: 'Love Lollipop Inimioară', en: 'Love Heart Lollipop', ar: 'مصاصة قلب الحب' },
     description: {
-      ro: 'Napolitane crocante cu straturi multiple de cremă de ciocolată intensă.',
-      en: 'Crispy wafers with multiple layers of rich chocolate cream.',
-      ar: 'ويفر مقرمش بطبقات متعددة من كريمة الشوكولاتة الغنية.',
+      ro: 'Acadele în formă de inimă, colorate și atractive. 30 de bucăți ambalate individual, ideale pentru Valentine\'s Day.',
+      en: 'Heart-shaped lollipops, colorful and attractive. 30 individually wrapped pieces, ideal for Valentine\'s Day.',
+      ar: 'مصاصات على شكل قلب، ملونة وجذابة. 30 قطعة مغلفة بشكل فردي، مثالية لعيد الحب.',
     },
-    category: 'chocolate', images: ['/placeholder.svg'], grammage: '200g',
-    badges: ['popular'], variants: ['200g', '400g'],
+    category: 'lollipops', images: [loveLollipop], grammage: '30 buc',
+    badges: ['seasonal'], variants: ['30 buc'],
   },
   {
-    id: '7', slug: 'bomboane-asortate',
-    name: { ro: 'Bomboane Asortate', en: 'Assorted Candies', ar: 'حلوى متنوعة' },
+    id: '7', slug: 'balloon-gummy',
+    name: { ro: 'Balloon Gummy', en: 'Balloon Gummy', ar: 'حلوى البالون المطاطية' },
     description: {
-      ro: 'Mix elegant de bomboane cu diverse umpluturi: caramel, ciocolată, fructe și mentă.',
-      en: 'Elegant mix of candies with various fillings: caramel, chocolate, fruit, and mint.',
-      ar: 'مزيج أنيق من الحلويات بحشوات متنوعة: كراميل، شوكولاتة، فواكه، ونعناع.',
+      ro: 'Jeleuri moi în formă de balon, 50 de bucăți colorate într-un borcan atractiv. Textura perfectă.',
+      en: 'Soft balloon-shaped gummies, 50 colorful pieces in an attractive jar. Perfect texture.',
+      ar: 'حلوى مطاطية على شكل بالون، 50 قطعة ملونة في برطمان جذاب. قوام مثالي.',
     },
-    category: 'chocolate', images: ['/placeholder.svg'], grammage: '400g',
-    badges: [], variants: ['400g', '800g'],
+    category: 'jellies', images: [balloonGummy], grammage: '8g × 50 buc',
+    badges: ['popular'], variants: ['50 buc'],
   },
   {
-    id: '8', slug: 'jeleuri-fructate',
-    name: { ro: 'Jeleuri Fructate', en: 'Fruit Jellies', ar: 'جيلي الفواكه' },
+    id: '8', slug: 'fruit-sticks',
+    name: { ro: 'Fruit Sticks Răcoritoare', en: 'Refreshing Fruit Sticks', ar: 'أعواد الفواكه المنعشة' },
     description: {
-      ro: 'Jeleuri moi și aromate cu extract natural de fructe, acoperite cu zahăr fin.',
-      en: 'Soft and aromatic jellies with natural fruit extract, coated in fine sugar.',
-      ar: 'جيلي طري وعطري بخلاصة فواكه طبيعية، مغطى بالسكر الناعم.',
+      ro: 'Batoane de gheață cu arome de fructe tropicale. Răcoritoare și colorate, într-un borcan transparent.',
+      en: 'Ice sticks with tropical fruit flavors. Refreshing and colorful, in a transparent jar.',
+      ar: 'أعواد ثلج بنكهات فواكه استوائية. منعشة وملونة، في برطمان شفاف.',
     },
-    category: 'jellies', images: ['/placeholder.svg'], grammage: '300g',
-    badges: ['new'], variants: ['300g', '600g'],
+    category: 'jellies', images: [fruitSticks], grammage: '30 buc',
+    badges: ['new', 'seasonal'], variants: ['30 buc'],
   },
   {
-    id: '9', slug: 'praline-fine',
-    name: { ro: 'Praline Fine', en: 'Fine Pralines', ar: 'برالين فاخرة' },
+    id: '9', slug: 'ice-cream-marshmallow',
+    name: { ro: 'Ice Cream Marshmallow cu Gem', en: 'Ice Cream Marshmallow with Jam', ar: 'مارشميلو آيس كريم بالمربى' },
     description: {
-      ro: 'Praline artizanale cu ciocolată belgiană, umplute cu ganache și alune crocante.',
-      en: 'Artisanal pralines with Belgian chocolate, filled with ganache and crunchy hazelnuts.',
-      ar: 'برالين حرفية من الشوكولاتة البلجيكية، محشوة بالغاناش والبندق المقرمش.',
+      ro: 'Marshmallow în formă de cornet de înghețată, umplut cu gem de fructe. 30 de bucăți ambalate individual.',
+      en: 'Ice cream cone shaped marshmallow filled with fruit jam. 30 individually wrapped pieces.',
+      ar: 'مارشميلو على شكل كوب آيس كريم محشو بمربى الفواكه. 30 قطعة مغلفة بشكل فردي.',
     },
-    category: 'chocolate', images: ['/placeholder.svg'], grammage: '200g',
-    badges: ['popular'], variants: ['200g', '400g'],
+    category: 'cakes', images: [iceCreamMarshmallow], grammage: '30 buc',
+    badges: ['new'], variants: ['30 buc'],
   },
   {
-    id: '10', slug: 'bezele-colorate',
-    name: { ro: 'Bezele Colorate', en: 'Colorful Meringues', ar: 'ميرانغ ملون' },
+    id: '10', slug: 'flower-lollipops',
+    name: { ro: 'Acadele Floare', en: 'Flower Lollipops', ar: 'مصاصات الزهور' },
     description: {
-      ro: 'Bezele ușoare și aerisate în culori pastelate, cu arome delicate de vanilie și zmeură.',
-      en: 'Light and airy meringues in pastel colors, with delicate vanilla and raspberry flavors.',
-      ar: 'ميرانغ خفيف وهوائي بألوان باستيل، بنكهات فانيليا وتوت لطيفة.',
+      ro: 'Acadele decorative în formă de floare, cu bile de ciocolată. Perfecte pentru petreceri și cadouri.',
+      en: 'Decorative flower-shaped lollipops with chocolate balls. Perfect for parties and gifts.',
+      ar: 'مصاصات زهور مزخرفة مع كرات شوكولاتة. مثالية للحفلات والهدايا.',
     },
-    category: 'cakes', images: ['/placeholder.svg'], grammage: '150g',
-    badges: ['seasonal', 'new'], variants: ['150g'],
+    category: 'lollipops', images: [flowerLollipops], grammage: '24 buc',
+    badges: ['seasonal'], variants: ['24 buc'],
   },
 ];

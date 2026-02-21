@@ -38,11 +38,17 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${
         scrolled
-          ? 'bg-[rgba(20,6,4,0.75)] backdrop-blur-[20px] border-b border-gold/10 shadow-[0_1px_20px_rgba(0,0,0,0.1)]'
-          : 'bg-transparent'
+          ? 'border-b shadow-[0_1px_20px_rgba(0,0,0,0.1)]'
+          : 'border-b'
       }`}
+      style={{
+        background: scrolled ? 'rgba(18,8,4,0.88)' : 'rgba(18,8,4,0.55)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderBottomColor: scrolled ? 'rgba(201,168,76,0.2)' : 'rgba(201,168,76,0.12)',
+      }}
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-3 group">
