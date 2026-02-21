@@ -17,7 +17,7 @@ const ProductDetail: React.FC = () => {
       <main className="pt-20 min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-display text-2xl font-bold text-foreground">Product not found</h1>
-          <Link to="/products" className="mt-4 inline-block text-accent hover:underline">{t('nav.products')}</Link>
+          <Link to="/products" className="mt-4 inline-block text-candy-red hover:underline">{t('nav.products')}</Link>
         </div>
       </main>
     );
@@ -36,7 +36,7 @@ const ProductDetail: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Image */}
             <ScrollReveal>
-              <div className="aspect-square bg-muted rounded-2xl overflow-hidden border border-border">
+              <div className="aspect-square bg-muted rounded-3xl overflow-hidden shadow-lg shadow-pink-100/30">
                 <img
                   src={product.images[0]}
                   alt={product.name[lang]}
@@ -51,7 +51,7 @@ const ProductDetail: React.FC = () => {
               <div className="lg:sticky lg:top-28">
                 <div className="flex gap-2 mb-4">
                   {product.badges.map(badge => (
-                    <span key={badge} className="px-3 py-1 bg-accent text-accent-foreground text-xs font-semibold rounded-full">
+                    <span key={badge} className="px-3 py-1 bg-candy-red text-white text-xs font-semibold rounded-full">
                       {t(`badge.${badge}`)}
                     </span>
                   ))}
@@ -73,7 +73,7 @@ const ProductDetail: React.FC = () => {
                     <h3 className="font-display text-lg font-semibold text-foreground mb-3">{t('products.variants')}</h3>
                     <div className="flex flex-wrap gap-2">
                       {product.variants.map(v => (
-                        <span key={v} className="px-4 py-2 bg-muted rounded-lg text-sm text-foreground">{v}</span>
+                        <span key={v} className="px-4 py-2 bg-gray-50 rounded-2xl text-sm text-foreground hover:shadow-md hover:shadow-pink-100/20 transition-all">{v}</span>
                       ))}
                     </div>
                   </div>
@@ -81,7 +81,7 @@ const ProductDetail: React.FC = () => {
 
                 <Link
                   to="/contact"
-                  className="mt-10 inline-flex items-center justify-center px-8 py-4 bg-accent text-accent-foreground font-semibold rounded-lg hover:bg-gold-dark transition-colors text-base"
+                  className="shine-effect mt-10 inline-flex items-center justify-center px-8 py-4 bg-candy-red text-white font-semibold rounded-3xl hover:shadow-lg hover:shadow-red-500/20 transition-all text-base"
                 >
                   {t('products.request')}
                 </Link>
@@ -97,7 +97,7 @@ const ProductDetail: React.FC = () => {
                 {related.map((p, i) => (
                   <ScrollReveal key={p.id} delay={i * 0.1}>
                     <Link to={`/products/${p.slug}`} className="group block">
-                      <div className="bg-card rounded-2xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300">
+                      <div className="bg-white rounded-3xl overflow-hidden shadow-md shadow-pink-50 hover:shadow-xl hover:shadow-pink-200/30 hover:-translate-y-3 transition-all duration-300">
                         <div className="aspect-[4/3] bg-muted overflow-hidden">
                           <img src={p.images[0]} alt={p.name[lang]} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }} />
                         </div>

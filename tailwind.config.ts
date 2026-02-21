@@ -61,6 +61,9 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        "candy-pink": "hsl(var(--candy-pink))",
+        "candy-red": "hsl(var(--candy-red))",
+        "candy-glow": "hsl(var(--candy-glow))",
         chocolate: {
           DEFAULT: "hsl(var(--chocolate))",
           light: "hsl(var(--chocolate-light))",
@@ -95,11 +98,20 @@ export default {
           from: { opacity: "0", transform: "translateY(24px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "whatsapp-glow": {
+          "0%, 100%": { boxShadow: "0 0 8px rgba(37,211,102,0.4)" },
+          "50%": { boxShadow: "0 0 24px rgba(37,211,102,0.7)" },
+        },
+        shine: {
+          from: { left: "-100%" },
+          to: { left: "120%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "whatsapp-glow": "whatsapp-glow 2s ease-in-out infinite",
       },
     },
   },
