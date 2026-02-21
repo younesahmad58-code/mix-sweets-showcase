@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '@/assets/logo.jpg';
+import logo from '@/assets/logo_2.png';
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: 'ro', label: 'Română', flag: '🇷🇴' },
@@ -44,7 +44,9 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-3">
-          <img src={logo} alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded" />
+          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1.5 shadow-sm">
+            <img src={logo} alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded" />
+          </div>
           <span className="font-display text-xl md:text-2xl font-bold text-foreground tracking-tight hidden sm:inline">
             MIX SWEETS
           </span>
