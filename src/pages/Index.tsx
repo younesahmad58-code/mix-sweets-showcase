@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Award, Sparkles, Truck, ShieldCheck } from 'lucide-react';
+import { Award, Sparkles, Truck, ShieldCheck, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-
 import FloatingBlobs from '@/components/FloatingBlobs';
 import GoldParticles from '@/components/GoldParticles';
 import SquishyCard from '@/components/SquishyCard';
@@ -13,12 +12,20 @@ import CountUpStat from '@/components/CountUpStat';
 import { categories, demoProducts } from '@/data/products';
 import { Language } from '@/i18n/translations';
 
-const categoryEmojis: Record<string, string> = {
-  biscuits: '🍪',
-  cakes: '🎂',
-  chocolate: '🍫',
-  lollipops: '🍬',
-  jellies: '🐻',
+const categoryImages: Record<string, string> = {
+  biscuits: '',
+  cakes: '',
+  chocolate: '',
+  lollipops: '',
+  jellies: '',
+};
+
+const categoryDescriptions: Record<string, Record<string, string>> = {
+  biscuits: { ro: 'Biscuiți premium din ingrediente atent selecționate', en: 'Premium biscuits from carefully selected ingredients', ar: 'بسكويت فاخر من مكونات مختارة بعناية' },
+  cakes: { ro: 'Prăjituri artizanale cu rețete tradiționale', en: 'Artisan cakes with traditional recipes', ar: 'كعك حرفي بوصفات تقليدية' },
+  chocolate: { ro: 'Ciocolată fină cu cacao de cea mai bună calitate', en: 'Fine chocolate with the best quality cocoa', ar: 'شوكولاتة فاخرة بأجود أنواع الكاكاو' },
+  lollipops: { ro: 'Acadele colorate pentru toate gusturile', en: 'Colorful lollipops for all tastes', ar: 'مصاصات ملونة لجميع الأذواق' },
+  jellies: { ro: 'Jeleuri moi și delicioase în forme variate', en: 'Soft and delicious jellies in various shapes', ar: 'جيلي طري ولذيذ بأشكال متنوعة' },
 };
 
 const Index: React.FC = () => {
@@ -37,10 +44,14 @@ const Index: React.FC = () => {
   return (
     <main>
       {/* ─── Hero ─── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay">
         <div className="absolute inset-0 bg-cocoa" />
         <div className="absolute inset-0 animate-ken-burns bg-cocoa" />
-        <FloatingBlobs className="opacity-15" />
+        {/* Vignette */}
+        <div className="absolute inset-0 z-[1]" style={{ background: 'radial-gradient(ellipse 70% 70% at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 100%)' }} />
+        {/* Crimson glow behind headline */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] z-[1]" style={{ background: 'radial-gradient(ellipse, rgba(176,18,42,0.12) 0%, transparent 70%)' }} />
+        <FloatingBlobs className="opacity-10" />
         <GoldParticles />
 
         <div className="relative z-10 container mx-auto px-4 text-center py-32">
@@ -80,13 +91,13 @@ const Index: React.FC = () => {
           >
             <Link
               to="/products"
-              className="shine-auto relative inline-flex items-center justify-center px-10 py-4 bg-primary text-cream font-semibold rounded-full border border-gold/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(201,168,76,0.3)] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
+              className="shine-auto relative inline-flex items-center justify-center px-10 py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.35)] hover:scale-[1.03] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
             >
               {t('hero.cta.products')}
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-10 py-4 bg-cream/5 border border-gold/30 text-gold font-medium rounded-full hover:bg-cream/10 transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
+              className="inline-flex items-center justify-center px-10 py-4 bg-cream/5 border border-cream/20 text-cream font-medium rounded-full hover:bg-cream/10 transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
             >
               {t('hero.cta.offer')}
             </Link>
@@ -113,7 +124,6 @@ const Index: React.FC = () => {
             ))}
           </motion.div>
         </div>
-
       </section>
 
       {/* ─── Why MIX SWEETS ─── */}
@@ -130,7 +140,9 @@ const Index: React.FC = () => {
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
-                <div className="relative bg-card rounded-[20px] p-8 shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.2)] hover:-translate-y-2 transition-all duration-[400ms] h-full border border-gold/[0.15]" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
+                <div className="relative bg-card rounded-[22px] p-8 border border-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-[400ms] h-full card-gloss overflow-hidden"
+                  style={{ boxShadow: '0 2px 20px rgba(0,0,0,0.04)' }}
+                >
                   <Icon3D icon={card.icon} variant="crimson" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
@@ -142,45 +154,48 @@ const Index: React.FC = () => {
       </section>
 
       {/* ─── Categories ─── */}
-      <section className="py-28 bg-cocoa">
+      <section className="py-28 bg-background">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
               <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('categories.eyebrow')}</span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-cream mb-16" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-foreground mb-16" style={{ letterSpacing: '-0.03em' }}>
               {t('categories.title')}
             </h2>
           </ScrollReveal>
 
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-4 md:grid md:grid-cols-5 md:overflow-visible md:pb-0 no-scrollbar">
-            {categories.map((cat, i) => (
-              <SquishyCard key={cat.id} delay={i * 0.06}>
-                <Link
-                  to={`/products?category=${cat.id}`}
-                  className="shine-effect group block min-w-[240px] md:min-w-0 snap-center h-full rounded-[20px] min-h-[280px] flex flex-col items-center justify-between p-8 transition-all duration-500 hover:-translate-y-[10px] hover:border-t-2 hover:border-t-gold"
-                  style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(201,168,76,0.12)',
-                  }}
-                >
-                  {/* Emoji */}
-                  <span className="text-[56px] mt-4 group-hover:scale-[1.2] group-hover:rotate-[-5deg] transition-transform duration-500 will-change-transform block">
-                    {categoryEmojis[cat.id] || '🍭'}
-                  </span>
-
-                  {/* Text at bottom */}
-                  <div className="w-full mt-auto">
-                    <span className="block font-display text-[22px] font-semibold text-cream group-hover:text-gold transition-colors duration-300">
-                      {cat.label[lang]}
-                    </span>
-                    <span className="block mt-3 text-[11px] text-gold/50 tracking-[0.15em] uppercase group-hover:translate-x-1 transition-transform duration-300">
-                      {t('categories.explore')}
-                    </span>
-                  </div>
-                </Link>
-              </SquishyCard>
-            ))}
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 md:gap-6 pb-4 md:grid md:grid-cols-5 md:overflow-visible md:pb-0 no-scrollbar">
+            {categories.map((cat, i) => {
+              const desc = categoryDescriptions[cat.id]?.[lang] || '';
+              return (
+                <SquishyCard key={cat.id} delay={i * 0.06}>
+                  <Link
+                    to={`/products?category=${cat.id}`}
+                    className="group block min-w-[220px] md:min-w-0 snap-center"
+                  >
+                    <div className="relative bg-card rounded-[22px] overflow-hidden border border-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-500 card-gloss">
+                      {/* Image placeholder */}
+                      <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                        <span className="text-[48px] group-hover:scale-110 group-hover:rotate-[-3deg] transition-transform duration-500">
+                          {cat.id === 'biscuits' ? '🍪' : cat.id === 'cakes' ? '🎂' : cat.id === 'chocolate' ? '🍫' : cat.id === 'lollipops' ? '🍬' : '🐻'}
+                        </span>
+                      </div>
+                      {/* Content */}
+                      <div className="p-5">
+                        <h3 className="font-display text-lg font-semibold text-foreground group-hover:text-crimson transition-colors duration-300">
+                          {cat.label[lang]}
+                        </h3>
+                        <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2 leading-relaxed">{desc}</p>
+                        <span className="mt-3 inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 transition-all duration-300">
+                          {t('categories.explore')} <ArrowRight size={12} />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </SquishyCard>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -201,7 +216,7 @@ const Index: React.FC = () => {
             {seasonalProducts.slice(0, 3).map((product, i) => (
               <SquishyCard key={product.id} delay={i * 0.1}>
                 <Link to={`/products/${product.slug}`} className="group block">
-                  <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
+                  <div className="relative bg-card rounded-[22px] overflow-hidden border border-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-500 card-gloss">
                     <div className="aspect-[4/3] bg-muted flex items-center justify-center relative overflow-hidden">
                       <img
                         src={product.images[0]}
@@ -211,7 +226,7 @@ const Index: React.FC = () => {
                       />
                       <div className="absolute top-4 start-4 flex gap-2">
                         {product.badges.map(badge => (
-                          <span key={badge} className="px-3 py-1 bg-gold text-cocoa text-xs font-medium rounded-full">
+                          <span key={badge} className="px-3 py-1 bg-crimson text-cream text-xs font-medium rounded-full">
                             {t(`badge.${badge}`)}
                           </span>
                         ))}
@@ -231,11 +246,10 @@ const Index: React.FC = () => {
       </section>
 
       {/* ─── Experience & Tradition with Stats Grid ─── */}
-      <section className="py-28 bg-cocoa relative overflow-hidden">
+      <section className="py-28 bg-cocoa relative overflow-hidden grain-overlay">
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
-            {/* Text */}
             <div>
               <ScrollReveal>
                 <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('tradition.eyebrow')}</span>
@@ -246,15 +260,13 @@ const Index: React.FC = () => {
                 <p className="mt-4 text-cream/60 leading-relaxed text-lg">{t('tradition.p2')}</p>
               </ScrollReveal>
             </div>
-
-            {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0">
               {[
                 { value: 30, suffix: '+', label: t('stats.years') },
                 { value: 500, suffix: '+', label: t('stats.products') },
               ].map((stat, i) => (
                 <ScrollReveal key={i} delay={i * 0.1}>
-                  <div className="bg-cream/[0.04] border border-cream/10 rounded-[20px] p-6 text-center hover:-translate-y-1 transition-all duration-300 group">
+                  <div className="bg-cream/[0.04] border border-cream/10 rounded-[20px] p-6 text-center hover:-translate-y-1 transition-all duration-300">
                     <CountUpStat
                       value={stat.value}
                       suffix={stat.suffix}
@@ -269,24 +281,29 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      {/* ─── CTA Strip ─── */}
-      <section className="py-24 bg-primary relative overflow-hidden">
-        {/* Radial glow */}
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,255,255,0.06) 0%, transparent 70%)' }} />
-        <FloatingBlobs className="opacity-10" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <ScrollReveal>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
-              {t('cta.title')}
-            </h2>
-            <p className="mt-4 text-cream/50 max-w-xl mx-auto text-lg">{t('cta.subtitle')}</p>
-            <Link
-              to="/contact"
-              className="shine-auto relative mt-10 inline-flex items-center justify-center px-10 py-4 bg-cream text-cocoa font-semibold rounded-full hover:shadow-[0_0_20px_rgba(201,168,76,0.3)] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
-            >
-              {t('cta.button')}
-            </Link>
-          </ScrollReveal>
+      {/* ─── CTA Strip (premium glass on cream) ─── */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div
+            className="rounded-[24px] px-8 py-16 md:px-16 md:py-20 text-center relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(176,18,42,0.08), rgba(199,155,42,0.06))',
+              border: '1px solid rgba(26,20,18,0.08)',
+            }}
+          >
+            <ScrollReveal>
+              <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
+                {t('cta.title')}
+              </h2>
+              <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-lg">{t('cta.subtitle')}</p>
+              <Link
+                to="/contact"
+                className="shine-auto relative mt-10 inline-flex items-center justify-center px-10 py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.3)] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
+              >
+                {t('cta.button')}
+              </Link>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
     </main>
