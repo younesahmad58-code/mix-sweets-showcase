@@ -64,8 +64,8 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {values.map((v, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
-                <div className="bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-[20px] p-8 text-center hover:bg-cream/8 hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 h-full flex flex-col items-center" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
-                  <Icon3D icon={v.icon} variant="gold" delay={i * 0.1} className="mb-6" />
+                <div className="card-3d-dark p-8 text-center h-full flex flex-col items-center">
+                  <Icon3D icon={v.icon} variant="crimson" size="lg" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-cream mb-3">{v.title}</h3>
                   <p className="text-sm text-cream/45 leading-relaxed">{v.desc}</p>
                 </div>

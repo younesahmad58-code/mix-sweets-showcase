@@ -140,9 +140,7 @@ const Index: React.FC = () => {
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
-                <div className="relative bg-card rounded-[22px] p-8 border border-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-[400ms] h-full card-gloss overflow-hidden"
-                  style={{ boxShadow: '0 2px 20px rgba(0,0,0,0.04)' }}
-                >
+                <div className="card-3d p-8 h-full">
                   <Icon3D icon={card.icon} variant="gold" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
@@ -174,14 +172,12 @@ const Index: React.FC = () => {
                     to={`/products?category=${cat.id}`}
                     className="group block min-w-[220px] md:min-w-0 snap-center"
                   >
-                    <div className="relative bg-card rounded-[22px] overflow-hidden border border-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-500 card-gloss">
-                      {/* Image placeholder */}
+                    <div className="card-3d">
                       <div className="aspect-[4/3] bg-muted flex items-center justify-center">
                         <span className="text-[48px] group-hover:scale-110 group-hover:rotate-[-3deg] transition-transform duration-500">
                           {cat.id === 'biscuits' ? '🍪' : cat.id === 'cakes' ? '🎂' : cat.id === 'chocolate' ? '🍫' : cat.id === 'lollipops' ? '🍬' : '🐻'}
                         </span>
                       </div>
-                      {/* Content */}
                       <div className="p-5">
                         <h3 className="font-display text-lg font-semibold text-foreground group-hover:text-crimson transition-colors duration-300">
                           {cat.label[lang]}
@@ -216,7 +212,7 @@ const Index: React.FC = () => {
             {seasonalProducts.slice(0, 3).map((product, i) => (
               <SquishyCard key={product.id} delay={i * 0.1}>
                 <Link to={`/products/${product.slug}`} className="group block">
-                  <div className="relative bg-card rounded-[22px] overflow-hidden border border-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-500 card-gloss">
+                  <div className="card-3d">
                     <div className="aspect-[4/3] bg-muted flex items-center justify-center relative overflow-hidden">
                       <img
                         src={product.images[0]}
@@ -265,8 +261,8 @@ const Index: React.FC = () => {
                 { value: 30, suffix: '+', label: t('stats.years') },
                 { value: 500, suffix: '+', label: t('stats.products') },
               ].map((stat, i) => (
-                <ScrollReveal key={i} delay={i * 0.1}>
-                  <div className="bg-cream/[0.04] border border-cream/10 rounded-[20px] p-6 text-center hover:-translate-y-1 transition-all duration-300">
+                 <ScrollReveal key={i} delay={i * 0.1}>
+                  <div className="card-3d-dark p-6 text-center">
                     <CountUpStat
                       value={stat.value}
                       suffix={stat.suffix}
