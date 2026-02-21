@@ -73,6 +73,9 @@ export default {
           DEFAULT: "hsl(var(--cream))",
           dark: "hsl(var(--cream-dark))",
         },
+        "candy-pink": "hsl(var(--candy-pink))",
+        "candy-red": "hsl(var(--candy-red))",
+        "candy-glow": "hsl(var(--candy-glow))",
         gold: {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold-light))",
