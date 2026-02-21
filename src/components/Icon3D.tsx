@@ -13,28 +13,27 @@ interface Icon3DProps {
   className?: string;
 }
 
-const variantStyles: Record<Icon3DVariant, { bg: string; shadow: string; hoverShadow: string; border?: string }> = {
+const variantStyles: Record<Icon3DVariant, { bg: string; iconColor: string; border: string }> = {
   gold: {
-    bg: 'linear-gradient(145deg, #E2C46A 0%, #C9A84C 50%, #8B6914 100%)',
-    shadow: '0 2px 0 rgba(255,255,255,0.15) inset, 0 -2px 0 rgba(0,0,0,0.2) inset, 4px 8px 24px rgba(201,168,76,0.45), 0 2px 4px rgba(0,0,0,0.3)',
-    hoverShadow: '0 2px 0 rgba(255,255,255,0.15) inset, 0 -2px 0 rgba(0,0,0,0.2) inset, 6px 16px 40px rgba(201,168,76,0.55), 0 4px 8px rgba(0,0,0,0.3)',
+    bg: 'rgba(199,155,42,0.10)',
+    iconColor: '#C79B2A',
+    border: '1px solid rgba(199,155,42,0.18)',
   },
   crimson: {
-    bg: 'linear-gradient(145deg, #C42020 0%, #8B1A1A 50%, #5A0E0E 100%)',
-    shadow: '0 2px 0 rgba(255,255,255,0.15) inset, 0 -2px 0 rgba(0,0,0,0.2) inset, 4px 8px 24px rgba(139,26,26,0.45), 0 2px 4px rgba(0,0,0,0.3)',
-    hoverShadow: '0 2px 0 rgba(255,255,255,0.15) inset, 0 -2px 0 rgba(0,0,0,0.2) inset, 6px 16px 40px rgba(139,26,26,0.55), 0 4px 8px rgba(0,0,0,0.3)',
+    bg: 'rgba(176,18,42,0.08)',
+    iconColor: '#B0122A',
+    border: '1px solid rgba(176,18,42,0.14)',
   },
   cocoa: {
-    bg: 'linear-gradient(145deg, #3D1A10 0%, #2A1008 50%, #1A0804 100%)',
-    shadow: '0 2px 0 rgba(255,255,255,0.08) inset, 0 -2px 0 rgba(0,0,0,0.3) inset, 4px 8px 24px rgba(26,8,4,0.5), 0 2px 4px rgba(0,0,0,0.4)',
-    hoverShadow: '0 2px 0 rgba(255,255,255,0.08) inset, 0 -2px 0 rgba(0,0,0,0.3) inset, 6px 16px 40px rgba(26,8,4,0.6), 0 4px 8px rgba(0,0,0,0.4)',
-    border: '1px solid rgba(201,168,76,0.2)',
+    bg: 'rgba(26,15,11,0.06)',
+    iconColor: '#1A0F0B',
+    border: '1px solid rgba(26,15,11,0.10)',
   },
 };
 
 const sizeConfig: Record<Icon3DSize, { container: number; icon: number; radius: number }> = {
-  md: { container: 80, icon: 32, radius: 22 },
-  sm: { container: 40, icon: 16, radius: 12 },
+  md: { container: 56, icon: 24, radius: 14 },
+  sm: { container: 36, icon: 16, radius: 10 },
 };
 
 const Icon3D: React.FC<Icon3DProps> = ({ icon: IconComponent, variant = 'gold', size = 'md', delay = 0, className = '' }) => {
@@ -43,42 +42,26 @@ const Icon3D: React.FC<Icon3DProps> = ({ icon: IconComponent, variant = 'gold', 
 
   return (
     <motion.div
-      initial={{ scale: 0.6, opacity: 0 }}
+      initial={{ scale: 0.8, opacity: 0 }}
       whileInView={{ scale: 1, opacity: 1 }}
       viewport={{ once: true }}
       transition={{ type: 'spring', stiffness: 300, damping: 20, delay }}
-      whileHover={{ y: -4, scale: 1.05 }}
-      className={`relative overflow-hidden flex items-center justify-center shrink-0 group ${className}`}
+      whileHover={{ y: -2, scale: 1.05 }}
+      className={`relative flex items-center justify-center shrink-0 ${className}`}
       style={{
         width: dim.container,
         height: dim.container,
         borderRadius: dim.radius,
         background: style.bg,
-        boxShadow: style.shadow,
-        border: style.border || 'none',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = style.hoverShadow;
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = style.shadow;
+        border: style.border,
+        transition: 'transform 0.3s ease',
       }}
     >
-      {/* Glossy highlight */}
-      <div
-        className="absolute top-0 left-0 right-0 pointer-events-none"
-        style={{
-          height: '50%',
-          background: 'linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)',
-          borderRadius: `${dim.radius}px ${dim.radius}px 0 0`,
-        }}
-      />
       <IconComponent
         size={dim.icon}
-        className="relative z-10 text-white"
-        style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' }}
-        strokeWidth={2.2}
+        className="relative z-10"
+        style={{ color: style.iconColor }}
+        strokeWidth={1.8}
       />
     </motion.div>
   );

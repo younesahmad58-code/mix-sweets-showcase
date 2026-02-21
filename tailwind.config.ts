@@ -75,6 +75,7 @@ export default {
           light: "hsl(var(--gold-light))",
           dark: "hsl(var(--gold-dark))",
         },
+        crimson: "hsl(var(--crimson))",
         whatsapp: "hsl(var(--whatsapp))",
       },
       borderRadius: {
