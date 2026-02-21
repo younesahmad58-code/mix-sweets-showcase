@@ -38,17 +38,21 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/5'
+          ? 'bg-white/60 backdrop-blur-2xl border-b border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.06)]'
           : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-3">
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-1.5 shadow-md">
+        <Link to="/" className="flex items-center gap-3 group">
+          <motion.div
+            whileHover={{ scale: 1.05, rotate: 2 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+            className="bg-white/90 backdrop-blur-sm rounded-[1.25rem] p-1.5 shadow-md"
+          >
             <img src={logo} alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded-xl" />
-          </div>
+          </motion.div>
           <span className="font-display text-xl md:text-2xl font-bold text-foreground tracking-tight hidden sm:inline">
             MIX SWEETS
           </span>
@@ -60,8 +64,8 @@ const Header: React.FC = () => {
             <Link
               key={link.to}
               to={link.to}
-              className={`relative text-sm font-medium transition-colors hover:text-candy-red ${
-                location.pathname === link.to ? 'text-candy-red' : 'text-foreground/80'
+              className={`relative text-sm font-semibold transition-colors hover:text-candy-red ${
+                location.pathname === link.to ? 'text-candy-red' : 'text-foreground/70'
               }`}
             >
               {link.label}
@@ -76,29 +80,33 @@ const Header: React.FC = () => {
 
           {/* Language switcher */}
           <div className="relative">
-            <button
+            <motion.button
               onClick={() => setLangOpen(!langOpen)}
-              className="flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-candy-red transition-colors"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+              className="flex items-center gap-1.5 text-sm font-medium text-foreground/70 hover:text-candy-red transition-colors"
             >
               <Globe className="w-4 h-4" />
               <span>{currentLang.flag}</span>
               <ChevronDown className="w-3 h-3" />
-            </button>
+            </motion.button>
             <AnimatePresence>
               {langOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  className="absolute top-full end-0 mt-2 bg-white/80 backdrop-blur-xl border border-white/30 rounded-2xl shadow-xl py-1 min-w-[140px]"
+                  initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="absolute top-full end-0 mt-3 bg-white/80 backdrop-blur-2xl border border-white/30 rounded-[1.25rem] shadow-xl py-2 min-w-[150px]"
                 >
                   {languages.map(lang => (
                     <button
                       key={lang.code}
                       onClick={() => { setLanguage(lang.code); setLangOpen(false); }}
-                      className={`flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-muted transition-colors ${
-                        language === lang.code ? 'text-candy-red font-semibold' : 'text-foreground'
+                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-candy-red/5 transition-colors rounded-xl mx-1 ${
+                        language === lang.code ? 'text-candy-red font-bold' : 'text-foreground'
                       }`}
+                      style={{ width: 'calc(100% - 8px)' }}
                     >
                       <span>{lang.flag}</span>
                       <span>{lang.label}</span>
@@ -111,9 +119,13 @@ const Header: React.FC = () => {
         </nav>
 
         {/* Mobile hamburger */}
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 text-foreground">
+        <motion.button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          whileTap={{ scale: 0.9 }}
+          className="md:hidden p-2 text-foreground"
+        >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        </motion.button>
       </div>
 
       {/* Mobile drawer */}
@@ -123,32 +135,34 @@ const Header: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/90 backdrop-blur-xl border-t border-white/20 overflow-hidden"
+            transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+            className="md:hidden bg-white/90 backdrop-blur-2xl border-t border-white/20 overflow-hidden"
           >
             <nav className="flex flex-col p-4 gap-1">
               {navLinks.map(link => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`px-4 py-3 rounded-2xl text-base font-medium transition-colors ${
+                  className={`px-4 py-3 rounded-[1.25rem] text-base font-semibold transition-colors ${
                     location.pathname === link.to ? 'bg-candy-red/10 text-candy-red' : 'text-foreground hover:bg-muted'
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="flex gap-2 mt-2 px-4">
+              <div className="flex gap-2 mt-3 px-4">
                 {languages.map(lang => (
-                  <button
+                  <motion.button
                     key={lang.code}
                     onClick={() => { setLanguage(lang.code); setMobileOpen(false); }}
-                    className={`flex items-center gap-1.5 px-3 py-2 rounded-2xl text-sm transition-colors ${
-                      language === lang.code ? 'bg-candy-red text-white' : 'bg-muted text-foreground'
+                    whileTap={{ scale: 0.95 }}
+                    className={`flex items-center gap-1.5 px-4 py-2.5 rounded-[1.25rem] text-sm font-semibold transition-colors ${
+                      language === lang.code ? 'bg-candy-red text-white shadow-lg shadow-candy-red/30' : 'bg-muted text-foreground'
                     }`}
                   >
                     <span>{lang.flag}</span>
                     <span>{lang.label}</span>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </nav>
