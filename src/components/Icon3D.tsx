@@ -33,7 +33,7 @@ const variantStyles: Record<Icon3DVariant, { bg: string; shadow: string; hoverSh
 };
 
 const sizeConfig: Record<Icon3DSize, { container: number; icon: number; radius: number }> = {
-  md: { container: 72, icon: 28, radius: 20 },
+  md: { container: 80, icon: 32, radius: 22 },
   sm: { container: 40, icon: 16, radius: 12 },
 };
 

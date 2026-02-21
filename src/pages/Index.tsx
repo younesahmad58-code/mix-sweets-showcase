@@ -6,10 +6,20 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
 import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
+import GoldParticles from '@/components/GoldParticles';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
+import CountUpStat from '@/components/CountUpStat';
 import { categories, demoProducts } from '@/data/products';
 import { Language } from '@/i18n/translations';
+
+const categoryEmojis: Record<string, string> = {
+  biscuits: '🍪',
+  cakes: '🎂',
+  chocolate: '🍫',
+  lollipops: '🍬',
+  jellies: '🐻',
+};
 
 const Index: React.FC = () => {
   const { t, language } = useLanguage();
@@ -31,6 +41,7 @@ const Index: React.FC = () => {
         <div className="absolute inset-0 bg-cocoa" />
         <div className="absolute inset-0 animate-ken-burns bg-cocoa" />
         <FloatingBlobs className="opacity-15" />
+        <GoldParticles />
 
         <div className="relative z-10 container mx-auto px-4 text-center py-32">
           <motion.div
@@ -80,6 +91,28 @@ const Index: React.FC = () => {
               {t('hero.cta.offer')}
             </Link>
           </motion.div>
+
+          {/* Stats row */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 1.1 }}
+            className="mt-14 flex items-center justify-center gap-6 md:gap-10"
+          >
+            {[
+              { value: '30+', label: t('stats.years') },
+              { value: '500+', label: t('stats.products') },
+              { value: '41', label: t('stats.counties') },
+            ].map((stat, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <div className="w-px h-8 bg-cream/15" />}
+                <div className="text-center">
+                  <span className="font-display text-gold text-lg md:text-xl font-semibold">{stat.value}</span>
+                  <span className="block text-cream/40 text-[11px] tracking-[0.1em] uppercase mt-0.5">{stat.label}</span>
+                </div>
+              </React.Fragment>
+            ))}
+          </motion.div>
         </div>
 
         <WaveDivider variant="drip" className="absolute bottom-0 left-0 right-0" />
@@ -123,19 +156,31 @@ const Index: React.FC = () => {
             </h2>
           </ScrollReveal>
 
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-4 md:grid md:grid-cols-5 md:overflow-visible md:pb-0">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-4 md:grid md:grid-cols-5 md:overflow-visible md:pb-0 no-scrollbar">
             {categories.map((cat, i) => (
               <SquishyCard key={cat.id} delay={i * 0.06}>
                 <Link
                   to={`/products?category=${cat.id}`}
-                  className="shine-effect group block min-w-[240px] md:min-w-0 snap-center h-full bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-[20px] p-8 min-h-[280px] flex flex-col justify-end hover:bg-cream/8 hover:border-t-2 hover:border-t-gold transition-all duration-500"
+                  className="shine-effect group block min-w-[240px] md:min-w-0 snap-center h-full rounded-[20px] min-h-[280px] flex flex-col items-center justify-between p-8 transition-all duration-500 hover:-translate-y-[10px] hover:border-t-2 hover:border-t-gold"
+                  style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(201,168,76,0.12)',
+                  }}
                 >
-                  <span className="block font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors duration-300">
-                    {cat.label[lang]}
+                  {/* Emoji */}
+                  <span className="text-[56px] mt-4 group-hover:scale-[1.2] group-hover:rotate-[-5deg] transition-transform duration-500 will-change-transform block">
+                    {categoryEmojis[cat.id] || '🍭'}
                   </span>
-                  <span className="block mt-3 text-[11px] text-gold/50 tracking-[0.15em] uppercase group-hover:translate-x-1 transition-transform duration-300">
-                    {t('categories.explore')}
-                  </span>
+
+                  {/* Text at bottom */}
+                  <div className="w-full mt-auto">
+                    <span className="block font-display text-[22px] font-semibold text-cream group-hover:text-gold transition-colors duration-300">
+                      {cat.label[lang]}
+                    </span>
+                    <span className="block mt-3 text-[11px] text-gold/50 tracking-[0.15em] uppercase group-hover:translate-x-1 transition-transform duration-300">
+                      {t('categories.explore')}
+                    </span>
+                  </div>
                 </Link>
               </SquishyCard>
             ))}
@@ -189,25 +234,53 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      {/* ─── Experience & Tradition ─── */}
+      {/* ─── Experience & Tradition with Stats Grid ─── */}
       <WaveDivider variant="glaze" color="hsl(var(--cocoa))" flip />
       <section className="py-28 bg-cocoa relative overflow-hidden">
         <FloatingBlobs className="opacity-10" />
-        <div className="container mx-auto px-4 max-w-3xl text-center relative z-10">
-          <ScrollReveal>
-            <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('tradition.eyebrow')}</span>
-            <h2 className="mt-4 font-display text-3xl md:text-5xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
-              {t('tradition.title')}
-            </h2>
-            <p className="mt-8 text-cream/60 leading-relaxed text-lg">{t('tradition.p1')}</p>
-            <p className="mt-4 text-cream/60 leading-relaxed text-lg">{t('tradition.p2')}</p>
-          </ScrollReveal>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
+            {/* Text */}
+            <div>
+              <ScrollReveal>
+                <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('tradition.eyebrow')}</span>
+                <h2 className="mt-4 font-display text-3xl md:text-5xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
+                  {t('tradition.title')}
+                </h2>
+                <p className="mt-8 text-cream/60 leading-relaxed text-lg">{t('tradition.p1')}</p>
+                <p className="mt-4 text-cream/60 leading-relaxed text-lg">{t('tradition.p2')}</p>
+              </ScrollReveal>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { value: 30, suffix: '+', label: t('stats.years') },
+                { value: 500, suffix: '+', label: t('stats.products') },
+                { value: 41, suffix: '', label: t('stats.counties') },
+                { value: 150, suffix: '+', label: t('stats.partners') },
+              ].map((stat, i) => (
+                <ScrollReveal key={i} delay={i * 0.1}>
+                  <div className="bg-cream/[0.04] border border-cream/10 rounded-[20px] p-6 text-center hover:-translate-y-1 transition-all duration-300 group">
+                    <CountUpStat
+                      value={stat.value}
+                      suffix={stat.suffix}
+                      label={stat.label}
+                      className="[&>span:first-child]:text-[40px] [&>span:first-child]:font-bold"
+                    />
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
       <WaveDivider variant="drip" color="hsl(var(--primary))" />
 
       {/* ─── CTA Strip ─── */}
       <section className="py-24 bg-primary relative overflow-hidden">
+        {/* Radial glow */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,255,255,0.06) 0%, transparent 70%)' }} />
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <ScrollReveal>
