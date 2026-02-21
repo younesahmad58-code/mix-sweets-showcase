@@ -141,7 +141,7 @@ const Index: React.FC = () => {
             {whyCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
                 <div className="card-3d p-8 h-full">
-                  <Icon3D icon={card.icon} variant="gold" delay={i * 0.1} className="mb-6" />
+                  <Icon3D icon={card.icon} variant="crimson" size="lg" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </div>
