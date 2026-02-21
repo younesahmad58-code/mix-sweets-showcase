@@ -61,9 +61,6 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        "candy-pink": "hsl(var(--candy-pink))",
-        "candy-red": "hsl(var(--candy-red))",
-        "candy-glow": "hsl(var(--candy-glow))",
         chocolate: {
           DEFAULT: "hsl(var(--chocolate))",
           light: "hsl(var(--chocolate-light))",
@@ -106,12 +103,17 @@ export default {
           from: { left: "-100%" },
           to: { left: "120%" },
         },
+        kenBurns: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.05)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "whatsapp-glow": "whatsapp-glow 3s ease-in-out infinite",
+        "ken-burns": "kenBurns 12s ease-in-out infinite alternate",
       },
     },
   },

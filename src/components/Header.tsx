@@ -40,7 +40,7 @@ const Header: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-background/80 backdrop-blur-2xl border-b border-border/50 shadow-[0_1px_20px_rgba(0,0,0,0.04)]'
+          ? 'bg-[rgba(20,6,4,0.75)] backdrop-blur-[20px] border-b border-gold/10 shadow-[0_1px_20px_rgba(0,0,0,0.1)]'
           : 'bg-transparent'
       }`}
     >
@@ -49,11 +49,11 @@ const Header: React.FC = () => {
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-            className="bg-white/90 backdrop-blur-sm rounded-2xl p-1.5 shadow-sm"
+            className="bg-white/10 backdrop-blur-sm rounded-2xl p-1.5"
           >
             <img src={logo} alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded-xl" />
           </motion.div>
-          <span className="font-display text-xl md:text-2xl font-bold text-foreground tracking-tight hidden sm:inline">
+          <span className="font-display text-xl md:text-2xl font-semibold text-cream tracking-tight hidden sm:inline">
             MIX SWEETS
           </span>
         </Link>
@@ -64,18 +64,17 @@ const Header: React.FC = () => {
             <Link
               key={link.to}
               to={link.to}
-              className={`relative text-sm font-medium tracking-wide uppercase transition-colors hover:text-primary ${
-                location.pathname === link.to ? 'text-primary' : 'text-foreground/60'
+              className={`relative text-sm font-medium tracking-wide uppercase transition-colors pb-1 ${
+                location.pathname === link.to ? 'text-gold' : 'text-cream/70 hover:text-cream'
               }`}
               style={{ letterSpacing: '0.05em', fontSize: '0.8rem' }}
             >
               {link.label}
-              {location.pathname === link.to && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute -bottom-1 left-0 right-0 h-px bg-primary"
-                />
-              )}
+              <span
+                className={`absolute bottom-0 left-0 h-px bg-gold transition-all duration-300 ${
+                  location.pathname === link.to ? 'w-full' : 'w-0'
+                }`}
+              />
             </Link>
           ))}
 
@@ -85,7 +84,7 @@ const Header: React.FC = () => {
               onClick={() => setLangOpen(!langOpen)}
               whileHover={{ scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-              className="flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-primary transition-colors"
+              className="flex items-center gap-1.5 text-sm font-medium text-cream/60 hover:text-gold transition-colors"
             >
               <Globe className="w-4 h-4" />
               <span>{currentLang.flag}</span>
@@ -98,14 +97,14 @@ const Header: React.FC = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.97 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
-                  className="absolute top-full end-0 mt-3 bg-background/90 backdrop-blur-2xl border border-border rounded-2xl shadow-xl py-2 min-w-[150px]"
+                  className="absolute top-full end-0 mt-3 bg-cocoa/95 backdrop-blur-2xl border border-gold/10 rounded-2xl shadow-xl py-2 min-w-[150px]"
                 >
                   {languages.map(lang => (
                     <button
                       key={lang.code}
                       onClick={() => { setLanguage(lang.code); setLangOpen(false); }}
-                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-primary/5 transition-colors rounded-xl mx-1 ${
-                        language === lang.code ? 'text-primary font-bold' : 'text-foreground'
+                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-gold/5 transition-colors rounded-xl mx-1 ${
+                        language === lang.code ? 'text-gold font-bold' : 'text-cream/80'
                       }`}
                       style={{ width: 'calc(100% - 8px)' }}
                     >
@@ -123,7 +122,7 @@ const Header: React.FC = () => {
         <motion.button
           onClick={() => setMobileOpen(!mobileOpen)}
           whileTap={{ scale: 0.95 }}
-          className="md:hidden p-2 text-foreground"
+          className="md:hidden p-2 text-cream"
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </motion.button>
@@ -137,7 +136,7 @@ const Header: React.FC = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="md:hidden bg-background/95 backdrop-blur-2xl border-t border-border/50 overflow-hidden"
+            className="md:hidden bg-cocoa/95 backdrop-blur-xl border-t border-gold/10 overflow-hidden"
           >
             <nav className="flex flex-col p-4 gap-1">
               {navLinks.map(link => (
@@ -145,7 +144,7 @@ const Header: React.FC = () => {
                   key={link.to}
                   to={link.to}
                   className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
-                    location.pathname === link.to ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-muted'
+                    location.pathname === link.to ? 'bg-gold/10 text-gold' : 'text-cream/80 hover:bg-cream/5'
                   }`}
                 >
                   {link.label}
@@ -158,7 +157,7 @@ const Header: React.FC = () => {
                     onClick={() => { setLanguage(lang.code); setMobileOpen(false); }}
                     whileTap={{ scale: 0.97 }}
                     className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                      language === lang.code ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
+                      language === lang.code ? 'bg-gold text-cocoa' : 'bg-cream/5 text-cream/80'
                     }`}
                   >
                     <span>{lang.flag}</span>

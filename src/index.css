@@ -6,101 +6,102 @@
 
 @layer base {
   :root {
-    --background: 25 33% 97%;
-    --foreground: 0 60% 11%;
+    --background: 30 50% 97%;
+    --foreground: 10 60% 8%;
 
-    --card: 30 25% 96%;
-    --card-foreground: 0 60% 11%;
+    --card: 30 30% 98%;
+    --card-foreground: 10 60% 8%;
 
-    --popover: 25 33% 97%;
-    --popover-foreground: 0 60% 11%;
+    --popover: 30 50% 97%;
+    --popover-foreground: 10 60% 8%;
 
-    --primary: 350 75% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 350 75% 32%;
+    --primary-foreground: 38 50% 92%;
 
-    --secondary: 25 20% 92%;
-    --secondary-foreground: 0 60% 11%;
+    --secondary: 30 15% 94%;
+    --secondary-foreground: 10 60% 8%;
 
-    --muted: 30 15% 94%;
-    --muted-foreground: 20 12% 45%;
+    --muted: 30 12% 95%;
+    --muted-foreground: 20 10% 45%;
 
-    --accent: 38 65% 52%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 42 55% 54%;
+    --accent-foreground: 10 60% 8%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 12% 90%;
+    --border: 30 15% 90%;
     --input: 30 12% 88%;
-    --ring: 350 75% 40%;
+    --ring: 350 75% 32%;
 
     --radius: 0.625rem;
 
-    --sidebar-background: 0 60% 5%;
+    --sidebar-background: 10 60% 5%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 350 75% 40%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 38 65% 52%;
+    --sidebar-primary: 350 75% 32%;
+    --sidebar-primary-foreground: 38 50% 92%;
+    --sidebar-accent: 42 55% 54%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 30% 14%;
-    --sidebar-ring: 350 75% 40%;
+    --sidebar-border: 10 30% 14%;
+    --sidebar-ring: 350 75% 32%;
 
     /* Custom tokens */
-    --candy-pink: 340 55% 50%;
-    --candy-red: 350 75% 40%;
-    --candy-glow: 340 50% 60%;
-    --chocolate: 0 60% 11%;
-    --chocolate-light: 0 30% 30%;
-    --cocoa: 0 55% 8%;
-    --cream: 25 33% 97%;
-    --cream-dark: 30 18% 88%;
-    --gold: 38 65% 52%;
-    --gold-light: 40 55% 62%;
-    --gold-dark: 35 70% 40%;
+    --chocolate: 10 60% 8%;
+    --chocolate-light: 10 30% 25%;
+    --cocoa: 10 60% 7%;
+    --cream: 38 50% 92%;
+    --cream-dark: 30 18% 85%;
+    --gold: 42 55% 54%;
+    --gold-light: 42 45% 64%;
+    --gold-dark: 42 60% 42%;
     --whatsapp: 142 70% 40%;
   }
 
   .dark {
-    --background: 0 40% 4%;
+    --background: 10 40% 4%;
     --foreground: 0 0% 92%;
 
-    --card: 0 30% 7%;
+    --card: 10 30% 7%;
     --card-foreground: 0 0% 92%;
 
-    --popover: 0 30% 7%;
+    --popover: 10 30% 7%;
     --popover-foreground: 0 0% 92%;
 
-    --primary: 350 75% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 350 75% 32%;
+    --primary-foreground: 38 50% 92%;
 
-    --secondary: 0 20% 14%;
+    --secondary: 10 20% 14%;
     --secondary-foreground: 0 0% 90%;
 
-    --muted: 0 10% 12%;
+    --muted: 10 10% 12%;
     --muted-foreground: 0 0% 55%;
 
-    --accent: 38 65% 52%;
+    --accent: 42 55% 54%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 10% 16%;
-    --input: 0 10% 18%;
-    --ring: 350 75% 40%;
+    --border: 10 10% 16%;
+    --input: 10 10% 18%;
+    --ring: 350 75% 32%;
 
-    --sidebar-background: 0 40% 3%;
+    --sidebar-background: 10 40% 3%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 350 75% 40%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 20% 14%;
+    --sidebar-primary: 350 75% 32%;
+    --sidebar-primary-foreground: 38 50% 92%;
+    --sidebar-accent: 10 20% 14%;
     --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 0 10% 12%;
-    --sidebar-ring: 350 75% 40%;
+    --sidebar-border: 10 10% 12%;
+    --sidebar-ring: 350 75% 32%;
   }
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border;
   }
@@ -135,7 +136,7 @@
     left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
     transition: left 0.6s ease;
   }
   .shine-effect:hover::after {
@@ -150,7 +151,7 @@
     left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     animation: shine-sweep 4s ease-in-out infinite;
   }
 
@@ -160,18 +161,18 @@
   }
 
   .candy-shadow {
-    box-shadow: 0 8px 32px rgba(178, 24, 48, 0.06), 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.06);
   }
 
   .candy-shadow-hover {
-    box-shadow: 0 16px 48px rgba(178, 24, 48, 0.1), 0 4px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.1);
   }
 
   .candy-glow {
-    box-shadow: 0 0 60px rgba(178, 24, 48, 0.08), 0 24px 48px rgba(0,0,0,0.06);
+    box-shadow: 0 12px 60px rgba(0,0,0,0.08);
   }
 
   .gold-glow {
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.1), 0 16px 32px rgba(0,0,0,0.04);
+    box-shadow: 0 0 40px rgba(201,168,76,0.15);
   }
 }

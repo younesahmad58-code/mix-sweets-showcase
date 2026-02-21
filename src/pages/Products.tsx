@@ -38,7 +38,7 @@ const Products: React.FC = () => {
       <section className="py-16 bg-cocoa relative overflow-hidden">
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <span className="text-gold text-xs font-medium tracking-[0.2em] uppercase">Our Collection</span>
+          <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('products.eyebrow')}</span>
           <h1 className="mt-3 font-display text-4xl md:text-6xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
             {t('products.title')}
           </h1>
@@ -58,7 +58,7 @@ const Products: React.FC = () => {
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   placeholder={t('products.search')}
-                  className="w-full ps-11 pe-4 py-3 bg-muted border border-border/50 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground placeholder:text-muted-foreground transition-all"
+                  className="w-full ps-11 pe-4 py-3 bg-muted border border-border rounded-[20px] text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground placeholder:text-muted-foreground transition-all"
                 />
               </div>
 
@@ -69,7 +69,7 @@ const Products: React.FC = () => {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 18 }}
                   className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === 'all' ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground border border-border/50 hover:border-primary/20'
+                    activeCategory === 'all' ? 'bg-primary text-cream' : 'bg-muted text-foreground border border-border hover:border-primary/20'
                   }`}
                 >
                   {t('products.all')}
@@ -82,7 +82,7 @@ const Products: React.FC = () => {
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 18 }}
                     className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
-                      activeCategory === cat.id ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground border border-border/50 hover:border-primary/20'
+                      activeCategory === cat.id ? 'bg-primary text-cream' : 'bg-muted text-foreground border border-border hover:border-primary/20'
                     }`}
                   >
                     {cat.label[lang]}
@@ -100,7 +100,7 @@ const Products: React.FC = () => {
                   {filtered.map((product, i) => (
                     <SquishyCard key={product.id} delay={i * 0.04}>
                       <Link to={`/products/${product.slug}`} className="group block">
-                        <div className="bg-background rounded-3xl overflow-hidden candy-shadow hover:candy-shadow-hover transition-all duration-500 border border-border/50">
+                        <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
                           <div className="aspect-[4/3] bg-muted relative overflow-hidden">
                             <img
                               src={product.images[0]}
@@ -110,7 +110,7 @@ const Products: React.FC = () => {
                             />
                             <div className="absolute top-3 start-3 flex gap-2">
                               {product.badges.map(badge => (
-                                <span key={badge} className="px-2.5 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                                <span key={badge} className="px-2.5 py-1 bg-gold text-cocoa text-xs font-medium rounded-full">
                                   {t(`badge.${badge}`)}
                                 </span>
                               ))}
