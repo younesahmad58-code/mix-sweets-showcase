@@ -1,117 +1,111 @@
 
 
-# MIX SWEETS SRL — Premium Presentation Website
+# UI Patch Plan -- MIX SWEETS
 
-## Overview
-A high-end, cinematic presentation website for MIX SWEETS SRL — a Romanian confectionery company with 30+ years of experience. The site supports 3 languages (RO/EN/AR with RTL), features a product catalog (no e-commerce), admin dashboard for product management, and a premium chocolate/cocoa-inspired design system.
+## 1. Remove Unverified Claims
 
----
+**Index.tsx (Home page)**
+- Delete the entire "Trust / Stats" section (lines 164-187) -- the block with 150+, 25+, 200+ stats and the "Partner de Incredere" heading.
+- Replace it with a simple "Experienta si Traditie" section: a centered heading + 2-3 generic sentences mentioning "peste 30 de ani experienta" without any specific numbers (except "30+").
 
-## Design System
-- **Color palette**: Deep chocolate browns, warm cream/ivory, soft cocoa tones, with a refined gold accent for CTAs and highlights
-- **Typography**: Modern sans-serif (Inter/Plus Jakarta Sans) for body, refined display font (Playfair Display) for headings only
-- **Layout**: Generous whitespace, strong 12-column grid, consistent 8px spacing scale, refined soft shadows
-- **Animations**: Cinematic hero entrance, scroll-reveal sections, subtle card hover scale/lift, smooth page transitions — all respecting `prefers-reduced-motion`
-- **Logo**: The uploaded MIX Sweets logo integrated into header and footer
+**About.tsx**
+- Remove the entire Timeline section (lines 71-95) with years 1993/2000/2010/2018/2022/2025.
+- Replace about.story.p3 (which mentions "Top Profit / locul #2") with a safe, generic paragraph about commitment to quality. No rankings.
 
----
-
-## Pages & Features
-
-### 1. Home Page
-- **Hero section**: Full-width cinematic section with elegant chocolate/candy mood, headline, subheadline, and two CTAs ("Explore Products" + "Request an Offer")
-- **Why MIX SWEETS**: 4 premium cards — Quality, Variety, Reliability, Distribution
-- **Featured Categories**: Horizontal carousel/slider showcasing product categories (no prices)
-- **New & Seasonal**: Highlight section for seasonal products with badges
-- **Trust Section**: Partners, distribution reach, trade fairs/expos mentions
-- **CTA Strip**: "Request an Offer" banner with button
-
-### 2. About Page
-- Rich storytelling sections with placeholder images
-- Timeline-style milestones showing 30+ years of history
-- Company values: Quality, Honesty, Responsibility
-- Mention of #2 ranking in Top Profit Romania (Voluntari, sugar/chocolate wholesale sector)
-- All content in RO/EN/AR
-
-### 3. Products Page
-- Category filters (sidebar on desktop, top bar on mobile)
-- Search bar + category chips
-- Product cards: image, name, short description, grammage, badges (e.g., "Seasonal", "New")
-- Clicking a card navigates to `/products/:slug`
-- 10 demo products pre-loaded: Biscuiți Glazurați, Turtă Dulce, Fursecuri Asortate, Rulouri cu Cremă, Acadele Fructate, Napolitane cu Ciocolată, Bomboane Asortate, Jeleuri Fructate, Praline Fine, Bezele Colorate
-
-### 4. Product Detail Page (`/products/:slug`)
-- Large image gallery with graceful fallback placeholders
-- Sticky info panel with name, description, grammage/packaging details, badges
-- "Available Variants" section
-- "Request an Offer" CTA
-- Related products row at bottom
-
-### 5. Contact Page
-- Company details displayed beautifully (address, phone, email, CUI, registration info)
-- Embedded Google Maps for Voluntari, Ilfov location
-- "Request Offer" form: name, company, email, phone, message — with client-side Zod validation
-- On submit: opens mailto with prefilled subject/body AND stores submission in Supabase for admin viewing
-- WhatsApp CTA button
+**translations.ts**
+- Remove all `trust.partners`, `trust.fairs`, `trust.products` keys (keep `trust.years` as fallback or remove).
+- Remove all `about.timeline.*` keys.
+- Update `about.story.p3` across RO/EN/AR to remove the #2 ranking claim.
+- Add new keys for the "Experienta si Traditie" replacement section (RO/EN/AR).
 
 ---
 
-## Multilingual (i18n)
-- **Languages**: Romanian (default), English, Arabic (RTL)
-- Language switcher dropdown in header with flag icons
-- Selected language persisted in localStorage
-- All UI text, product content, and About page content translated in all 3 languages
-- Arabic pages automatically switch to RTL layout
+## 2. Fix Product Categories
+
+**products.ts** -- Update `categories` array to keep only 5:
+- `biscuits` (Biscuiti)
+- `cakes` (Prajituri)
+- `chocolate` (Ciocolata) -- new ID, replacing previous
+- `lollipops` (Acadele)
+- `jellies` (Jeleuri) -- new ID, replacing previous
+
+Remove: `candies` (Bomboane), `wafers` (Napolitane), `seasonal` (Sezoniere).
+
+Reassign existing demo products:
+- "Napolitane cu Ciocolata" -> category `chocolate`
+- "Bomboane Asortate" -> category `chocolate`
+- "Jeleuri Fructate" -> category `jellies`
+- "Praline Fine" -> category `chocolate`
+- "Bezele Colorate" -> category `cakes`
+- "Turta Dulce" -> keep but change category from `seasonal` to `cakes` (remove seasonal category)
+
+Update `translations.ts` category keys accordingly (RO/EN/AR).
 
 ---
 
-## WhatsApp Floating Button
-- Green, modern, premium-styled floating button (bottom-right corner)
-- Appears with smooth animation after ~1.5 seconds
-- Opens WhatsApp chat to +40728980123 with language-specific prefilled message
+## 3. About Page -- Replace Intro Text
+
+Replace the 3 story paragraphs with content based on the user's provided Romanian base text:
+
+**RO**: "Compania noastra MIX SWEETS este o afacere romaneasca cu experienta de peste 30 de ani, dezvoltata in Bucuresti. Oferim o gama de produse precum biscuiti, prajituri, ciocolata, acadele si jeleuri, alaturi de produse de sezon si sortimente potrivite in orice perioada. Punem accent pe calitate, consecventa si respect fata de clientii nostri, oferind partenerilor produse realizate cu atentie si seriozitate."
+
+Slightly expanded into 2 paragraphs (keeping it factual, no fake claims). Translate naturally to EN and AR (RTL).
 
 ---
 
-## Sticky Header
-- Logo + navigation links (Home, About, Products, Contact)
-- Language switcher dropdown
-- No cart icon anywhere
-- Mobile: hamburger menu with smooth drawer
+## 4. Contact Page -- Premium 3D Info Cards
 
-## Footer
-- Full company details (name, CUI, registration, address, phone, email)
-- Quick links to all pages
-- "Request an Offer" CTA
-- Discreet "Admin" link (small, low-emphasis text)
+Redesign the contact info area (currently a flat list of address/phone/email/CUI/reg) into:
 
----
+- A section title "Contacteaza-ne" with a short intro paragraph (translated RO/EN/AR).
+- A 3-column grid (desktop) / stacked (mobile) with 3 lifted cards:
+  - **Card A "Locatia Noastra"** -- MapPin icon, formatted address
+  - **Card B "Informatii de Contact"** -- Phone icon, phone + email
+  - **Card C "Program de Lucru"** -- Clock icon, "Luni-Vineri: 09:00-17:00" + "Sambata-Duminica: Inchis"
 
-## Backend (Supabase)
+Card styling: `rounded-xl`, soft shadow (`shadow-lg`), `border border-border`, `bg-card`, hover: `hover:-translate-y-1 hover:shadow-xl`, transition. Icons centered above card titles.
 
-### Database Tables
-- **products**: id, slug, name (RO/EN/AR), description (RO/EN/AR), category, images (array of URLs), grammage, badges/tags, created_at, updated_at
-- **contact_submissions**: id, name, company, email, phone, message, language, created_at, read (boolean)
-- **user_roles**: id, user_id, role (admin enum)
-
-### Authentication & Admin
-- Supabase Auth for admin login (email/password)
-- Admin role stored in `user_roles` table with RLS
-- Protected `/admin` routes — unauthenticated users redirected to `/admin/login`
-- Admin entry point: discreet footer link only
-
-### Admin Dashboard
-- **Products CRUD**: Add, edit, delete products with all multilingual fields, category, images, grammage, badges
-- **Product preview**: Preview how a product looks on the public site
-- **Contact submissions viewer**: See all form submissions, mark as read
-- Clean, functional admin UI (not public-facing design)
+Keep existing form, map, and WhatsApp unchanged.
 
 ---
 
-## SEO & Performance
-- Proper meta tags and Open Graph tags per page
-- Clean semantic HTML headings structure
-- Schema.org markup for Organization + Product catalog items
-- Mobile-first responsive design
-- Optimized images with fallback placeholders
-- Fast loading with code splitting
+## 5. Color Tone Adjustment
+
+Shift heavy brown sections to cleaner tones:
+
+**index.css**
+- Change `--primary` from deep brown `20 60% 20%` to a softer warm charcoal like `20 25% 22%` (less saturated brown).
+- Shift hero gradient in Index.tsx from `from-primary via-chocolate to-cocoa` to a more refined `from-[hsl(20,20%,18%)] via-[hsl(15,15%,22%)] to-[hsl(20,10%,28%)]` -- darker, less "brown paint" feel.
+- Keep gold accent and cream backgrounds as-is.
+- The About hero and Contact hero sections (`bg-primary`) will automatically look cleaner with the adjusted primary.
+
+---
+
+## 6. Logo Treatment
+
+**Header.tsx and Footer.tsx**
+- Wrap the logo `<img>` in a container with: `bg-white/90 backdrop-blur-sm rounded-lg p-1.5 shadow-sm` so the logo sits in a soft light badge instead of appearing as a raw white rectangle.
+
+Also copy the new uploaded logo (`logo_2.png`) to `src/assets/logo_2.png` for use (transparent/cleaner version). Update imports in Header and Footer to use the new logo.
+
+---
+
+## Technical Details
+
+### Files to modify:
+1. `src/index.css` -- adjust `--primary` HSL value
+2. `src/i18n/translations.ts` -- update/remove keys for trust stats, timeline, about story, add contact card keys, update category keys
+3. `src/data/products.ts` -- update categories array and reassign product categories
+4. `src/pages/Index.tsx` -- remove Trust/Stats section, add "Experienta si Traditie" section
+5. `src/pages/About.tsx` -- remove Timeline section, update story paragraph references
+6. `src/pages/Contact.tsx` -- redesign info area into 3-column card grid
+7. `src/components/Header.tsx` -- logo badge wrapper + new logo import
+8. `src/components/Footer.tsx` -- logo badge wrapper + new logo import
+
+### Asset to copy:
+- `user-uploads://logo_2.png` -> `src/assets/logo_2.png`
+
+### No changes to:
+- Routing, admin, database, auth, WhatsApp, i18n system logic
+- No new libraries
 
