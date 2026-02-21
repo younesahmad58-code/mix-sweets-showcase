@@ -6,10 +6,36 @@ import { Language } from '@/i18n/translations';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '@/assets/logo_2.png';
 
-const languages: { code: Language; label: string; flag: string }[] = [
-  { code: 'ro', label: 'Română', flag: '🇷🇴' },
-  { code: 'en', label: 'English', flag: '🇬🇧' },
-  { code: 'ar', label: 'العربية', flag: '🇸🇦' },
+const flagSvgs: Record<string, React.ReactNode> = {
+  ro: (
+    <svg width="20" height="14" viewBox="0 0 30 20" className="rounded-sm shrink-0">
+      <rect width="10" height="20" fill="#002B7F" />
+      <rect x="10" width="10" height="20" fill="#FCD116" />
+      <rect x="20" width="10" height="20" fill="#CE1126" />
+    </svg>
+  ),
+  en: (
+    <svg width="20" height="14" viewBox="0 0 60 30" className="rounded-sm shrink-0">
+      <rect width="60" height="30" fill="#012169" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" />
+      <path d="M30,0 V30 M0,15 H60" stroke="#fff" strokeWidth="10" />
+      <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" strokeWidth="6" />
+    </svg>
+  ),
+  ar: (
+    <svg width="20" height="14" viewBox="0 0 30 20" className="rounded-sm shrink-0">
+      <rect width="30" height="6.67" fill="#006C35" />
+      <rect y="6.67" width="30" height="6.67" fill="#fff" />
+      <rect y="13.34" width="30" height="6.66" fill="#000" />
+    </svg>
+  ),
+};
+
+const languages: { code: Language; label: string }[] = [
+  { code: 'ro', label: 'RO' },
+  { code: 'en', label: 'EN' },
+  { code: 'ar', label: 'AR' },
 ];
 
 const Header: React.FC = () => {
@@ -92,7 +118,7 @@ const Header: React.FC = () => {
               transition={{ type: 'spring', stiffness: 200, damping: 18 }}
               className="flex items-center gap-1.5 text-sm font-medium text-cream/60 hover:text-gold transition-colors"
             >
-              <span>{currentLang.flag} {currentLang.code.toUpperCase()}</span>
+              <span className="flex items-center gap-1.5">{flagSvgs[currentLang.code]} {currentLang.label}</span>
             </motion.button>
             <AnimatePresence>
               {langOpen && (
@@ -112,7 +138,7 @@ const Header: React.FC = () => {
                       }`}
                       style={{ width: 'calc(100% - 8px)' }}
                     >
-                      <span>{lang.flag}</span>
+                      {flagSvgs[lang.code]}
                       <span>{lang.label}</span>
                     </button>
                   ))}
@@ -164,7 +190,7 @@ const Header: React.FC = () => {
                       language === lang.code ? 'bg-gold text-cocoa' : 'bg-cream/5 text-cream/80'
                     }`}
                   >
-                    <span>{lang.flag}</span>
+                    {flagSvgs[lang.code]}
                     <span>{lang.label}</span>
                   </motion.button>
                 ))}

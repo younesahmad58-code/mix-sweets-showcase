@@ -143,7 +143,7 @@ const Index: React.FC = () => {
                 <div className="relative bg-card rounded-[22px] p-8 border border-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-[400ms] h-full card-gloss overflow-hidden"
                   style={{ boxShadow: '0 2px 20px rgba(0,0,0,0.04)' }}
                 >
-                  <Icon3D icon={card.icon} variant="crimson" delay={i * 0.1} className="mb-6" />
+                  <Icon3D icon={card.icon} variant="gold" delay={i * 0.1} className="mb-6" />
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </div>
