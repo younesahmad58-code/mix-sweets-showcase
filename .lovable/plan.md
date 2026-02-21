@@ -1,111 +1,174 @@
 
+# Visual Overhaul -- Vibrant Candy Brand Aesthetic
 
-# UI Patch Plan -- MIX SWEETS
-
-## 1. Remove Unverified Claims
-
-**Index.tsx (Home page)**
-- Delete the entire "Trust / Stats" section (lines 164-187) -- the block with 150+, 25+, 200+ stats and the "Partner de Incredere" heading.
-- Replace it with a simple "Experienta si Traditie" section: a centered heading + 2-3 generic sentences mentioning "peste 30 de ani experienta" without any specific numbers (except "30+").
-
-**About.tsx**
-- Remove the entire Timeline section (lines 71-95) with years 1993/2000/2010/2018/2022/2025.
-- Replace about.story.p3 (which mentions "Top Profit / locul #2") with a safe, generic paragraph about commitment to quality. No rankings.
-
-**translations.ts**
-- Remove all `trust.partners`, `trust.fairs`, `trust.products` keys (keep `trust.years` as fallback or remove).
-- Remove all `about.timeline.*` keys.
-- Update `about.story.p3` across RO/EN/AR to remove the #2 ranking claim.
-- Add new keys for the "Experienta si Traditie" replacement section (RO/EN/AR).
+Complete UI/UX redesign transforming the current brown/corporate look into a vibrant, modern candy brand aesthetic. All logic, routing, i18n, database, and admin functionality remain untouched.
 
 ---
 
-## 2. Fix Product Categories
+## 1. Color System Overhaul (index.css + tailwind.config.ts)
 
-**products.ts** -- Update `categories` array to keep only 5:
-- `biscuits` (Biscuiti)
-- `cakes` (Prajituri)
-- `chocolate` (Ciocolata) -- new ID, replacing previous
-- `lollipops` (Acadele)
-- `jellies` (Jeleuri) -- new ID, replacing previous
+**index.css -- Light mode CSS variables:**
+- `--background`: Pure white `0 0% 100%`
+- `--foreground`: Rich chocolate `10 50% 12%` (deep #2B1414-like)
+- `--card`: Soft off-white `0 0% 99%`
+- `--primary`: Vibrant Red `0 78% 52%` (from MIX SWEETS logo red)
+- `--primary-foreground`: White `0 0% 100%`
+- `--secondary`: Soft pink `350 60% 96%`
+- `--muted`: Very light warm gray `30 10% 96%`
+- `--accent`: Candy Pink `340 70% 56%`
+- `--accent-foreground`: White `0 0% 100%`
+- `--border`: Very subtle gray `30 10% 92%`
+- `--ring`: Vibrant Red (same as primary)
 
-Remove: `candies` (Bomboane), `wafers` (Napolitane), `seasonal` (Sezoniere).
+**New custom tokens:**
+- `--candy-pink`: `340 70% 56%`
+- `--candy-red`: `0 78% 52%`
+- `--candy-glow`: `340 80% 70%` (for glowing shadows)
 
-Reassign existing demo products:
-- "Napolitane cu Ciocolata" -> category `chocolate`
-- "Bomboane Asortate" -> category `chocolate`
-- "Jeleuri Fructate" -> category `jellies`
-- "Praline Fine" -> category `chocolate`
-- "Bezele Colorate" -> category `cakes`
-- "Turta Dulce" -> keep but change category from `seasonal` to `cakes` (remove seasonal category)
-
-Update `translations.ts` category keys accordingly (RO/EN/AR).
-
----
-
-## 3. About Page -- Replace Intro Text
-
-Replace the 3 story paragraphs with content based on the user's provided Romanian base text:
-
-**RO**: "Compania noastra MIX SWEETS este o afacere romaneasca cu experienta de peste 30 de ani, dezvoltata in Bucuresti. Oferim o gama de produse precum biscuiti, prajituri, ciocolata, acadele si jeleuri, alaturi de produse de sezon si sortimente potrivite in orice perioada. Punem accent pe calitate, consecventa si respect fata de clientii nostri, oferind partenerilor produse realizate cu atentie si seriozitate."
-
-Slightly expanded into 2 paragraphs (keeping it factual, no fake claims). Translate naturally to EN and AR (RTL).
+**tailwind.config.ts:**
+- Add `candy-pink`, `candy-red`, `candy-glow` color tokens
+- Add `whatsapp-glow` keyframe for infinite pulse
+- Add `shine` keyframe for button sweep effect
+- Keep existing font families unchanged
 
 ---
 
-## 4. Contact Page -- Premium 3D Info Cards
+## 2. Wave/Liquid Section Dividers (new component)
 
-Redesign the contact info area (currently a flat list of address/phone/email/CUI/reg) into:
-
-- A section title "Contacteaza-ne" with a short intro paragraph (translated RO/EN/AR).
-- A 3-column grid (desktop) / stacked (mobile) with 3 lifted cards:
-  - **Card A "Locatia Noastra"** -- MapPin icon, formatted address
-  - **Card B "Informatii de Contact"** -- Phone icon, phone + email
-  - **Card C "Program de Lucru"** -- Clock icon, "Luni-Vineri: 09:00-17:00" + "Sambata-Duminica: Inchis"
-
-Card styling: `rounded-xl`, soft shadow (`shadow-lg`), `border border-border`, `bg-card`, hover: `hover:-translate-y-1 hover:shadow-xl`, transition. Icons centered above card titles.
-
-Keep existing form, map, and WhatsApp unchanged.
+Create `src/components/WaveDivider.tsx`:
+- A simple inline SVG component that renders a smooth wave/melting curve
+- Props: `color` (fill color), `flip` (boolean for top vs bottom), `className`
+- Used between major sections on Home, About, Contact pages
+- Pure SVG path, no extra libraries
 
 ---
 
-## 5. Color Tone Adjustment
+## 3. Header -- Glassmorphism Sticky Nav
 
-Shift heavy brown sections to cleaner tones:
-
-**index.css**
-- Change `--primary` from deep brown `20 60% 20%` to a softer warm charcoal like `20 25% 22%` (less saturated brown).
-- Shift hero gradient in Index.tsx from `from-primary via-chocolate to-cocoa` to a more refined `from-[hsl(20,20%,18%)] via-[hsl(15,15%,22%)] to-[hsl(20,10%,28%)]` -- darker, less "brown paint" feel.
-- Keep gold accent and cream backgrounds as-is.
-- The About hero and Contact hero sections (`bg-primary`) will automatically look cleaner with the adjusted primary.
-
----
-
-## 6. Logo Treatment
-
-**Header.tsx and Footer.tsx**
-- Wrap the logo `<img>` in a container with: `bg-white/90 backdrop-blur-sm rounded-lg p-1.5 shadow-sm` so the logo sits in a soft light badge instead of appearing as a raw white rectangle.
-
-Also copy the new uploaded logo (`logo_2.png`) to `src/assets/logo_2.png` for use (transparent/cleaner version). Update imports in Header and Footer to use the new logo.
+**Header.tsx visual changes only:**
+- Scrolled state: `bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/5`
+- Non-scrolled: `bg-transparent`
+- Logo badge: `bg-white/90 backdrop-blur-sm rounded-2xl p-1.5 shadow-md`
+- Active nav link: `text-candy-red` with animated underline dot
+- Language dropdown: `bg-white/80 backdrop-blur-xl border border-white/30 shadow-xl`
+- Mobile drawer: `bg-white/90 backdrop-blur-xl`
+- All corners bumped to `rounded-2xl` / `rounded-3xl`
 
 ---
 
-## Technical Details
+## 4. Home Page (Index.tsx)
 
-### Files to modify:
-1. `src/index.css` -- adjust `--primary` HSL value
-2. `src/i18n/translations.ts` -- update/remove keys for trust stats, timeline, about story, add contact card keys, update category keys
-3. `src/data/products.ts` -- update categories array and reassign product categories
-4. `src/pages/Index.tsx` -- remove Trust/Stats section, add "Experienta si Traditie" section
-5. `src/pages/About.tsx` -- remove Timeline section, update story paragraph references
-6. `src/pages/Contact.tsx` -- redesign info area into 3-column card grid
-7. `src/components/Header.tsx` -- logo badge wrapper + new logo import
-8. `src/components/Footer.tsx` -- logo badge wrapper + new logo import
+**Hero Section:**
+- Background: gradient from deep rich red/crimson to warm dark rose instead of brown
+  `from-[#8B1A1A] via-[#A0153E] to-[#C62E65]`
+- Add 3-4 floating decorative blur circles (pure CSS/Tailwind `absolute` divs with `bg-pink-400/20 blur-3xl rounded-full`) for depth
+- Text: `text-white` with bigger sizing (`text-5xl md:text-7xl lg:text-8xl`)
+- CTA buttons: Primary = `bg-white text-candy-red rounded-3xl` with hover shine effect; Secondary = `border-2 border-white/40 text-white rounded-3xl`
+- Add wave divider at bottom transitioning to white background
 
-### Asset to copy:
-- `user-uploads://logo_2.png` -> `src/assets/logo_2.png`
+**Why MIX SWEETS Cards:**
+- Background: `bg-white` with `shadow-lg shadow-pink-100/50` (colored glow shadow)
+- Rounded: `rounded-3xl`
+- Hover: `hover:-translate-y-3 hover:shadow-xl hover:shadow-pink-200/40`
+- Icon container: `bg-gradient-to-br from-candy-red/10 to-candy-pink/10 rounded-2xl`
+- Staggered entrance via existing ScrollReveal
 
-### No changes to:
-- Routing, admin, database, auth, WhatsApp, i18n system logic
-- No new libraries
+**Categories Section:**
+- Background: `bg-[#FFF5F5]` (very faint pink tint)
+- Category cards: `rounded-3xl bg-white shadow-md hover:-translate-y-3 hover:shadow-xl hover:shadow-pink-200/30`
+- Icon circle: `bg-gradient-to-br from-candy-red/10 to-candy-pink/20`
 
+**Seasonal Products:**
+- Product cards: `rounded-3xl bg-white shadow-md shadow-pink-100/30` with `hover:-translate-y-3 hover:shadow-xl`
+- Badges: `bg-candy-red text-white` instead of gold accent
+- Image: existing `group-hover:scale-105` kept
+
+**Experience & Tradition:**
+- Background: gradient `from-[#8B1A1A] to-[#A0153E]` instead of flat `bg-primary`
+- Text: `text-white/90`
+- Wave dividers above and below
+
+**CTA Strip:**
+- Background: `bg-candy-red` (vibrant red)
+- Button: `bg-white text-candy-red rounded-3xl` with shine effect on hover
+
+---
+
+## 5. About Page (About.tsx)
+
+**Hero banner:** `bg-gradient-to-r from-[#8B1A1A] to-[#C62E65]` with wave divider below
+**Story section:** White background, text unchanged
+**Values cards:** `rounded-3xl bg-white shadow-lg shadow-pink-100/40`, icon containers with gradient pink/red bg, hover lift `-translate-y-3`
+
+---
+
+## 6. Products Page (Products.tsx)
+
+**Hero banner:** Same red gradient as About
+**Category filter buttons:** `rounded-3xl`, active = `bg-candy-red text-white`, inactive = `bg-white text-foreground shadow-sm hover:shadow-md`
+**Search input:** `bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-candy-red/30 focus:shadow-lg focus:shadow-pink-100/30`
+**Product cards:** `rounded-3xl bg-white shadow-md shadow-pink-50` with `hover:-translate-y-3 hover:shadow-xl hover:shadow-pink-200/30`, image `group-hover:scale-105`
+**Badges:** `bg-candy-red text-white rounded-full`
+
+---
+
+## 7. Product Detail Page (ProductDetail.tsx)
+
+**Image container:** `rounded-3xl shadow-lg shadow-pink-100/30`
+**Badges:** `bg-candy-red text-white`
+**Variant chips:** `bg-gray-50 rounded-2xl` with hover glow
+**CTA button:** `bg-candy-red text-white rounded-3xl` with shine effect
+**Related products:** Same card style as Products page
+
+---
+
+## 8. Contact Page (Contact.tsx)
+
+**Hero banner:** Red gradient with wave divider
+**Info cards:** `rounded-3xl bg-white shadow-lg shadow-pink-100/40`, icon containers with gradient, hover `-translate-y-3`
+**Form inputs:** `bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-candy-red/30 focus:shadow-lg focus:shadow-pink-100/20` (ultra-modern flush style)
+**Submit button:** `bg-candy-red text-white rounded-3xl` with shine effect
+**Form container:** `rounded-3xl bg-white shadow-xl shadow-pink-100/20 border-0`
+
+---
+
+## 9. Footer (Footer.tsx)
+
+- Background: `bg-[#1A0A0A]` (very dark rich near-black with warm tint) instead of brown `bg-primary`
+- Text: `text-white/70` for body, `text-white` for headings
+- CTA button: `bg-candy-red text-white rounded-3xl`
+- Admin link: keep discreet, `text-white/20`
+
+---
+
+## 10. WhatsApp Button (WhatsAppButton.tsx)
+
+- Add infinite pulse animation: `animate-[pulse_2s_ease-in-out_infinite]` as a ring behind the button
+- Neon green glow shadow: `shadow-[0_0_20px_rgba(37,211,102,0.5)]`
+- Keep existing delayed entrance and framer-motion logic
+
+---
+
+## 11. ScrollReveal (ScrollReveal.tsx)
+
+No changes needed -- existing framer-motion scroll reveal is already smooth.
+
+---
+
+## Files Modified (visual only):
+
+| File | Change Type |
+|------|-------------|
+| `src/index.css` | Color variables overhaul |
+| `tailwind.config.ts` | New color tokens + keyframes |
+| `src/components/WaveDivider.tsx` | NEW -- SVG wave divider component |
+| `src/components/Header.tsx` | Glassmorphism styles |
+| `src/components/Footer.tsx` | Dark background, rounded buttons |
+| `src/components/WhatsAppButton.tsx` | Pulse glow animation |
+| `src/pages/Index.tsx` | Hero gradient, card styles, wave dividers |
+| `src/pages/About.tsx` | Gradient hero, card glow shadows |
+| `src/pages/Products.tsx` | Card styles, filter pills, search input |
+| `src/pages/ProductDetail.tsx` | Rounded cards, red badges, shine CTA |
+| `src/pages/Contact.tsx` | Modern inputs, gradient hero, card glow |
+
+**Zero changes to:** Routing, i18n, database, admin, WhatsApp logic, state management, data fetching, form handlers.
