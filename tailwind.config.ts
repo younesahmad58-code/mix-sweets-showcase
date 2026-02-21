@@ -73,9 +73,6 @@ export default {
           DEFAULT: "hsl(var(--cream))",
           dark: "hsl(var(--cream-dark))",
         },
-        "candy-pink": "hsl(var(--candy-pink))",
-        "candy-red": "hsl(var(--candy-red))",
-        "candy-glow": "hsl(var(--candy-glow))",
         gold: {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold-light))",
@@ -102,8 +99,8 @@ export default {
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "whatsapp-glow": {
-          "0%, 100%": { boxShadow: "0 0 8px rgba(37,211,102,0.4)" },
-          "50%": { boxShadow: "0 0 24px rgba(37,211,102,0.7)" },
+          "0%, 100%": { boxShadow: "0 0 8px rgba(37,211,102,0.3)" },
+          "50%": { boxShadow: "0 0 20px rgba(37,211,102,0.5)" },
         },
         shine: {
           from: { left: "-100%" },
@@ -114,7 +111,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
-        "whatsapp-glow": "whatsapp-glow 2s ease-in-out infinite",
+        "whatsapp-glow": "whatsapp-glow 3s ease-in-out infinite",
       },
     },
   },

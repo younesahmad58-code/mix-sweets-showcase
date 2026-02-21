@@ -9,14 +9,13 @@ interface SquishyCardProps {
 
 const SquishyCard: React.FC<SquishyCardProps> = ({ children, className = '', delay = 0 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 40 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: '-60px' }}
-    transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+    transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
     whileHover={{
-      y: -12,
-      scale: 1.02,
-      transition: { type: 'spring', stiffness: 300, damping: 15 },
+      y: -8,
+      transition: { type: 'spring', stiffness: 200, damping: 18 },
     }}
     className={className}
   >
