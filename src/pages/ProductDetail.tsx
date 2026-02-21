@@ -38,7 +38,7 @@ const ProductDetail: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             {/* Image */}
             <ScrollReveal>
-              <div className="aspect-square bg-muted rounded-3xl overflow-hidden candy-shadow border border-border/50">
+              <div className="aspect-square bg-muted rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15]">
                 <img
                   src={product.images[0]}
                   alt={product.name[lang]}
@@ -53,7 +53,7 @@ const ProductDetail: React.FC = () => {
               <div className="lg:sticky lg:top-28">
                 <div className="flex gap-2 mb-4">
                   {product.badges.map(badge => (
-                    <span key={badge} className="px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                    <span key={badge} className="px-3 py-1 bg-gold text-cocoa text-xs font-medium rounded-full">
                       {t(`badge.${badge}`)}
                     </span>
                   ))}
@@ -81,7 +81,7 @@ const ProductDetail: React.FC = () => {
                           key={v}
                           whileHover={{ scale: 1.04 }}
                           transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-                          className="px-5 py-2.5 bg-muted rounded-full text-sm font-medium text-foreground border border-border/50 cursor-default"
+                          className="px-5 py-2.5 bg-muted rounded-full text-sm font-medium text-foreground border border-border cursor-default"
                         >
                           {v}
                         </motion.span>
@@ -92,7 +92,7 @@ const ProductDetail: React.FC = () => {
 
                 <Link
                   to="/contact"
-                  className="shine-auto relative mt-10 inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:shadow-[0_8px_32px_rgba(178,24,48,0.25)] transition-all duration-500 text-sm tracking-wide"
+                  className="shine-auto relative mt-10 inline-flex items-center justify-center px-10 py-4 bg-primary text-cream font-semibold rounded-full border border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.3)] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
                 >
                   {t('products.request')}
                 </Link>
@@ -110,7 +110,7 @@ const ProductDetail: React.FC = () => {
                 {related.map((p, i) => (
                   <SquishyCard key={p.id} delay={i * 0.1}>
                     <Link to={`/products/${p.slug}`} className="group block">
-                      <div className="bg-background rounded-3xl overflow-hidden candy-shadow hover:candy-shadow-hover transition-all duration-500 border border-border/50">
+                      <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
                         <div className="aspect-[4/3] bg-muted overflow-hidden">
                           <img src={p.images[0]} alt={p.name[lang]} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }} />
                         </div>
