@@ -4,9 +4,6 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  // IMPORTANT:
-  // - In dev/preview (loveable) folosim "/"
-  // - In production build (GitHub Pages) folosim subfolderul repo-ului
   base: mode === "production" ? "/mix-sweets-showcase/" : "/",
 
   server: {
