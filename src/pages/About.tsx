@@ -2,7 +2,6 @@ import React from 'react';
 import { Award, Heart, Shield, Quote, Globe } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
@@ -33,7 +32,6 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
       {/* Story */}
       <section className="py-28 bg-background">
@@ -75,7 +73,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--cocoa))" variant="glaze" flip className="-mt-px" />
+      
 
       {/* Values */}
       <section className="py-28 bg-cocoa-warm">
@@ -102,7 +100,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
+      
 
       {/* Distribution Reach */}
       <section className="py-24 bg-background">

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
@@ -112,7 +111,7 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
+      
 
       {/* Info Cards */}
       <section className="py-20 bg-background">

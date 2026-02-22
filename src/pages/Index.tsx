@@ -9,7 +9,6 @@ import GoldParticles from '@/components/GoldParticles';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
 import CountUpStat from '@/components/CountUpStat';
-import WaveDivider from '@/components/WaveDivider';
 import { categories, demoProducts } from '@/data/products';
 import { Language } from '@/i18n/translations';
 import rainbowCanes from '@/assets/products/rainbow-canes.jpeg';
@@ -137,7 +136,6 @@ const Index: React.FC = () => {
         </div>
       </div>
 
-      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
       {/* ─── Why MIX SWEETS ─── */}
       <section className="py-28 bg-background relative">
@@ -164,7 +162,7 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--cocoa))" variant="glaze" flip className="-mt-px" />
+      
 
       {/* ─── Categories ─── */}
       <section className="py-28 bg-cocoa-warm">
@@ -212,7 +210,6 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
       {/* ─── Recent Products ─── */}
       <section className="py-28 bg-background">
@@ -334,7 +331,7 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
+      
 
       {/* ─── CTA Strip (premium glass on cream) ─── */}
       <section className="py-24 bg-background">
