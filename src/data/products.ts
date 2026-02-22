@@ -18,7 +18,7 @@ export interface Product {
   description: { ro: string; en: string; ar: string };
   category: string;
   images: string[];
-  grammage: string;
+  grammage: { ro: string; en: string; ar: string };
   badges: string[];
   variants?: string[];
 }
@@ -40,7 +40,8 @@ export const demoProducts: Product[] = [
       en: 'Rainbow-colored candy canes in a jar. Pack of 60 pieces, perfect for gifts and events.',
       ar: 'عصا حلوى ملونة بألوان قوس قزح. عبوة من 60 قطعة، مثالية للهدايا والمناسبات.',
     },
-    category: 'lollipops', images: [rainbowCanes], grammage: '60 buc',
+    category: 'lollipops', images: [rainbowCanes],
+    grammage: { ro: '60 buc', en: '60 pcs', ar: '60 قطعة' },
     badges: ['popular'], variants: ['60 buc'],
   },
   {
@@ -51,7 +52,8 @@ export const demoProducts: Product[] = [
       en: 'CC Stick candies with a flashlight toy included. A fun mix for kids — sweets and play in one product.',
       ar: 'حلوى CC Stick مع لعبة مصباح يدوي. مزيج ممتع للأطفال — حلويات ولعب في منتج واحد.',
     },
-    category: 'lollipops', images: [flashlightCandy], grammage: '20 buc',
+    category: 'lollipops', images: [flashlightCandy],
+    grammage: { ro: '20 buc', en: '20 pcs', ar: '20 قطعة' },
     badges: ['new'], variants: ['20 buc'],
   },
   {
@@ -62,7 +64,8 @@ export const demoProducts: Product[] = [
       en: 'Liquid spray candies with cola, lemon, and orange flavors. Fun format that brings smiles.',
       ar: 'حلوى رذاذ سائلة بنكهات الكولا والليمون والبرتقال. تنسيق ممتع يجلب الابتسامات.',
     },
-    category: 'lollipops', images: [sprayCandy], grammage: '24 buc',
+    category: 'lollipops', images: [sprayCandy],
+    grammage: { ro: '24 buc', en: '24 pcs', ar: '24 قطعة' },
     badges: ['popular'], variants: ['24 buc'],
   },
   {
@@ -73,7 +76,8 @@ export const demoProducts: Product[] = [
       en: 'Bullet-shaped spray candies with intense fruit flavors. Unique design and irresistible taste.',
       ar: 'حلوى رذاذ على شكل رصاصة بنكهات فواكه مكثفة. تصميم فريد وطعم لا يقاوم.',
     },
-    category: 'lollipops', images: [bulletSpray], grammage: '30 buc',
+    category: 'lollipops', images: [bulletSpray],
+    grammage: { ro: '30 buc', en: '30 pcs', ar: '30 قطعة' },
     badges: ['new'], variants: ['30 buc'],
   },
   {
@@ -84,7 +88,8 @@ export const demoProducts: Product[] = [
       en: 'Fruit pudding in a jar with various flavors. 65 colorful and delicious pieces, perfect for kids.',
       ar: 'بودنغ فاكهة في برطمان بنكهات متنوعة. 65 قطعة ملونة ولذيذة، مثالية للأطفال.',
     },
-    category: 'jellies', images: [monkeyPudding], grammage: '65 buc',
+    category: 'jellies', images: [monkeyPudding],
+    grammage: { ro: '65 buc', en: '65 pcs', ar: '65 قطعة' },
     badges: ['popular'], variants: ['65 buc'],
   },
   {
@@ -95,7 +100,8 @@ export const demoProducts: Product[] = [
       en: 'Heart-shaped lollipops, colorful and attractive. 30 individually wrapped pieces, ideal for Valentine\'s Day.',
       ar: 'مصاصات على شكل قلب، ملونة وجذابة. 30 قطعة مغلفة بشكل فردي، مثالية لعيد الحب.',
     },
-    category: 'lollipops', images: [loveLollipop], grammage: '30 buc',
+    category: 'lollipops', images: [loveLollipop],
+    grammage: { ro: '30 buc', en: '30 pcs', ar: '30 قطعة' },
     badges: ['seasonal'], variants: ['30 buc'],
   },
   {
@@ -106,7 +112,8 @@ export const demoProducts: Product[] = [
       en: 'Soft balloon-shaped gummies, 50 colorful pieces in an attractive jar. Perfect texture.',
       ar: 'حلوى مطاطية على شكل بالون، 50 قطعة ملونة في برطمان جذاب. قوام مثالي.',
     },
-    category: 'jellies', images: [balloonGummy], grammage: '8g × 50 buc',
+    category: 'jellies', images: [balloonGummy],
+    grammage: { ro: '8g × 50 buc', en: '8g × 50 pcs', ar: '8غ × 50 قطعة' },
     badges: ['popular'], variants: ['50 buc'],
   },
   {
@@ -117,7 +124,8 @@ export const demoProducts: Product[] = [
       en: 'Ice sticks with tropical fruit flavors. Refreshing and colorful, in a transparent jar.',
       ar: 'أعواد ثلج بنكهات فواكه استوائية. منعشة وملونة، في برطمان شفاف.',
     },
-    category: 'jellies', images: [fruitSticks], grammage: '30 buc',
+    category: 'jellies', images: [fruitSticks],
+    grammage: { ro: '30 buc', en: '30 pcs', ar: '30 قطعة' },
     badges: ['new', 'seasonal'], variants: ['30 buc'],
   },
   {
@@ -128,7 +136,8 @@ export const demoProducts: Product[] = [
       en: 'Ice cream cone shaped marshmallow filled with fruit jam. 30 individually wrapped pieces.',
       ar: 'مارشميلو على شكل كوب آيس كريم محشو بمربى الفواكه. 30 قطعة مغلفة بشكل فردي.',
     },
-    category: 'cakes', images: [iceCreamMarshmallow], grammage: '30 buc',
+    category: 'cakes', images: [iceCreamMarshmallow],
+    grammage: { ro: '30 buc', en: '30 pcs', ar: '30 قطعة' },
     badges: ['new'], variants: ['30 buc'],
   },
   {
@@ -139,7 +148,8 @@ export const demoProducts: Product[] = [
       en: 'Decorative flower-shaped lollipops with chocolate balls. Perfect for parties and gifts.',
       ar: 'مصاصات زهور مزخرفة مع كرات شوكولاتة. مثالية للحفلات والهدايا.',
     },
-    category: 'lollipops', images: [flowerLollipops], grammage: '24 buc',
+    category: 'lollipops', images: [flowerLollipops],
+    grammage: { ro: '24 buc', en: '24 pcs', ar: '24 قطعة' },
     badges: ['seasonal'], variants: ['24 buc'],
   },
   {
@@ -150,7 +160,8 @@ export const demoProducts: Product[] = [
       en: 'Colorful chocolate beans in crayon-shaped packaging. Unique and fun design, perfect for kids.',
       ar: 'حبوب شوكولاتة ملونة في عبوة على شكل أقلام تلوين. تصميم فريد وممتع، مثالي للأطفال.',
     },
-    category: 'chocolate', images: [chocolateBeans], grammage: '24 buc',
+    category: 'chocolate', images: [chocolateBeans],
+    grammage: { ro: '24 buc', en: '24 pcs', ar: '24 قطعة' },
     badges: ['new'], variants: ['24 buc'],
   },
   {
@@ -161,7 +172,8 @@ export const demoProducts: Product[] = [
       en: 'Chocolate eggs with surprise toy and crunchy biscuits. 24 pieces, available for boys and girls.',
       ar: 'بيض شوكولاتة مع لعبة مفاجأة وبسكويت مقرمش. 24 قطعة، متاحة للأولاد والبنات.',
     },
-    category: 'biscuits', images: [eggosChocolate], grammage: '24 buc',
+    category: 'biscuits', images: [eggosChocolate],
+    grammage: { ro: '24 buc', en: '24 pcs', ar: '24 قطعة' },
     badges: ['popular'], variants: ['24 buc'],
   },
 ];

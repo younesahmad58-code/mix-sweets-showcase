@@ -62,7 +62,7 @@ const Index: React.FC = () => {
   return (
     <main>
       {/* ─── Hero ─── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay">
+      <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden grain-overlay">
         {heroImages.map((img, index) => (
           <div
             key={img}
@@ -78,30 +78,30 @@ const Index: React.FC = () => {
         <FloatingBlobs className="opacity-10" />
         <GoldParticles />
 
-        <div className="relative z-10 container mx-auto px-4 text-center py-32">
+        <div className="relative z-10 container mx-auto px-5 md:px-4 text-center py-20 md:py-32">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="mb-6">
             <span className="inline-block text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('hero.badge')}</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display font-bold text-cream leading-[0.95] max-w-5xl mx-auto"
-            style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.04em' }}
+            className="font-display font-bold text-cream leading-[0.95] max-w-5xl mx-auto px-2"
+            style={{ fontSize: 'clamp(2.2rem, 7vw, 6rem)', letterSpacing: '-0.04em' }}
           >
             {t('hero.title')}
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.6 }}
-            className="mt-8 text-lg md:text-xl text-cream/70 max-w-2xl mx-auto font-light" style={{ lineHeight: 1.7 }}
+            className="mt-6 md:mt-8 text-base md:text-xl text-cream/70 max-w-2xl mx-auto font-light px-2" style={{ lineHeight: 1.7 }}
           >
             {t('hero.subtitle')}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+            className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4"
           >
-            <Link to="/products" className="shine-auto relative inline-flex items-center justify-center px-10 py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.35)] hover:scale-[1.03] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]">
+            <Link to="/products" className="shine-auto relative inline-flex items-center justify-center px-8 md:px-10 py-3.5 md:py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.35)] hover:scale-[1.03] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]">
               {t('hero.cta.products')}
             </Link>
-            <Link to="/contact" className="inline-flex items-center justify-center px-10 py-4 bg-cream/5 border border-cream/20 text-cream font-medium rounded-full hover:bg-cream/10 transition-all duration-500 text-sm tracking-wide active:scale-[0.97]">
+            <Link to="/contact" className="inline-flex items-center justify-center px-8 md:px-10 py-3.5 md:py-4 bg-cream/5 border border-cream/20 text-cream font-medium rounded-full hover:bg-cream/10 transition-all duration-500 text-sm tracking-wide active:scale-[0.97]">
               {t('hero.cta.offer')}
             </Link>
           </motion.div>
@@ -138,23 +138,23 @@ const Index: React.FC = () => {
 
 
       {/* ─── Why MIX SWEETS ─── */}
-      <section className="py-28 bg-background relative">
+      <section className="py-16 md:py-28 bg-background relative">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
               <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('why.eyebrow')}</span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-foreground" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="font-display text-2xl md:text-5xl font-bold text-center text-foreground" style={{ letterSpacing: '-0.03em' }}>
               {t('why.title')}
             </h2>
           </ScrollReveal>
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-10 md:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {whyCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
-                <div className="card-3d p-8 h-full">
-                  <Icon3D icon={card.icon} variant="crimson" size="lg" delay={i * 0.1} className="mb-6" />
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                <div className="card-3d p-5 md:p-8 h-full">
+                  <Icon3D icon={card.icon} variant="crimson" size="lg" delay={i * 0.1} className="mb-4 md:mb-6" />
+                  <h3 className="font-display text-base md:text-xl font-semibold text-foreground mb-2 md:mb-3">{card.title}</h3>
+                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </div>
               </SquishyCard>
             ))}
@@ -165,24 +165,24 @@ const Index: React.FC = () => {
       
 
       {/* ─── Categories ─── */}
-      <section className="py-28 bg-cocoa-warm">
+      <section className="py-16 md:py-28 bg-cocoa-warm">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
               <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('categories.eyebrow')}</span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-cream mb-16" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="font-display text-2xl md:text-5xl font-bold text-center text-cream mb-10 md:mb-16" style={{ letterSpacing: '-0.03em' }}>
               {t('categories.title')}
             </h2>
           </ScrollReveal>
 
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 md:gap-6 pb-4 md:grid md:grid-cols-5 md:overflow-visible md:pb-0 no-scrollbar">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
             {categories.map((cat, i) => {
               const emoji = cat.id === 'biscuits' ? '🍪' : cat.id === 'cakes' ? '🎂' : cat.id === 'chocolate' ? '🍫' : cat.id === 'lollipops' ? '🍬' : '🐻';
               const productImage = categoryProductImages[cat.id];
               return (
                 <SquishyCard key={cat.id} delay={i * 0.06}>
-                  <Link to={`/products?category=${cat.id}`} className="group block min-w-[220px] md:min-w-0 snap-center">
+                  <Link to={`/products?category=${cat.id}`} className="group block">
                     <div className="category-shimmer relative overflow-hidden rounded-[20px] border border-gold/15 bg-white/[0.04] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-t-2 hover:border-t-gold hover:bg-white/[0.06]">
                       <div className="aspect-[4/3] flex items-center justify-center relative overflow-hidden">
                         {productImage ? (
@@ -193,11 +193,11 @@ const Index: React.FC = () => {
                         ) : (
                           <span className="absolute bottom-2 right-2 text-[120px] opacity-[0.12] blur-sm select-none pointer-events-none">{emoji}</span>
                         )}
-                        <span className="relative text-[60px] drop-shadow-lg group-hover:scale-[1.15] group-hover:rotate-6 transition-transform duration-500">{emoji}</span>
+                        <span className="relative text-[40px] md:text-[60px] drop-shadow-lg group-hover:scale-[1.15] group-hover:rotate-6 transition-transform duration-500">{emoji}</span>
                       </div>
-                      <div className="p-5 text-center">
-                        <h3 className="font-display text-lg font-semibold text-cream mb-2">{cat.label[lang]}</h3>
-                        <span className="inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 transition-all duration-300">
+                      <div className="p-3 md:p-5 text-center">
+                        <h3 className="font-display text-sm md:text-lg font-semibold text-cream mb-1 md:mb-2">{cat.label[lang]}</h3>
+                        <span className="hidden md:inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 transition-all duration-300">
                           {t('categories.explore')} <ArrowRight size={12} />
                         </span>
                       </div>
@@ -212,18 +212,18 @@ const Index: React.FC = () => {
 
 
       {/* ─── Recent Products ─── */}
-      <section className="py-28 bg-background">
+      <section className="py-16 md:py-28 bg-background">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
               <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('recent.eyebrow')}</span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-foreground mb-16" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="font-display text-2xl md:text-5xl font-bold text-center text-foreground mb-10 md:mb-16" style={{ letterSpacing: '-0.03em' }}>
               {t('recent.title')}
             </h2>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8 max-w-6xl mx-auto">
             {demoProducts.filter(p => p.badges.includes('new')).slice(0, 3).map((product, i) => {
               const category = categories.find(c => c.id === product.category);
               return (
@@ -233,9 +233,9 @@ const Index: React.FC = () => {
                       <div className="aspect-[4/3] overflow-hidden relative">
                         <img src={product.images[0]} alt={product.name[lang]} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       </div>
-                      <div className="p-6">
+                      <div className="p-4 md:p-6">
                         <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-[10px] font-medium tracking-widest uppercase rounded-full mb-3">{category?.label[lang]}</span>
-                        <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">{product.name[lang]}</h3>
+                        <h3 className="font-display text-base md:text-xl font-semibold text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">{product.name[lang]}</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">{product.description[lang]}</p>
                         <span className="inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 group-hover:underline transition-all duration-300">
                           {t('recent.details')} <ArrowRight size={12} />
@@ -251,7 +251,7 @@ const Index: React.FC = () => {
       </section>
 
       {/* ─── Seasonal / New Products ─── */}
-      <section className="py-28 bg-background">
+      <section className="py-16 md:py-28 bg-background">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center">
@@ -262,7 +262,7 @@ const Index: React.FC = () => {
               <p className="mt-4 text-muted-foreground max-w-xl mx-auto">{t('seasonal.subtitle')}</p>
             </div>
           </ScrollReveal>
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-10 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
             {seasonalProducts.slice(0, 3).map((product, i) => (
               <SquishyCard key={product.id} delay={i * 0.1}>
                 <Link to={`/products/${product.slug}`} className="group block">
@@ -282,10 +282,10 @@ const Index: React.FC = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="p-6">
+                    <div className="p-4 md:p-6">
                       <h3 className="font-display text-lg font-semibold text-foreground">{product.name[lang]}</h3>
                       <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{product.description[lang]}</p>
-                      <p className="mt-3 text-xs text-muted-foreground">{product.grammage}</p>
+                      <p className="mt-3 text-xs text-muted-foreground">{product.grammage[lang]}</p>
                     </div>
                   </div>
                 </Link>
@@ -296,18 +296,18 @@ const Index: React.FC = () => {
       </section>
 
       {/* ─── Experience & Tradition with Stats Grid (no wave divider before) ─── */}
-      <section className="py-28 bg-cocoa-warm relative overflow-hidden grain-overlay">
+      <section className="py-16 md:py-28 bg-cocoa-warm relative overflow-hidden grain-overlay">
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center max-w-5xl mx-auto">
             <div>
               <ScrollReveal>
                 <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('tradition.eyebrow')}</span>
-                <h2 className="mt-4 font-display text-3xl md:text-5xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
+                <h2 className="mt-4 font-display text-2xl md:text-5xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
                   {t('tradition.title')}
                 </h2>
-                <p className="mt-8 text-cream/60 leading-relaxed text-lg">{t('tradition.p1')}</p>
-                <p className="mt-4 text-cream/60 leading-relaxed text-lg">{t('tradition.p2')}</p>
+                <p className="mt-6 md:mt-8 text-cream/60 leading-relaxed text-base md:text-lg">{t('tradition.p1')}</p>
+                <p className="mt-3 md:mt-4 text-cream/60 leading-relaxed text-base md:text-lg">{t('tradition.p2')}</p>
               </ScrollReveal>
             </div>
             <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0">

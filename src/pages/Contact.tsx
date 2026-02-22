@@ -114,15 +114,15 @@ const Contact: React.FC = () => {
       
 
       {/* Info Cards */}
-      <section className="py-20 bg-background">
+      <section className="py-12 md:py-20 bg-background">
         <div className="container mx-auto px-4">
           <ScrollReveal>
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <p className="text-muted-foreground leading-relaxed text-lg">{t('contact.intro')}</p>
+            <div className="text-center max-w-2xl mx-auto mb-8 md:mb-14">
+              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">{t('contact.intro')}</p>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-20">
             {infoCards.map((card, i) => (
               <SquishyCard key={i} delay={i * 0.1} className="h-full">
                 <div className="card-3d p-8 text-center h-full flex flex-col items-center">
@@ -134,7 +134,7 @@ const Contact: React.FC = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
             <ScrollReveal>
               {/* Paper slab form */}
               <div className="bg-card rounded-[20px] shadow-[0_12px_60px_rgba(0,0,0,0.08)] p-10 border border-gold/[0.15]">

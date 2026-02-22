@@ -49,9 +49,9 @@ const Products: React.FC = () => {
 
       
 
-      <section className="py-16 bg-background">
+      <section className="py-8 md:py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-10">
+          <div className="flex flex-col lg:flex-row gap-6 md:gap-10">
             {/* Sidebar */}
             <aside className="lg:w-64 shrink-0">
               <div className="relative mb-6">
@@ -99,7 +99,7 @@ const Products: React.FC = () => {
               {filtered.length === 0 ? (
                 <p className="text-muted-foreground text-center py-16">{t('products.empty')}</p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                   {filtered.map((product, i) => (
                     <SquishyCard key={product.id} delay={i * 0.04}>
                       <Link to={`/products/${product.slug}`} className="group block">
@@ -119,11 +119,11 @@ const Products: React.FC = () => {
                               ))}
                             </div>
                           </div>
-                          <div className="p-5">
-                            <h3 className="font-display text-lg font-semibold text-foreground">{product.name[lang]}</h3>
-                            <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2">{product.description[lang]}</p>
+                          <div className="p-3 md:p-5">
+                            <h3 className="font-display text-sm md:text-lg font-semibold text-foreground">{product.name[lang]}</h3>
+                            <p className="mt-1 text-xs md:text-sm text-muted-foreground line-clamp-2 hidden sm:block">{product.description[lang]}</p>
                             <div className="mt-3 flex items-center justify-between">
-                              <span className="text-xs text-muted-foreground">{product.grammage}</span>
+                              <span className="text-xs text-muted-foreground">{product.grammage[lang]}</span>
                               <span className="text-sm font-medium text-primary">{t('products.details')} →</span>
                             </div>
                           </div>
