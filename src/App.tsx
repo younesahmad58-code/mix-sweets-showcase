@@ -33,7 +33,7 @@ const App = () => (
       <LanguageProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/" element={<PublicLayout><Index /></PublicLayout>} />
             <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
