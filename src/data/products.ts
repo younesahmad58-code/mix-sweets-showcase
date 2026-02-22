@@ -8,6 +8,8 @@ import balloonGummy from '@/assets/products/balloon-gummy.jpeg';
 import fruitSticks from '@/assets/products/fruit-sticks.jpeg';
 import iceCreamMarshmallow from '@/assets/products/ice-cream-marshmallow.jpeg';
 import flowerLollipops from '@/assets/products/flower-lollipops.jpeg';
+import chocolateBeans from '@/assets/products/chocolate-beans.jpeg';
+import eggosChocolate from '@/assets/products/eggos-chocolate.jpeg';
 
 export interface Product {
   id: string;
@@ -139,5 +141,27 @@ export const demoProducts: Product[] = [
     },
     category: 'lollipops', images: [flowerLollipops], grammage: '24 buc',
     badges: ['seasonal'], variants: ['24 buc'],
+  },
+  {
+    id: '11', slug: 'colorful-chocolate-beans',
+    name: { ro: 'Colorful Chocolate Beans', en: 'Colorful Chocolate Beans', ar: 'حبوب شوكولاتة ملونة' },
+    description: {
+      ro: 'Drajeuri de ciocolată colorate în formă de creioane. Design unic și distractiv, perfect pentru copii.',
+      en: 'Colorful chocolate beans in crayon-shaped packaging. Unique and fun design, perfect for kids.',
+      ar: 'حبوب شوكولاتة ملونة في عبوة على شكل أقلام تلوين. تصميم فريد وممتع، مثالي للأطفال.',
+    },
+    category: 'chocolate', images: [chocolateBeans], grammage: '24 buc',
+    badges: ['new'], variants: ['24 buc'],
+  },
+  {
+    id: '12', slug: 'eggos-chocolate-egg',
+    name: { ro: 'Eggos Ou de Ciocolată', en: 'Eggos Chocolate Egg', ar: 'بيضة شوكولاتة إيغوس' },
+    description: {
+      ro: 'Ouă de ciocolată cu surpriză și biscuiți crocanți. 24 de bucăți, disponibile pentru băieți și fete.',
+      en: 'Chocolate eggs with surprise toy and crunchy biscuits. 24 pieces, available for boys and girls.',
+      ar: 'بيض شوكولاتة مع لعبة مفاجأة وبسكويت مقرمش. 24 قطعة، متاحة للأولاد والبنات.',
+    },
+    category: 'biscuits', images: [eggosChocolate], grammage: '24 buc',
+    badges: ['popular'], variants: ['24 buc'],
   },
 ];

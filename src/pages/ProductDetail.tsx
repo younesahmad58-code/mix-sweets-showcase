@@ -38,11 +38,11 @@ const ProductDetail: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             {/* Image */}
             <ScrollReveal>
-              <div className="aspect-square bg-muted rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15]">
+              <div className="aspect-[3/4] bg-muted rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15]">
                 <img
                   src={product.images[0]}
                   alt={product.name[lang]}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain bg-white"
                   onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
                 />
               </div>
@@ -71,24 +71,6 @@ const ProductDetail: React.FC = () => {
                   <h3 className="font-display text-lg font-semibold text-foreground mb-3">{t('products.packaging')}</h3>
                   <p className="text-muted-foreground">{t('products.grammage')}: {product.grammage}</p>
                 </div>
-
-                {product.variants && product.variants.length > 0 && (
-                  <div className="mt-8">
-                    <h3 className="font-display text-lg font-semibold text-foreground mb-3">{t('products.variants')}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {product.variants.map(v => (
-                        <motion.span
-                          key={v}
-                          whileHover={{ scale: 1.04 }}
-                          transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-                          className="px-5 py-2.5 bg-muted rounded-full text-sm font-medium text-foreground border border-border cursor-default"
-                        >
-                          {v}
-                        </motion.span>
-                      ))}
-                    </div>
-                  </div>
-                )}
 
                 <Link
                   to="/contact"

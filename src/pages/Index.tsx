@@ -15,29 +15,21 @@ import { Language } from '@/i18n/translations';
 import rainbowCanes from '@/assets/products/rainbow-canes.jpeg';
 import monkeyPudding from '@/assets/products/monkey-pudding.jpeg';
 import iceCreamMarshmallow from '@/assets/products/ice-cream-marshmallow.jpeg';
-
-const categoryGradients: Record<string, string> = {
-  biscuits: 'linear-gradient(145deg, hsl(30 40% 75%), hsl(25 50% 60%))',
-  cakes: 'linear-gradient(145deg, hsl(340 50% 80%), hsl(350 60% 65%))',
-  chocolate: 'linear-gradient(145deg, hsl(20 50% 35%), hsl(15 60% 22%))',
-  lollipops: 'linear-gradient(145deg, hsl(300 40% 75%), hsl(280 50% 65%))',
-  jellies: 'linear-gradient(145deg, hsl(120 35% 70%), hsl(140 40% 55%))',
-};
-
-const categoryDescriptions: Record<string, Record<string, string>> = {
-  biscuits: { ro: 'Biscuiți premium din ingrediente atent selecționate', en: 'Premium biscuits from carefully selected ingredients', ar: 'بسكويت فاخر من مكونات مختارة بعناية' },
-  cakes: { ro: 'Prăjituri artizanale cu rețete tradiționale', en: 'Artisan cakes with traditional recipes', ar: 'كعك حرفي بوصفات تقليدية' },
-  chocolate: { ro: 'Ciocolată fină cu cacao de cea mai bună calitate', en: 'Fine chocolate with the best quality cocoa', ar: 'شوكولاتة فاخرة بأجود أنواع الكاكاو' },
-  lollipops: { ro: 'Acadele colorate pentru toate gusturile', en: 'Colorful lollipops for all tastes', ar: 'مصاصات ملونة لجميع الأذواق' },
-  jellies: { ro: 'Jeleuri moi și delicioase în forme variate', en: 'Soft and delicious jellies in various shapes', ar: 'جيلي طري ولذيذ بأشكال متنوعة' },
-};
+import chocolateBeans from '@/assets/products/chocolate-beans.jpeg';
+import eggosChocolate from '@/assets/products/eggos-chocolate.jpeg';
 
 const categoryProductImages: Record<string, string | null> = {
   lollipops: rainbowCanes,
   jellies: monkeyPudding,
   cakes: iceCreamMarshmallow,
-  chocolate: null,
-  biscuits: null,
+  chocolate: chocolateBeans,
+  biscuits: eggosChocolate,
+};
+
+const marqueeTexts: Record<string, string> = {
+  ro: '✦ Calitate Certificată ✦ Distribuție Națională ✦ Gamă Completă ✦ Parteneri de Încredere ✦ Produse Premium ✦ Livrare Rapidă ✦\u00a0\u00a0\u00a0',
+  en: '✦ Certified Quality ✦ National Distribution ✦ Complete Range ✦ Trusted Partners ✦ Premium Products ✦ Fast Delivery ✦\u00a0\u00a0\u00a0',
+  ar: '✦ جودة معتمدة ✦ توزيع وطني ✦ مجموعة كاملة ✦ شركاء موثوقون ✦ منتجات فاخرة ✦ توصيل سريع ✦\u00a0\u00a0\u00a0',
 };
 
 const Index: React.FC = () => {
@@ -46,7 +38,7 @@ const Index: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
   const heroImages = [
-    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&q=80',
+    'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=1920&q=80',
     'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1920&q=80',
     'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=1920&q=80',
     'https://images.unsplash.com/photo-1612201535116-ead35a9f5a4a?w=1920&q=80',
@@ -72,87 +64,50 @@ const Index: React.FC = () => {
     <main>
       {/* ─── Hero ─── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay">
-        {/* Hero image slider */}
         {heroImages.map((img, index) => (
           <div
             key={img}
             className="absolute inset-0 transition-opacity duration-[1500ms]"
-            style={{
-              opacity: index === currentImageIndex ? 1 : 0,
-              zIndex: 0,
-            }}
+            style={{ opacity: index === currentImageIndex ? 1 : 0, zIndex: 0 }}
           >
-            <img
-              src={img}
-              alt=""
-              className="w-full h-full object-cover animate-ken-burns"
-              style={{ animationDuration: '15s' }}
-            />
+            <img src={img} alt="" className="w-full h-full object-cover animate-ken-burns" style={{ animationDuration: '15s' }} />
           </div>
         ))}
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-[rgba(18,8,4,0.82)] z-[0]" />
-        {/* Vignette */}
         <div className="absolute inset-0 z-[1]" style={{ background: 'radial-gradient(ellipse 70% 70% at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 100%)' }} />
-        {/* Crimson glow behind headline */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] z-[1]" style={{ background: 'radial-gradient(ellipse, rgba(176,18,42,0.12) 0%, transparent 70%)' }} />
         <FloatingBlobs className="opacity-10" />
         <GoldParticles />
 
         <div className="relative z-10 container mx-auto px-4 text-center py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6"
-          >
-            <span className="inline-block text-gold text-[11px] font-medium tracking-[0.2em] uppercase">
-              {t('hero.badge')}
-            </span>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="mb-6">
+            <span className="inline-block text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('hero.badge')}</span>
           </motion.div>
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="font-display font-bold text-cream leading-[0.95] max-w-5xl mx-auto"
             style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.04em' }}
           >
             {t('hero.title')}
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="mt-8 text-lg md:text-xl text-cream/70 max-w-2xl mx-auto font-light"
-            style={{ lineHeight: 1.7 }}
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.6 }}
+            className="mt-8 text-lg md:text-xl text-cream/70 max-w-2xl mx-auto font-light" style={{ lineHeight: 1.7 }}
           >
             {t('hero.subtitle')}
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.8 }}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.8 }}
             className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link
-              to="/products"
-              className="shine-auto relative inline-flex items-center justify-center px-10 py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.35)] hover:scale-[1.03] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
-            >
+            <Link to="/products" className="shine-auto relative inline-flex items-center justify-center px-10 py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.35)] hover:scale-[1.03] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]">
               {t('hero.cta.products')}
             </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-10 py-4 bg-cream/5 border border-cream/20 text-cream font-medium rounded-full hover:bg-cream/10 transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
-            >
+            <Link to="/contact" className="inline-flex items-center justify-center px-10 py-4 bg-cream/5 border border-cream/20 text-cream font-medium rounded-full hover:bg-cream/10 transition-all duration-500 text-sm tracking-wide active:scale-[0.97]">
               {t('hero.cta.offer')}
             </Link>
           </motion.div>
 
-          {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 1.1 }}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }}
             className="mt-14 flex items-center justify-center gap-6 md:gap-10"
           >
             {[
@@ -170,6 +125,17 @@ const Index: React.FC = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* ─── Trust Strip Marquee (right after hero) ─── */}
+      <div className="py-6 bg-cocoa overflow-hidden border-y border-gold/10">
+        <div className="flex whitespace-nowrap" style={{ animation: 'marquee-scroll 25s linear infinite' }}>
+          {[...Array(3)].map((_, i) => (
+            <span key={`${lang}-${i}`} className="text-gold text-sm tracking-widest uppercase font-medium">
+              {marqueeTexts[lang]}
+            </span>
+          ))}
+        </div>
+      </div>
 
       <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
@@ -198,17 +164,6 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      {/* ─── Trust Strip Marquee ─── */}
-      <div className="py-6 bg-cocoa overflow-hidden border-y border-gold/10">
-        <div className="flex whitespace-nowrap" style={{ animation: 'marquee-scroll 25s linear infinite' }}>
-          {[...Array(3)].map((_, i) => (
-            <span key={i} className="text-gold text-sm tracking-widest uppercase font-medium">
-              ✦ Calitate Certificată ✦ Distribuție Națională ✦ Gamă Completă ✦ Parteneri de Încredere ✦ Produse Premium ✦ Livrare Rapidă ✦&nbsp;&nbsp;&nbsp;
-            </span>
-          ))}
-        </div>
-      </div>
-
       <WaveDivider color="hsl(var(--cocoa))" variant="glaze" flip className="-mt-px" />
 
       {/* ─── Categories ─── */}
@@ -229,10 +184,7 @@ const Index: React.FC = () => {
               const productImage = categoryProductImages[cat.id];
               return (
                 <SquishyCard key={cat.id} delay={i * 0.06}>
-                  <Link
-                    to={`/products?category=${cat.id}`}
-                    className="group block min-w-[220px] md:min-w-0 snap-center"
-                  >
+                  <Link to={`/products?category=${cat.id}`} className="group block min-w-[220px] md:min-w-0 snap-center">
                     <div className="category-shimmer relative overflow-hidden rounded-[20px] border border-gold/15 bg-white/[0.04] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-t-2 hover:border-t-gold hover:bg-white/[0.06]">
                       <div className="aspect-[4/3] flex items-center justify-center relative overflow-hidden">
                         {productImage ? (
@@ -241,18 +193,12 @@ const Index: React.FC = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                           </>
                         ) : (
-                          <span className="absolute bottom-2 right-2 text-[120px] opacity-[0.12] blur-sm select-none pointer-events-none">
-                            {emoji}
-                          </span>
+                          <span className="absolute bottom-2 right-2 text-[120px] opacity-[0.12] blur-sm select-none pointer-events-none">{emoji}</span>
                         )}
-                        <span className="relative text-[60px] drop-shadow-lg group-hover:scale-[1.15] group-hover:rotate-6 transition-transform duration-500">
-                          {emoji}
-                        </span>
+                        <span className="relative text-[60px] drop-shadow-lg group-hover:scale-[1.15] group-hover:rotate-6 transition-transform duration-500">{emoji}</span>
                       </div>
                       <div className="p-5 text-center">
-                        <h3 className="font-display text-lg font-semibold text-cream mb-2">
-                          {cat.label[lang]}
-                        </h3>
+                        <h3 className="font-display text-lg font-semibold text-cream mb-2">{cat.label[lang]}</h3>
                         <span className="inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 transition-all duration-300">
                           {t('categories.explore')} <ArrowRight size={12} />
                         </span>
@@ -288,22 +234,12 @@ const Index: React.FC = () => {
                   <Link to={`/products/${product.slug}`} className="group block">
                     <div className="card-3d overflow-hidden hover:shadow-[0_8_32px_rgba(201,168,76,0.15)] transition-all duration-500">
                       <div className="aspect-[4/3] overflow-hidden relative">
-                        <img
-                          src={product.images[0]}
-                          alt={product.name[lang]}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
+                        <img src={product.images[0]} alt={product.name[lang]} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       </div>
                       <div className="p-6">
-                        <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-[10px] font-medium tracking-widest uppercase rounded-full mb-3">
-                          {category?.label[lang]}
-                        </span>
-                        <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">
-                          {product.name[lang]}
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">
-                          {product.description[lang]}
-                        </p>
+                        <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-[10px] font-medium tracking-widest uppercase rounded-full mb-3">{category?.label[lang]}</span>
+                        <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">{product.name[lang]}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">{product.description[lang]}</p>
                         <span className="inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 group-hover:underline transition-all duration-300">
                           {t('recent.details')} <ArrowRight size={12} />
                         </span>
@@ -362,9 +298,7 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider color="hsl(var(--cocoa))" variant="glaze" flip className="-mt-px" />
-
-      {/* ─── Experience & Tradition with Stats Grid ─── */}
+      {/* ─── Experience & Tradition with Stats Grid (no wave divider before) ─── */}
       <section className="py-28 bg-cocoa-warm relative overflow-hidden grain-overlay">
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
@@ -384,7 +318,7 @@ const Index: React.FC = () => {
                 { value: 30, suffix: '+', label: t('stats.years') },
                 { value: 500, suffix: '+', label: t('stats.products') },
               ].map((stat, i) => (
-                 <ScrollReveal key={i} delay={i * 0.1}>
+                <ScrollReveal key={i} delay={i * 0.1}>
                   <div className="card-3d-dark p-6 text-center">
                     <CountUpStat
                       value={stat.value}
