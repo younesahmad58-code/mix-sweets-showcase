@@ -5,7 +5,6 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { demoProducts, categories } from '@/data/products';
 import ScrollReveal from '@/components/ScrollReveal';
-import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import { motion } from 'framer-motion';
@@ -48,7 +47,7 @@ const Products: React.FC = () => {
 
       </section>
 
-      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
+      
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

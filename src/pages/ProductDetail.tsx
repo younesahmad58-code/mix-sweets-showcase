@@ -38,11 +38,11 @@ const ProductDetail: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             {/* Image */}
             <ScrollReveal>
-              <div className="aspect-[3/4] bg-muted rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15]">
+              <div className="rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15] bg-white">
                 <img
                   src={product.images[0]}
                   alt={product.name[lang]}
-                  className="w-full h-full object-contain bg-white"
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto"
                   onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
                 />
               </div>
