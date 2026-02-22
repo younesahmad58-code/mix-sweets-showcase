@@ -1,8 +1,8 @@
 import React from 'react';
-import { Award, Heart, Shield } from 'lucide-react';
+import { Award, Heart, Shield, Quote, Globe } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-
+import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
@@ -19,8 +19,9 @@ const About: React.FC = () => {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="py-28 bg-cocoa relative overflow-hidden">
+      <section className="py-32 bg-cocoa relative overflow-hidden grain-overlay">
         <div className="absolute top-0 left-0 right-0 h-[120px] z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(18,8,4,0.6) 0%, transparent 100%)' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px]" style={{ background: 'radial-gradient(ellipse, rgba(176,18,42,0.1) 0%, transparent 70%)' }} />
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <ScrollReveal>
@@ -30,8 +31,9 @@ const About: React.FC = () => {
             </h1>
           </ScrollReveal>
         </div>
-        
       </section>
+
+      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
       {/* Story */}
       <section className="py-28 bg-background">
@@ -49,9 +51,34 @@ const About: React.FC = () => {
         </div>
       </section>
 
+      {/* Mission */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
+          <ScrollReveal>
+            <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('about.mission.eyebrow')}</span>
+            <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
+              {t('about.mission.title')}
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <div className="mt-10 relative">
+              <div className="flex justify-center -mb-8 relative z-10">
+                <Icon3D icon={Quote} variant="crimson" size="lg" />
+              </div>
+              <div className="card-3d pt-16 pb-10 px-8 md:px-12 border-t-2 border-t-gold/30">
+                <blockquote className="font-display text-xl md:text-2xl text-foreground/80 italic leading-relaxed">
+                  {t('about.mission.quote')}
+                </blockquote>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <WaveDivider color="hsl(var(--cocoa))" variant="glaze" flip className="-mt-px" />
+
       {/* Values */}
-      
-      <section className="py-28 bg-cocoa">
+      <section className="py-28 bg-cocoa-warm">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
@@ -74,7 +101,30 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
-      
+
+      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
+
+      {/* Distribution Reach */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <ScrollReveal>
+            <div className="text-center">
+              <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('about.reach.eyebrow')}</span>
+              <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
+                {t('about.reach.title')}
+              </h2>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <div className="mt-12 card-3d p-10 md:p-14 text-center">
+              <Icon3D icon={Globe} variant="crimson" size="lg" className="mx-auto mb-6" />
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
+                {t('about.reach.desc')}
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
     </main>
   );
 };

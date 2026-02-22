@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-
+import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
@@ -100,9 +100,9 @@ const Contact: React.FC = () => {
 
   return (
     <main className="pt-20">
-      <section className="py-16 bg-cocoa relative overflow-hidden">
-        {/* Top gradient for navbar readability */}
+      <section className="py-20 bg-cocoa relative overflow-hidden grain-overlay">
         <div className="absolute top-0 left-0 right-0 h-[120px] z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(18,8,4,0.6) 0%, transparent 100%)' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px]" style={{ background: 'radial-gradient(ellipse, rgba(176,18,42,0.1) 0%, transparent 70%)' }} />
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="font-display text-4xl md:text-6xl font-bold text-cream" style={{ letterSpacing: '-0.03em' }}>
@@ -111,6 +111,8 @@ const Contact: React.FC = () => {
           <p className="mt-4 text-cream/50 max-w-xl mx-auto text-lg">{t('contact.subtitle')}</p>
         </div>
       </section>
+
+      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
       {/* Info Cards */}
       <section className="py-20 bg-background">
@@ -144,7 +146,7 @@ const Contact: React.FC = () => {
                     </div>
                     <h3 className="font-display text-2xl font-bold text-foreground">{t('contact.form.success')}</h3>
                     <button onClick={() => setSuccess(false)} className="mt-4 text-sm text-primary hover:underline font-medium">
-                      Send another message
+                      {t('contact.form.again')}
                     </button>
                   </div>
                 ) : (
@@ -195,6 +197,13 @@ const Contact: React.FC = () => {
               </div>
             </ScrollReveal>
           </div>
+        </div>
+      </section>
+
+      {/* Breathing spacer before footer */}
+      <section className="py-12 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="w-16 h-px bg-gold/20 mx-auto" />
         </div>
       </section>
     </main>

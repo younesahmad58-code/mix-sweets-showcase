@@ -9,15 +9,19 @@ import GoldParticles from '@/components/GoldParticles';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
 import CountUpStat from '@/components/CountUpStat';
+import WaveDivider from '@/components/WaveDivider';
 import { categories, demoProducts } from '@/data/products';
 import { Language } from '@/i18n/translations';
+import rainbowCanes from '@/assets/products/rainbow-canes.jpeg';
+import monkeyPudding from '@/assets/products/monkey-pudding.jpeg';
+import iceCreamMarshmallow from '@/assets/products/ice-cream-marshmallow.jpeg';
 
-const categoryImages: Record<string, string> = {
-  biscuits: '',
-  cakes: '',
-  chocolate: '',
-  lollipops: '',
-  jellies: '',
+const categoryGradients: Record<string, string> = {
+  biscuits: 'linear-gradient(145deg, hsl(30 40% 75%), hsl(25 50% 60%))',
+  cakes: 'linear-gradient(145deg, hsl(340 50% 80%), hsl(350 60% 65%))',
+  chocolate: 'linear-gradient(145deg, hsl(20 50% 35%), hsl(15 60% 22%))',
+  lollipops: 'linear-gradient(145deg, hsl(300 40% 75%), hsl(280 50% 65%))',
+  jellies: 'linear-gradient(145deg, hsl(120 35% 70%), hsl(140 40% 55%))',
 };
 
 const categoryDescriptions: Record<string, Record<string, string>> = {
@@ -28,9 +32,32 @@ const categoryDescriptions: Record<string, Record<string, string>> = {
   jellies: { ro: 'Jeleuri moi și delicioase în forme variate', en: 'Soft and delicious jellies in various shapes', ar: 'جيلي طري ولذيذ بأشكال متنوعة' },
 };
 
+const categoryProductImages: Record<string, string | null> = {
+  lollipops: rainbowCanes,
+  jellies: monkeyPudding,
+  cakes: iceCreamMarshmallow,
+  chocolate: null,
+  biscuits: null,
+};
+
 const Index: React.FC = () => {
   const { t, language } = useLanguage();
   const lang = language as Language;
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+
+  const heroImages = [
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&q=80',
+    'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1920&q=80',
+    'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=1920&q=80',
+    'https://images.unsplash.com/photo-1612201535116-ead35a9f5a4a?w=1920&q=80',
+  ];
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const whyCards = [
     { icon: Award, title: t('why.quality.title'), desc: t('why.quality.desc') },
@@ -45,8 +72,26 @@ const Index: React.FC = () => {
     <main>
       {/* ─── Hero ─── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay">
-        <div className="absolute inset-0 bg-cocoa" />
-        <div className="absolute inset-0 animate-ken-burns bg-cocoa" />
+        {/* Hero image slider */}
+        {heroImages.map((img, index) => (
+          <div
+            key={img}
+            className="absolute inset-0 transition-opacity duration-[1500ms]"
+            style={{
+              opacity: index === currentImageIndex ? 1 : 0,
+              zIndex: 0,
+            }}
+          >
+            <img
+              src={img}
+              alt=""
+              className="w-full h-full object-cover animate-ken-burns"
+              style={{ animationDuration: '15s' }}
+            />
+          </div>
+        ))}
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-[rgba(18,8,4,0.82)] z-[0]" />
         {/* Vignette */}
         <div className="absolute inset-0 z-[1]" style={{ background: 'radial-gradient(ellipse 70% 70% at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 100%)' }} />
         {/* Crimson glow behind headline */}
@@ -62,7 +107,7 @@ const Index: React.FC = () => {
             className="mb-6"
           >
             <span className="inline-block text-gold text-[11px] font-medium tracking-[0.2em] uppercase">
-              ✦ Premium Artisan Sweets ✦
+              {t('hero.badge')}
             </span>
           </motion.div>
           <motion.h1
@@ -126,6 +171,8 @@ const Index: React.FC = () => {
         </div>
       </section>
 
+      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
+
       {/* ─── Why MIX SWEETS ─── */}
       <section className="py-28 bg-background relative">
         <div className="container mx-auto px-4">
@@ -151,40 +198,114 @@ const Index: React.FC = () => {
         </div>
       </section>
 
+      {/* ─── Trust Strip Marquee ─── */}
+      <div className="py-6 bg-cocoa overflow-hidden border-y border-gold/10">
+        <div className="flex whitespace-nowrap" style={{ animation: 'marquee-scroll 25s linear infinite' }}>
+          {[...Array(3)].map((_, i) => (
+            <span key={i} className="text-gold text-sm tracking-widest uppercase font-medium">
+              ✦ Calitate Certificată ✦ Distribuție Națională ✦ Gamă Completă ✦ Parteneri de Încredere ✦ Produse Premium ✦ Livrare Rapidă ✦&nbsp;&nbsp;&nbsp;
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <WaveDivider color="hsl(var(--cocoa))" variant="glaze" flip className="-mt-px" />
+
       {/* ─── Categories ─── */}
-      <section className="py-28 bg-background">
+      <section className="py-28 bg-cocoa-warm">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
               <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('categories.eyebrow')}</span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-foreground mb-16" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-cream mb-16" style={{ letterSpacing: '-0.03em' }}>
               {t('categories.title')}
             </h2>
           </ScrollReveal>
 
           <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 md:gap-6 pb-4 md:grid md:grid-cols-5 md:overflow-visible md:pb-0 no-scrollbar">
             {categories.map((cat, i) => {
-              const desc = categoryDescriptions[cat.id]?.[lang] || '';
+              const emoji = cat.id === 'biscuits' ? '🍪' : cat.id === 'cakes' ? '🎂' : cat.id === 'chocolate' ? '🍫' : cat.id === 'lollipops' ? '🍬' : '🐻';
+              const productImage = categoryProductImages[cat.id];
               return (
                 <SquishyCard key={cat.id} delay={i * 0.06}>
                   <Link
                     to={`/products?category=${cat.id}`}
                     className="group block min-w-[220px] md:min-w-0 snap-center"
                   >
-                    <div className="card-3d">
-                      <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                        <span className="text-[48px] group-hover:scale-110 group-hover:rotate-[-3deg] transition-transform duration-500">
-                          {cat.id === 'biscuits' ? '🍪' : cat.id === 'cakes' ? '🎂' : cat.id === 'chocolate' ? '🍫' : cat.id === 'lollipops' ? '🍬' : '🐻'}
+                    <div className="category-shimmer relative overflow-hidden rounded-[20px] border border-gold/15 bg-white/[0.04] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-t-2 hover:border-t-gold hover:bg-white/[0.06]">
+                      <div className="aspect-[4/3] flex items-center justify-center relative overflow-hidden">
+                        {productImage ? (
+                          <>
+                            <img src={productImage} alt={cat.label[lang]} className="absolute inset-0 w-full h-full object-cover opacity-15" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                          </>
+                        ) : (
+                          <span className="absolute bottom-2 right-2 text-[120px] opacity-[0.12] blur-sm select-none pointer-events-none">
+                            {emoji}
+                          </span>
+                        )}
+                        <span className="relative text-[60px] drop-shadow-lg group-hover:scale-[1.15] group-hover:rotate-6 transition-transform duration-500">
+                          {emoji}
                         </span>
                       </div>
-                      <div className="p-5">
-                        <h3 className="font-display text-lg font-semibold text-foreground group-hover:text-crimson transition-colors duration-300">
+                      <div className="p-5 text-center">
+                        <h3 className="font-display text-lg font-semibold text-cream mb-2">
                           {cat.label[lang]}
                         </h3>
-                        <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2 leading-relaxed">{desc}</p>
-                        <span className="mt-3 inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 transition-all duration-300">
+                        <span className="inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 transition-all duration-300">
                           {t('categories.explore')} <ArrowRight size={12} />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </SquishyCard>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
+
+      {/* ─── Recent Products ─── */}
+      <section className="py-28 bg-background">
+        <div className="container mx-auto px-4">
+          <ScrollReveal>
+            <div className="text-center mb-4">
+              <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('recent.eyebrow')}</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-center text-foreground mb-16" style={{ letterSpacing: '-0.03em' }}>
+              {t('recent.title')}
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {demoProducts.filter(p => p.badges.includes('new')).slice(0, 3).map((product, i) => {
+              const category = categories.find(c => c.id === product.category);
+              return (
+                <SquishyCard key={product.id} delay={i * 0.1}>
+                  <Link to={`/products/${product.slug}`} className="group block">
+                    <div className="card-3d overflow-hidden hover:shadow-[0_8_32px_rgba(201,168,76,0.15)] transition-all duration-500">
+                      <div className="aspect-[4/3] overflow-hidden relative">
+                        <img
+                          src={product.images[0]}
+                          alt={product.name[lang]}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-[10px] font-medium tracking-widest uppercase rounded-full mb-3">
+                          {category?.label[lang]}
+                        </span>
+                        <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">
+                          {product.name[lang]}
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">
+                          {product.description[lang]}
+                        </p>
+                        <span className="inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 group-hover:underline transition-all duration-300">
+                          {t('recent.details')} <ArrowRight size={12} />
                         </span>
                       </div>
                     </div>
@@ -241,8 +362,10 @@ const Index: React.FC = () => {
         </div>
       </section>
 
+      <WaveDivider color="hsl(var(--cocoa))" variant="glaze" flip className="-mt-px" />
+
       {/* ─── Experience & Tradition with Stats Grid ─── */}
-      <section className="py-28 bg-cocoa relative overflow-hidden grain-overlay">
+      <section className="py-28 bg-cocoa-warm relative overflow-hidden grain-overlay">
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
@@ -276,6 +399,8 @@ const Index: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
       {/* ─── CTA Strip (premium glass on cream) ─── */}
       <section className="py-24 bg-background">

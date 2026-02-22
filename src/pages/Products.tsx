@@ -5,7 +5,7 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { demoProducts, categories } from '@/data/products';
 import ScrollReveal from '@/components/ScrollReveal';
-
+import WaveDivider from '@/components/WaveDivider';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import { motion } from 'framer-motion';
@@ -35,8 +35,9 @@ const Products: React.FC = () => {
 
   return (
     <main className="pt-20">
-      <section className="py-16 bg-cocoa relative overflow-hidden">
+      <section className="py-20 bg-cocoa relative overflow-hidden grain-overlay">
         <div className="absolute top-0 left-0 right-0 h-[120px] z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(18,8,4,0.6) 0%, transparent 100%)' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px]" style={{ background: 'radial-gradient(ellipse, rgba(176,18,42,0.1) 0%, transparent 70%)' }} />
         <FloatingBlobs className="opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('products.eyebrow')}</span>
@@ -44,8 +45,10 @@ const Products: React.FC = () => {
             {t('products.title')}
           </h1>
         </div>
-        
+
       </section>
+
+      <WaveDivider color="hsl(var(--background))" variant="drip" className="-mt-px" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
@@ -95,7 +98,7 @@ const Products: React.FC = () => {
             {/* Product grid */}
             <div className="flex-1">
               {filtered.length === 0 ? (
-                <p className="text-muted-foreground text-center py-16">No products found.</p>
+                <p className="text-muted-foreground text-center py-16">{t('products.empty')}</p>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {filtered.map((product, i) => (
@@ -133,6 +136,24 @@ const Products: React.FC = () => {
               )}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Pre-footer CTA */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <ScrollReveal>
+            <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
+              {t('prefooter.title')}
+            </h2>
+            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t('prefooter.subtitle')}</p>
+            <Link
+              to="/contact"
+              className="shine-auto relative mt-8 inline-flex items-center justify-center px-10 py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.3)] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
+            >
+              {t('cta.button')}
+            </Link>
+          </ScrollReveal>
         </div>
       </section>
     </main>

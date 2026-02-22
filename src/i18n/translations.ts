@@ -51,7 +51,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.story.title': 'Povestea Noastră',
     'about.story.p1': 'Compania noastră MIX SWEETS este o afacere românească cu experiență de peste 30 de ani, dezvoltată în București. Oferim o gamă de produse precum biscuiți, prăjituri, ciocolată, acadele și jeleuri, alături de produse de sezon și sortimente potrivite în orice perioadă.',
     'about.story.p2': 'Punem accent pe calitate, consecvență și respect față de clienții noștri, oferind partenerilor produse realizate cu atenție și seriozitate. Fiecare produs trece prin verificări riguroase și respectă standardele europene de siguranță alimentară.',
-    'about.values.eyebrow': '✦ VALORILE NOASTRE ✦',
+    'about.values.eyebrow': '✦ CE REPREZENTĂM ✦',
     'about.values.title': 'Valorile Noastre',
     'about.values.quality': 'Calitate',
     'about.values.quality.desc': 'Fiecare produs trece prin verificări riguroase de calitate.',
@@ -109,6 +109,31 @@ export const translations: Record<Language, Record<string, string>> = {
     'stats.products': 'Produse',
     'stats.counties': 'Județe',
     'stats.partners': 'Parteneri',
+    // Hero badge
+    'hero.badge': '✦ Dulciuri Artizanale Premium ✦',
+    // Empty states & actions
+    'products.empty': 'Nu s-au găsit produse.',
+    'contact.form.again': 'Trimite alt mesaj',
+    'products.notfound': 'Produsul nu a fost găsit',
+    // WhatsApp tooltip
+    'whatsapp.tooltip': 'Ai o întrebare? Suntem aici!',
+    // About mission
+    'about.mission.eyebrow': '✦ MISIUNEA NOASTRĂ ✦',
+    'about.mission.title': 'Misiunea Noastră',
+    'about.mission.quote': 'Să aducem bucurie în fiecare colț al României prin dulciuri de cea mai înaltă calitate, onorând tradiția cofetăriei românești.',
+    // About reach
+    'about.reach.eyebrow': '✦ RAZA NOASTRĂ DE ACȚIUNE ✦',
+    'about.reach.title': 'Distribuție Națională',
+    'about.reach.desc': 'Cu o rețea de distribuție care acoperă întreaga Românie, de la București la toate județele țării, ne asigurăm că dulciurile noastre ajung la partenerii noștri rapid și în condiții optime.',
+    // Pre-footer CTA
+    'prefooter.title': 'Pregătit să Începem?',
+    'prefooter.subtitle': 'Contactați-ne pentru a discuta despre nevoile dvs. de distribuție.',
+    // Recent products
+    'recent.eyebrow': '✦ PRODUSE RECENTE ✦',
+    'recent.title': 'Noutăți',
+    'recent.details': 'Vezi Detalii',
+    // Footer brand description
+    'footer.brand.desc': 'Distribuitor autorizat de dulciuri premium pentru parteneri din retail, horeca și distribuție în toată România.',
   },
   en: {
     'nav.home': 'Home',
@@ -152,7 +177,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.story.title': 'Our Story',
     'about.story.p1': 'Our company MIX SWEETS is a Romanian business with over 30 years of experience, developed in Bucharest. We offer a range of products including biscuits, cakes, chocolate, lollipops, and jellies, alongside seasonal products and assortments suitable for any time of year.',
     'about.story.p2': 'We focus on quality, consistency, and respect for our customers, offering our partners products crafted with care and professionalism. Every product undergoes rigorous checks and meets European food safety standards.',
-    'about.values.eyebrow': '✦ OUR VALUES ✦',
+    'about.values.eyebrow': '✦ WHAT WE STAND FOR ✦',
     'about.values.title': 'Our Values',
     'about.values.quality': 'Quality',
     'about.values.quality.desc': 'Every product undergoes rigorous quality checks.',
@@ -205,6 +230,31 @@ export const translations: Record<Language, Record<string, string>> = {
     'stats.products': 'Products',
     'stats.counties': 'Counties',
     'stats.partners': 'Partners',
+    // Hero badge
+    'hero.badge': '✦ Premium Artisan Sweets ✦',
+    // Empty states & actions
+    'products.empty': 'No products found.',
+    'contact.form.again': 'Send another message',
+    'products.notfound': 'Product not found',
+    // WhatsApp tooltip
+    'whatsapp.tooltip': 'Have a question? We are here!',
+    // About mission
+    'about.mission.eyebrow': '✦ OUR MISSION ✦',
+    'about.mission.title': 'Our Mission',
+    'about.mission.quote': 'To bring joy to every corner of Romania through the highest quality confectionery, honoring the tradition of Romanian pastry-making.',
+    // About reach
+    'about.reach.eyebrow': '✦ OUR REACH ✦',
+    'about.reach.title': 'National Distribution',
+    'about.reach.desc': 'With a distribution network covering all of Romania, from Bucharest to every county in the country, we ensure our confections reach our partners quickly and in optimal conditions.',
+    // Pre-footer CTA
+    'prefooter.title': 'Ready to Get Started?',
+    'prefooter.subtitle': 'Contact us to discuss your distribution needs.',
+    // Recent products
+    'recent.eyebrow': '✦ RECENT PRODUCTS ✦',
+    'recent.title': 'Latest Additions',
+    'recent.details': 'View Details',
+    // Footer brand description
+    'footer.brand.desc': 'Authorized distributor of premium sweets for retail, horeca, and distribution partners throughout Romania.',
   },
   ar: {
     'nav.home': 'الرئيسية',
@@ -248,7 +298,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.story.title': 'قصتنا',
     'about.story.p1': 'شركتنا MIX SWEETS هي شركة رومانية بخبرة تزيد عن 30 عامًا، تأسست في بوخارست. نقدم مجموعة من المنتجات تشمل البسكويت والكعك والشوكولاتة والمصاصات والجيلي، إلى جانب منتجات موسمية وتشكيلات مناسبة لأي وقت من السنة.',
     'about.story.p2': 'نركز على الجودة والاتساق واحترام عملائنا، ونقدم لشركائنا منتجات مصنوعة بعناية واحترافية. يخضع كل منتج لفحوصات صارمة ويلتزم بمعايير سلامة الغذاء الأوروبية.',
-    'about.values.eyebrow': '✦ قيمنا ✦',
+    'about.values.eyebrow': '✦ ما نمثله ✦',
     'about.values.title': 'قيمنا',
     'about.values.quality': 'الجودة',
     'about.values.quality.desc': 'يخضع كل منتج لفحوصات جودة صارمة.',
@@ -301,5 +351,30 @@ export const translations: Record<Language, Record<string, string>> = {
     'stats.products': 'منتج',
     'stats.counties': 'محافظة',
     'stats.partners': 'شريك',
+    // Hero badge
+    'hero.badge': '✦ حلويات حرفية فاخرة ✦',
+    // Empty states & actions
+    'products.empty': 'لم يتم العثور على منتجات.',
+    'contact.form.again': 'إرسال رسالة أخرى',
+    'products.notfound': 'المنتج غير موجود',
+    // WhatsApp tooltip
+    'whatsapp.tooltip': 'هل لديك سؤال؟ نحن هنا!',
+    // About mission
+    'about.mission.eyebrow': '✦ مهمتنا ✦',
+    'about.mission.title': 'مهمتنا',
+    'about.mission.quote': 'أن نجلب الفرح إلى كل ركن من أركان رومانيا من خلال حلويات بأعلى جودة، مع تكريم تقاليد صناعة الحلويات الرومانية.',
+    // About reach
+    'about.reach.eyebrow': '✦ نطاق عملنا ✦',
+    'about.reach.title': 'توزيع وطني',
+    'about.reach.desc': 'مع شبكة توزيع تغطي جميع أنحاء رومانيا، من بوخارست إلى كل محافظة في البلاد، نضمن وصول حلوياتنا إلى شركائنا بسرعة وفي أفضل الظروف.',
+    // Pre-footer CTA
+    'prefooter.title': 'مستعد للبدء؟',
+    'prefooter.subtitle': 'تواصل معنا لمناقشة احتياجات التوزيع الخاصة بك.',
+    // Recent products
+    'recent.eyebrow': '✦ منتجات حديثة ✦',
+    'recent.title': 'أحدث الإضافات',
+    'recent.details': 'عرض التفاصيل',
+    // Footer brand description
+    'footer.brand.desc': 'موزع معتمد للحلويات الفاخرة لشركاء التجزئة والمطاعم والتوزيع في جميع أنحاء رومانيا.',
   },
 };

@@ -18,7 +18,7 @@ const ProductDetail: React.FC = () => {
     return (
       <main className="pt-20 min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="font-display text-2xl font-bold text-foreground">Product not found</h1>
+          <h1 className="font-display text-2xl font-bold text-foreground">{t('products.notfound')}</h1>
           <Link to="/products" className="mt-4 inline-block text-primary hover:underline">{t('nav.products')}</Link>
         </div>
       </main>

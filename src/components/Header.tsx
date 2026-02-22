@@ -44,6 +44,7 @@ const Header: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -70,10 +71,10 @@ const Header: React.FC = () => {
           : 'border-b'
       }`}
       style={{
-        background: scrolled ? 'rgba(18,8,4,0.88)' : 'rgba(18,8,4,0.55)',
+        background: scrolled ? 'rgba(18,8,4,0.92)' : isHomePage ? 'rgba(18,8,4,0.6)' : 'rgba(18,8,4,0.88)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
-        borderBottomColor: scrolled ? 'rgba(201,168,76,0.2)' : 'rgba(201,168,76,0.12)',
+        borderBottomColor: scrolled ? 'rgba(201,168,76,0.22)' : isHomePage ? 'rgba(201,168,76,0.12)' : 'rgba(201,168,76,0.18)',
       }}
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-16 md:h-20">
@@ -81,11 +82,12 @@ const Header: React.FC = () => {
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-            className="bg-white/10 backdrop-blur-sm rounded-2xl p-1.5"
+            className="bg-white/10 backdrop-blur-sm rounded-2xl p-1.5 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(201,168,76,0.2)]"
           >
             <img src={logo} alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded-xl" />
           </motion.div>
-          <span className="font-display text-xl md:text-2xl font-semibold text-cream tracking-tight hidden sm:inline">
+          <div className="w-px h-4 bg-gold/20 hidden sm:block" />
+          <span className="font-display text-xl md:text-2xl font-semibold text-cream tracking-wide hidden sm:inline">
             MIX SWEETS
           </span>
         </Link>

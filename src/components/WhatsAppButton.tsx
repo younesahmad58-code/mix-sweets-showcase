@@ -46,7 +46,7 @@ const WhatsAppButton: React.FC = () => {
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 className="bg-white text-cocoa px-4 py-2.5 rounded-2xl rounded-br-md shadow-lg text-sm font-medium whitespace-nowrap"
               >
-                Ai o întrebare? Suntem aici! 😊
+                {t('whatsapp.tooltip')}
               </motion.div>
             )}
           </AnimatePresence>
