@@ -16,7 +16,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <main className="pt-20">
+    <main className="pt-16 md:pt-20">
       {/* Hero */}
       <section className="py-32 bg-cocoa relative overflow-hidden grain-overlay">
         <div className="absolute top-0 left-0 right-0 h-[120px] z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(18,8,4,0.6) 0%, transparent 100%)' }} />
