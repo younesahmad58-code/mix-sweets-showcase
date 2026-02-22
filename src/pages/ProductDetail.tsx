@@ -29,13 +29,13 @@ const ProductDetail: React.FC = () => {
 
   return (
     <main className="pt-20">
-      <section className="py-16 bg-background">
+      <section className="py-8 md:py-16 bg-background">
         <div className="container mx-auto px-4">
-          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
+          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6 md:mb-8">
             <ArrowLeft className="w-4 h-4" /> {t('nav.products')}
           </Link>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14">
             {/* Image */}
             <ScrollReveal>
               <div className="rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15] bg-white">
@@ -58,7 +58,7 @@ const ProductDetail: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
+                <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
                   {product.name[lang]}
                 </h1>
 
@@ -69,7 +69,7 @@ const ProductDetail: React.FC = () => {
 
                 <div className="mt-8">
                   <h3 className="font-display text-lg font-semibold text-foreground mb-3">{t('products.packaging')}</h3>
-                  <p className="text-muted-foreground">{t('products.grammage')}: {product.grammage}</p>
+                  <p className="text-muted-foreground">{t('products.grammage')}: {product.grammage[lang]}</p>
                 </div>
 
                 <Link
@@ -84,11 +84,11 @@ const ProductDetail: React.FC = () => {
 
           {/* Related */}
           {related.length > 0 && (
-            <div className="mt-28">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-10" style={{ letterSpacing: '-0.03em' }}>
+            <div className="mt-16 md:mt-28">
+              <h2 className="font-display text-xl md:text-3xl font-bold text-foreground mb-6 md:mb-10" style={{ letterSpacing: '-0.03em' }}>
                 {t('products.related')}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-6">
                 {related.map((p, i) => (
                   <SquishyCard key={p.id} delay={i * 0.1}>
                     <Link to={`/products/${p.slug}`} className="group block">
@@ -98,7 +98,7 @@ const ProductDetail: React.FC = () => {
                         </div>
                         <div className="p-5">
                           <h3 className="font-display text-base font-semibold text-foreground">{p.name[lang]}</h3>
-                          <p className="text-xs text-muted-foreground mt-1">{p.grammage}</p>
+                          <p className="text-xs text-muted-foreground mt-1">{p.grammage[lang]}</p>
                         </div>
                       </div>
                     </Link>

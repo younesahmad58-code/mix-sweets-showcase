@@ -34,23 +34,23 @@ const About: React.FC = () => {
 
 
       {/* Story */}
-      <section className="py-28 bg-background">
+      <section className="py-16 md:py-28 bg-background">
         <div className="container mx-auto px-4 max-w-3xl">
           <ScrollReveal>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-6 md:mb-8" style={{ letterSpacing: '-0.03em' }}>
               {t('about.story.title')}
             </h2>
           </ScrollReveal>
           {['about.story.p1', 'about.story.p2'].map((key, i) => (
             <ScrollReveal key={key} delay={i * 0.1}>
-              <p className="text-muted-foreground leading-relaxed mb-6 text-lg">{t(key)}</p>
+              <p className="text-muted-foreground leading-relaxed mb-4 md:mb-6 text-base md:text-lg">{t(key)}</p>
             </ScrollReveal>
           ))}
         </div>
       </section>
 
       {/* Mission */}
-      <section className="py-20 bg-background">
+      <section className="pb-16 md:pb-20 bg-background">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <ScrollReveal>
             <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('about.mission.eyebrow')}</span>
@@ -76,13 +76,13 @@ const About: React.FC = () => {
       
 
       {/* Values */}
-      <section className="py-28 bg-cocoa-warm">
+      <section className="py-16 md:py-28 bg-cocoa-warm">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
               <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('about.values.eyebrow')}</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-center text-cream mb-16" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="font-display text-2xl md:text-4xl font-bold text-center text-cream mb-10 md:mb-16" style={{ letterSpacing: '-0.03em' }}>
               {t('about.values.title')}
             </h2>
           </ScrollReveal>
