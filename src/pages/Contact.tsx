@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <main className="pt-20">
+    <main className="pt-16 md:pt-20">
       <section className="py-20 bg-cocoa relative overflow-hidden grain-overlay">
         <div className="absolute top-0 left-0 right-0 h-[120px] z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(18,8,4,0.6) 0%, transparent 100%)' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px]" style={{ background: 'radial-gradient(ellipse, rgba(176,18,42,0.1) 0%, transparent 70%)' }} />
