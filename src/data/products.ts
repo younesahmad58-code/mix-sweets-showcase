@@ -10,6 +10,7 @@ import iceCreamMarshmallow from '@/assets/products/ice-cream-marshmallow.jpeg';
 import flowerLollipops from '@/assets/products/flower-lollipops.jpeg';
 import chocolateBeans from '@/assets/products/chocolate-beans.jpeg';
 import eggosChocolate from '@/assets/products/eggos-chocolate.jpeg';
+import magicWafer from '@/assets/products/magic-wafer.png';
 
 export interface Product {
   id: string;
@@ -175,5 +176,17 @@ export const demoProducts: Product[] = [
     category: 'biscuits', images: [eggosChocolate],
     grammage: { ro: '24 buc', en: '24 pcs', ar: '24 قطعة' },
     badges: ['popular'], variants: ['24 buc'],
+  },
+  {
+    id: '13', slug: 'magic-wafer-strawberry',
+    name: { ro: 'Magic Wafer Căpșuni', en: 'Magic Wafer Strawberry', ar: 'ويفر ماجيك فراولة' },
+    description: {
+      ro: 'Napolitane crocante umplute cu cremă de căpșuni. 8 bucăți într-un pachet, gustare perfectă pentru orice moment.',
+      en: 'Crunchy wafers filled with strawberry cream. 8 pieces per pack, the perfect snack for any moment.',
+      ar: 'ويفر مقرمش محشو بكريمة الفراولة. 8 قطع في العبوة، وجبة خفيفة مثالية لأي وقت.',
+    },
+    category: 'biscuits', images: [magicWafer],
+    grammage: { ro: '8 buc', en: '8 pcs', ar: '8 قطع' },
+    badges: ['new'], variants: ['8 buc'],
   },
 ];
