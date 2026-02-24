@@ -9,7 +9,8 @@ import GoldParticles from '@/components/GoldParticles';
 import SquishyCard from '@/components/SquishyCard';
 import Icon3D from '@/components/Icon3D';
 import CountUpStat from '@/components/CountUpStat';
-import { categories, demoProducts } from '@/data/products';
+import { categories } from '@/data/products';
+import { useProducts } from '@/hooks/useProducts';
 import { Language } from '@/i18n/translations';
 
 const categoryEmoji: Record<string, string> = {
@@ -24,7 +25,7 @@ const categoryEmoji: Record<string, string> = {
   'altele': '🎁',
 };
 
-const FeaturedImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+const FeaturedImage: React.FC<{ src: string; alt: string; cod: string }> = ({ src, alt, cod }) => {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -76,7 +77,8 @@ const Index: React.FC = () => {
     { icon: Truck, title: t('why.distribution.title'), desc: t('why.distribution.desc') },
   ];
 
-  const featuredProducts = demoProducts.slice(0, 3);
+  const { products: allProducts } = useProducts();
+  const featuredProducts = allProducts.slice(0, 3);
 
   return (
     <main>
@@ -281,15 +283,15 @@ const Index: React.FC = () => {
                   <div className="card-3d h-full flex flex-col">
                     <div className="h-48 md:h-56 bg-muted relative overflow-hidden">
                       <FeaturedImage
-                        src={product.images[0]}
-                        alt={product.name[lang]}
-                        cod={product.cod}
+                        src={product.images[0] || ''}
+                        alt={product.name_ro}
+                        cod={product.slug}
                       />
                     </div>
                     <div className="p-4 md:p-6 flex-1">
-                      <h3 className="font-display text-lg font-semibold text-foreground">{product.name[lang]}</h3>
-                      <p className="mt-2 text-xs text-muted-foreground">COD: {product.cod}</p>
-                      <p className="mt-1 text-xs text-muted-foreground">{product.weight}</p>
+                      <h3 className="font-display text-lg font-semibold text-foreground">{lang === 'en' ? product.name_en : lang === 'ar' ? product.name_ar : product.name_ro}</h3>
+                      <p className="mt-2 text-xs text-muted-foreground">COD: {product.slug}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{product.grammage}</p>
                     </div>
                   </div>
                 </Link>
