@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Icon3D from '@/components/Icon3D';
+import footerLogo from '@/assets/logo_footer.jpeg';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -18,7 +19,7 @@ const Footer: React.FC = () => {
           <div className="space-y-5">
             <div className="flex items-center">
               <div style={{ background: 'white', borderRadius: '8px', padding: '6px', display: 'inline-block' }}>
-                <img src="/logo.jpeg" alt="MIX SWEETS" className="h-16 w-auto block" />
+                <img src={footerLogo} alt="MIX SWEETS" className="h-16 w-auto block" />
               </div>
             </div>
             <div className="w-12 h-px bg-gold/10 mt-4" />

@@ -14,7 +14,7 @@ const CountUpStat: React.FC<CountUpStatProps> = ({ value, suffix = '+', unit, la
 
   return (
     <div ref={ref} className={className}>
-      <span className="font-display text-gold">
+      <span className="font-display text-gold" style={{ fontVariantNumeric: 'tabular-nums', minWidth: `${String(value).length + (suffix?.length || 0)}ch`, display: 'inline-block' }}>
         {count}{suffix}
         {unit && <span style={{fontSize: '0.5em', verticalAlign: 'super'}} className="font-semibold ml-0.5 leading-none">{unit}</span>}
       </span>

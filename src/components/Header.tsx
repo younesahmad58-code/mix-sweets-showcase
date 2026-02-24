@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { motion, AnimatePresence } from 'framer-motion';
+import headerLogo from '@/assets/logo3.png';
 
 const flagSvgs: Record<string, React.ReactNode> = {
   ro: (
@@ -92,7 +93,7 @@ const Header: React.FC = () => {
               transition={{ type: 'spring', stiffness: 200, damping: 18 }}
               className="rounded-2xl p-1.5 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(201,168,76,0.2)]"
             >
-              <img src="/logo3.png" alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded-xl" />
+              <img src={headerLogo} alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded-xl" />
             </motion.div>
           </Link>
         </div>
