@@ -69,6 +69,15 @@ const ProductDetail: React.FC = () => {
   if (product.grammage) {
     infoRows.push({ label: t('products.weight'), value: product.grammage });
   }
+  if (product.cutie_box) {
+    infoRows.push({ label: t('products.cutieBox'), value: product.cutie_box });
+  }
+  if (product.buc_cutie) {
+    infoRows.push({ label: t('products.bucCutie'), value: product.buc_cutie });
+  }
+  if (product.baxuri_palet) {
+    infoRows.push({ label: t('products.baxuriPalet'), value: product.baxuri_palet });
+  }
 
   return (
     <main className="pt-20">
