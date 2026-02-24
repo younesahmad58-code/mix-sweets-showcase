@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { demoProducts } from '@/data/products';
 import ScrollReveal from '@/components/ScrollReveal';
 import SquishyCard from '@/components/SquishyCard';
+
+const DetailImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="w-full h-[400px] md:h-[600px] bg-gradient-to-br from-primary to-crimson flex items-center justify-center rounded-[20px]">
+        <span className="text-cream font-display font-bold text-6xl md:text-8xl">
+          {cod}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-auto object-contain max-h-[600px] mx-auto"
+      onError={() => setFailed(true)}
+    />
+  );
+};
 
 const ProductDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -27,6 +49,21 @@ const ProductDetail: React.FC = () => {
 
   const related = demoProducts.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
 
+  const infoRows: { label: string; value: string | number }[] = [];
+  infoRows.push({ label: t('products.cod'), value: product.cod });
+  if (product.weight) {
+    infoRows.push({ label: t('products.weight'), value: product.weight });
+  }
+  if (product.cutieBox != null) {
+    infoRows.push({ label: t('products.cutieBox'), value: product.cutieBox });
+  }
+  if (product.bucCutie != null) {
+    infoRows.push({ label: t('products.bucCutie'), value: product.bucCutie });
+  }
+  if (product.baxuriPalet != null) {
+    infoRows.push({ label: t('products.baxuriPalet'), value: product.baxuriPalet });
+  }
+
   return (
     <main className="pt-20">
       <section className="py-8 md:py-16 bg-background">
@@ -39,11 +76,10 @@ const ProductDetail: React.FC = () => {
             {/* Image */}
             <ScrollReveal>
               <div className="rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15] bg-white">
-                <img
+                <DetailImage
                   src={product.images[0]}
                   alt={product.name[lang]}
-                  className="w-full h-auto object-contain max-h-[600px] mx-auto"
-                  onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
+                  cod={product.cod}
                 />
               </div>
             </ScrollReveal>
@@ -51,25 +87,20 @@ const ProductDetail: React.FC = () => {
             {/* Info */}
             <ScrollReveal delay={0.1}>
               <div className="lg:sticky lg:top-28">
-                <div className="flex gap-2 mb-4">
-                  {product.badges.map(badge => (
-                    <span key={badge} className="px-3 py-1 bg-gold text-cocoa text-xs font-medium rounded-full">
-                      {t(`badge.${badge}`)}
-                    </span>
-                  ))}
-                </div>
                 <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
                   {product.name[lang]}
                 </h1>
 
                 <div className="mt-8">
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-3">{t('products.description')}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-lg">{product.description[lang]}</p>
-                </div>
-
-                <div className="mt-8">
                   <h3 className="font-display text-lg font-semibold text-foreground mb-3">{t('products.packaging')}</h3>
-                  <p className="text-muted-foreground">{t('products.grammage')}: {product.grammage[lang]}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {infoRows.map(row => (
+                      <div key={row.label} className="flex items-center justify-between p-3 bg-muted rounded-xl border border-border">
+                        <span className="text-sm text-muted-foreground">{row.label}</span>
+                        <span className="text-sm font-semibold text-foreground">{row.value}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <Link
@@ -94,11 +125,11 @@ const ProductDetail: React.FC = () => {
                     <Link to={`/products/${p.slug}`} className="group block">
                       <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
                         <div className="aspect-[4/3] bg-muted overflow-hidden">
-                          <img src={p.images[0]} alt={p.name[lang]} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }} />
+                          <RelatedImage src={p.images[0]} alt={p.name[lang]} cod={p.cod} />
                         </div>
                         <div className="p-5">
                           <h3 className="font-display text-base font-semibold text-foreground">{p.name[lang]}</h3>
-                          <p className="text-xs text-muted-foreground mt-1">{p.grammage[lang]}</p>
+                          <p className="text-xs text-muted-foreground mt-1">{p.weight}</p>
                         </div>
                       </div>
                     </Link>
@@ -110,6 +141,27 @@ const ProductDetail: React.FC = () => {
         </div>
       </section>
     </main>
+  );
+};
+
+const RelatedImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
+        <span className="text-cream font-display font-bold text-2xl">{cod}</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+      onError={() => setFailed(true)}
+    />
   );
 };
 

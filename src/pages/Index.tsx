@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Award, Sparkles, Truck, ShieldCheck, ArrowRight, Lightbulb, Warehouse, Package, BarChart2, Users, ClipboardList } from 'lucide-react';
@@ -11,18 +11,38 @@ import Icon3D from '@/components/Icon3D';
 import CountUpStat from '@/components/CountUpStat';
 import { categories, demoProducts } from '@/data/products';
 import { Language } from '@/i18n/translations';
-import rainbowCanes from '@/assets/products/rainbow-canes.jpeg';
-import monkeyPudding from '@/assets/products/monkey-pudding.jpeg';
-import iceCreamMarshmallow from '@/assets/products/ice-cream-marshmallow.jpeg';
-import chocolateBeans from '@/assets/products/chocolate-beans.jpeg';
-import eggosChocolate from '@/assets/products/eggos-chocolate.jpeg';
 
-const categoryProductImages: Record<string, string | null> = {
-  lollipops: rainbowCanes,
-  jellies: monkeyPudding,
-  cakes: iceCreamMarshmallow,
-  chocolate: chocolateBeans,
-  biscuits: eggosChocolate,
+const categoryEmoji: Record<string, string> = {
+  'biscuiti-napolitane': '🍪',
+  'prajituri-torturi': '🎂',
+  'jeleuri-pudding': '🐻',
+  'acadele-drajeuri': '🍬',
+  'marshmallow': '☁️',
+  'sucuri-spray': '🧃',
+  'guma': '🫧',
+  'caramele-drops': '🍭',
+  'altele': '🎁',
+};
+
+const FeaturedImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
+        <span className="text-cream font-display font-bold text-3xl">{cod}</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+      onError={() => setFailed(true)}
+    />
+  );
 };
 
 const marqueeTexts: Record<string, string> = {
@@ -56,7 +76,7 @@ const Index: React.FC = () => {
     { icon: Truck, title: t('why.distribution.title'), desc: t('why.distribution.desc') },
   ];
 
-  const seasonalProducts = demoProducts.filter(p => p.badges.includes('seasonal') || p.badges.includes('new'));
+  const featuredProducts = demoProducts.slice(0, 3);
 
   return (
     <main>
@@ -176,23 +196,15 @@ const Index: React.FC = () => {
             </h2>
           </ScrollReveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
             {categories.map((cat, i) => {
-              const emoji = cat.id === 'biscuits' ? '🍪' : cat.id === 'cakes' ? '🎂' : cat.id === 'chocolate' ? '🍫' : cat.id === 'lollipops' ? '🍬' : '🐻';
-              const productImage = categoryProductImages[cat.id];
+              const emoji = categoryEmoji[cat.id] || '🎁';
               return (
                 <SquishyCard key={cat.id} delay={i * 0.06}>
                   <Link to={`/products?category=${cat.id}`} className="group block">
                     <div className="category-shimmer relative overflow-hidden rounded-[20px] border border-gold/15 bg-white/[0.04] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-t-2 hover:border-t-gold hover:bg-white/[0.06]">
                       <div className="aspect-[4/3] flex items-center justify-center relative overflow-hidden">
-                        {productImage ? (
-                          <>
-                            <img src={productImage} alt={cat.label[lang]} className="absolute inset-0 w-full h-full object-cover opacity-15" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                          </>
-                        ) : (
-                          <span className="absolute bottom-2 right-2 text-[120px] opacity-[0.12] blur-sm select-none pointer-events-none">{emoji}</span>
-                        )}
+                        <span className="absolute bottom-2 right-2 text-[120px] opacity-[0.12] blur-sm select-none pointer-events-none">{emoji}</span>
                         <span className="relative text-[40px] md:text-[60px] drop-shadow-lg group-hover:scale-[1.15] group-hover:rotate-6 transition-transform duration-500">{emoji}</span>
                       </div>
                       <div className="p-3 md:p-5 text-center">
@@ -250,7 +262,7 @@ const Index: React.FC = () => {
       </section>
 
 
-      {/* ─── Seasonal / New Products ─── */}
+      {/* ─── Featured Products ─── */}
       <section className="py-10 md:py-16 bg-background">
         <div className="container mx-auto px-4">
           <ScrollReveal>
@@ -263,29 +275,21 @@ const Index: React.FC = () => {
             </div>
           </ScrollReveal>
           <div className="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
-            {seasonalProducts.slice(0, 3).map((product, i) => (
+            {featuredProducts.map((product, i) => (
               <SquishyCard key={product.id} delay={i * 0.1} className="h-full">
                 <Link to={`/products/${product.slug}`} className="group block h-full">
                   <div className="card-3d h-full flex flex-col">
                     <div className="h-48 md:h-56 bg-muted relative overflow-hidden">
-                      <img
+                      <FeaturedImage
                         src={product.images[0]}
                         alt={product.name[lang]}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
+                        cod={product.cod}
                       />
-                      <div className="absolute top-4 start-4 flex gap-2">
-                        {product.badges.map(badge => (
-                          <span key={badge} className="px-3 py-1 bg-crimson text-cream text-xs font-medium rounded-full">
-                            {t(`badge.${badge}`)}
-                          </span>
-                        ))}
-                      </div>
                     </div>
                     <div className="p-4 md:p-6 flex-1">
                       <h3 className="font-display text-lg font-semibold text-foreground">{product.name[lang]}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{product.description[lang]}</p>
-                      <p className="mt-3 text-xs text-muted-foreground">{product.grammage[lang]}</p>
+                      <p className="mt-2 text-xs text-muted-foreground">COD: {product.cod}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{product.weight}</p>
                     </div>
                   </div>
                 </Link>
@@ -333,7 +337,7 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      
+
 
       {/* ─── CTA Strip (premium glass on cream) ─── */}
       <section className="py-14 md:py-20 bg-background">

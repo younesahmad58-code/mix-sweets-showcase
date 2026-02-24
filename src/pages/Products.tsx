@@ -9,6 +9,29 @@ import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import { motion } from 'framer-motion';
 
+const ProductImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
+        <span className="text-cream font-display font-bold text-2xl md:text-3xl">
+          {cod}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+      onError={() => setFailed(true)}
+    />
+  );
+};
+
 const Products: React.FC = () => {
   const { t, language } = useLanguage();
   const lang = language as Language;
@@ -48,7 +71,7 @@ const Products: React.FC = () => {
 
       </section>
 
-      
+
 
       <section className="py-8 md:py-16 bg-background">
         <div className="container mx-auto px-4">
@@ -106,25 +129,21 @@ const Products: React.FC = () => {
                       <Link to={`/products/${product.slug}`} className="group block">
                         <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
                           <div className="aspect-[4/3] bg-muted relative overflow-hidden">
-                            <img
+                            <ProductImage
                               src={product.images[0]}
                               alt={product.name[lang]}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                              onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
+                              cod={product.cod}
                             />
-                            <div className="absolute top-3 start-3 flex gap-2">
-                              {product.badges.map(badge => (
-                                <span key={badge} className="px-2.5 py-1 bg-gold text-cocoa text-xs font-medium rounded-full">
-                                  {t(`badge.${badge}`)}
-                                </span>
-                              ))}
-                            </div>
                           </div>
                           <div className="p-3 md:p-5">
                             <h3 className="font-display text-sm md:text-lg font-semibold text-foreground">{product.name[lang]}</h3>
-                            <p className="mt-1 text-xs md:text-sm text-muted-foreground line-clamp-2 hidden sm:block">{product.description[lang]}</p>
                             <div className="mt-3 flex items-center justify-between">
-                              <span className="text-xs text-muted-foreground">{product.grammage[lang]}</span>
+                              <div className="flex flex-col gap-0.5">
+                                <span className="text-xs text-muted-foreground">COD: {product.cod}</span>
+                                {product.weight && (
+                                  <span className="text-xs text-muted-foreground">{product.weight}</span>
+                                )}
+                              </div>
                               <span className="text-sm font-medium text-primary">{t('products.details')} →</span>
                             </div>
                           </div>
