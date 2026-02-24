@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { LogOut, Package, Mail, Plus, Pencil, Trash2, Eye, Check } from 'lucide-react';
+import { LogOut, Package, Mail, Plus, Pencil, Trash2, Eye, Check, Search } from 'lucide-react';
 
 interface ProductRow {
   id: string;
@@ -41,6 +41,7 @@ const AdminDashboard: React.FC = () => {
   const [tab, setTab] = useState<'products' | 'submissions'>('products');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   // Products state
@@ -120,6 +121,16 @@ const AdminDashboard: React.FC = () => {
     await supabase.from('contact_submissions').update({ read: true }).eq('id', id);
     fetchSubmissions();
   };
+  const filteredProducts = useMemo(() => {
+    if (!searchQuery.trim()) return products;
+    const q = searchQuery.toLowerCase();
+    return products.filter(p =>
+      p.name_en.toLowerCase().includes(q) ||
+      p.name_ro.toLowerCase().includes(q) ||
+      p.slug.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q)
+    );
+  }, [products, searchQuery]);
 
   if (loading) {
     return <main className="min-h-screen flex items-center justify-center bg-background"><p className="text-muted-foreground">Loading...</p></main>;
@@ -176,21 +187,30 @@ const AdminDashboard: React.FC = () => {
               </div>
             ) : (
               <div className="bg-card rounded-2xl border border-border p-6">
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <h2 className="font-display text-lg font-bold text-foreground">Products ({products.length})</h2>
                   <button onClick={() => setEditingProduct({...emptyProduct})} className="flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground rounded-lg text-sm font-semibold hover:bg-gold-dark transition-colors">
                     <Plus className="w-4 h-4" /> Add Product
                   </button>
                 </div>
-                {products.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">No products yet. Click "Add Product" to create one.</p>
+                <div className="relative mb-4">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    className={`${inputCls} pl-9`}
+                    placeholder="Search products by name, slug or category..."
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                  />
+                </div>
+                {filteredProducts.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">{searchQuery ? 'No products match your search.' : 'No products yet. Click "Add Product" to create one.'}</p>
                 ) : (
                   <div className="space-y-3">
-                    {products.map(p => (
+                    {filteredProducts.map(p => (
                       <div key={p.id} className="flex items-center justify-between p-4 bg-background rounded-lg border border-border">
                         <div>
                           <h3 className="font-semibold text-foreground text-sm">{p.name_en || p.name_ro}</h3>
-                          <p className="text-xs text-muted-foreground">{p.category} · {p.grammage}</p>
+                          <p className="text-xs text-muted-foreground">{p.category} · {p.grammage} · {p.slug}</p>
                         </div>
                         <div className="flex gap-2">
                           <a href={`/products/${p.slug}`} target="_blank" rel="noopener" className="p-2 text-muted-foreground hover:text-foreground transition-colors"><Eye className="w-4 h-4" /></a>

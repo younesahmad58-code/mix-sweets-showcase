@@ -7,7 +7,6 @@ const AdminLogin: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,29 +20,12 @@ const AdminLogin: React.FC = () => {
     setError('');
     setLoading(true);
 
-    if (isSignUp) {
-      const { error } = await supabase.auth.signUp({ email, password });
-      setLoading(false);
-      if (error) {
-        setError(error.message);
-      } else {
-        // Auto-confirmed, so sign in immediately
-        const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
-        if (loginError) {
-          setError('Cont creat! Încearcă să te loghezi.');
-          setIsSignUp(false);
-        } else {
-          navigate('/admin');
-        }
-      }
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+    if (error) {
+      setError(error.message);
     } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      setLoading(false);
-      if (error) {
-        setError(error.message);
-      } else {
-        navigate('/admin');
-      }
+      navigate('/admin');
     }
   };
 
@@ -51,7 +33,7 @@ const AdminLogin: React.FC = () => {
     <main className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm bg-card border border-border rounded-2xl p-8">
         <h1 className="font-display text-2xl font-bold text-foreground text-center mb-8">
-          {isSignUp ? 'Admin Sign Up' : 'Admin Login'}
+          Admin Login
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -76,15 +58,9 @@ const AdminLogin: React.FC = () => {
             disabled={loading}
             className="w-full py-3 bg-accent text-accent-foreground font-semibold rounded-lg hover:bg-gold-dark transition-colors disabled:opacity-50"
           >
-            {loading ? (isSignUp ? 'Creating...' : 'Signing in...') : (isSignUp ? 'Create Account' : 'Sign In')}
+            {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        <button
-          onClick={() => { setIsSignUp(!isSignUp); setError(''); }}
-          className="w-full mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          {isSignUp ? 'Ai deja cont? Loghează-te' : 'Nu ai cont? Creează unul'}
-        </button>
       </div>
     </main>
   );
