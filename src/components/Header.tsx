@@ -4,7 +4,6 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '@/assets/logo_2.png';
 
 const flagSvgs: Record<string, React.ReactNode> = {
   ro: (
@@ -77,87 +76,96 @@ const Header: React.FC = () => {
         borderBottomColor: scrolled ? 'rgba(201,168,76,0.22)' : isHomePage ? 'rgba(201,168,76,0.12)' : 'rgba(201,168,76,0.18)',
       }}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-3 group">
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-            className="bg-white/10 backdrop-blur-sm rounded-2xl p-1.5 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(201,168,76,0.2)]"
-          >
-            <img src={logo} alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded-xl" />
-          </motion.div>
-          <div className="w-px h-4 bg-gold/20 hidden sm:block" />
-          <span className="font-display text-xl md:text-2xl font-semibold text-cream tracking-wide hidden sm:inline">
+      <div className="container mx-auto px-4 flex items-center h-16 md:h-20 relative">
+        {/* Left: Brand name */}
+        <div className="flex-1">
+          <Link to="/" className="font-display font-bold text-cream text-base md:text-lg tracking-[0.12em] uppercase hover:text-gold transition-colors duration-300">
             MIX SWEETS
-          </span>
-        </Link>
+          </Link>
+        </div>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`relative text-sm font-medium tracking-wide uppercase transition-colors pb-1 ${
-                location.pathname === link.to ? 'text-gold' : 'text-cream/70 hover:text-cream'
-              }`}
-              style={{ letterSpacing: '0.05em', fontSize: '0.8rem' }}
-            >
-              {link.label}
-              <span
-                className={`absolute bottom-0 left-0 h-px bg-gold transition-all duration-300 ${
-                  location.pathname === link.to ? 'w-full' : 'w-0'
-                }`}
-              />
-            </Link>
-          ))}
-
-          {/* Language switcher */}
-          <div className="relative">
-            <motion.button
-              onClick={() => setLangOpen(!langOpen)}
+        {/* Center: Logo (absolute) */}
+        <div className="absolute left-1/2 -translate-x-1/2">
+          <Link to="/" className="flex items-center group">
+            <motion.div
               whileHover={{ scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-              className="flex items-center gap-1.5 text-sm font-medium text-cream/60 hover:text-gold transition-colors"
+              className="rounded-2xl p-1.5 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(201,168,76,0.2)]"
             >
-              <span className="flex items-center gap-1.5">{flagSvgs[currentLang.code]} {currentLang.label}</span>
-            </motion.button>
-            <AnimatePresence>
-              {langOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
-                  className="absolute top-full end-0 mt-3 bg-cocoa/95 backdrop-blur-2xl border border-gold/10 rounded-2xl shadow-xl py-2 min-w-[150px]"
-                >
-                  {languages.map(lang => (
-                    <button
-                      key={lang.code}
-                      onClick={() => { setLanguage(lang.code); setLangOpen(false); }}
-                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-gold/5 transition-colors rounded-xl mx-1 ${
-                        language === lang.code ? 'text-gold font-bold' : 'text-cream/80'
-                      }`}
-                      style={{ width: 'calc(100% - 8px)' }}
-                    >
-                      {flagSvgs[lang.code]}
-                      <span>{lang.label}</span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </nav>
+              <img src="/logo3.png" alt="MIX SWEETS" className="h-10 md:h-12 w-auto rounded-xl" />
+            </motion.div>
+          </Link>
+        </div>
 
-        {/* Mobile hamburger */}
-        <motion.button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          whileTap={{ scale: 0.95 }}
-          className="md:hidden p-2 text-cream"
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </motion.button>
+        {/* Right: Desktop nav + mobile hamburger */}
+        <div className="flex-1 flex justify-end items-center gap-6">
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map(link => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`relative text-sm font-medium tracking-wide uppercase transition-colors pb-1 ${
+                  location.pathname === link.to ? 'text-gold' : 'text-cream/70 hover:text-cream'
+                }`}
+                style={{ letterSpacing: '0.05em', fontSize: '0.8rem' }}
+              >
+                {link.label}
+                <span
+                  className={`absolute bottom-0 left-0 h-px bg-gold transition-all duration-300 ${
+                    location.pathname === link.to ? 'w-full' : 'w-0'
+                  }`}
+                />
+              </Link>
+            ))}
+
+            {/* Language switcher */}
+            <div className="relative">
+              <motion.button
+                onClick={() => setLangOpen(!langOpen)}
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+                className="flex items-center gap-1.5 text-sm font-medium text-cream/60 hover:text-gold transition-colors"
+              >
+                <span className="flex items-center gap-1.5">{flagSvgs[currentLang.code]} {currentLang.label}</span>
+              </motion.button>
+              <AnimatePresence>
+                {langOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="absolute top-full end-0 mt-3 bg-cocoa/95 backdrop-blur-2xl border border-gold/10 rounded-2xl shadow-xl py-2 min-w-[150px]"
+                  >
+                    {languages.map(lang => (
+                      <button
+                        key={lang.code}
+                        onClick={() => { setLanguage(lang.code); setLangOpen(false); }}
+                        className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-gold/5 transition-colors rounded-xl mx-1 ${
+                          language === lang.code ? 'text-gold font-bold' : 'text-cream/80'
+                        }`}
+                        style={{ width: 'calc(100% - 8px)' }}
+                      >
+                        {flagSvgs[lang.code]}
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </nav>
+
+          {/* Mobile hamburger */}
+          <motion.button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            whileTap={{ scale: 0.95 }}
+            className="md:hidden p-2 text-cream"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile drawer */}

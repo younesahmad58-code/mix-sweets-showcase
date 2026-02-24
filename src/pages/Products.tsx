@@ -25,6 +25,7 @@ const Products: React.FC = () => {
   }, [activeCategory, search, lang]);
 
   const setCategory = (cat: string) => {
+    window.scrollTo(0, 0);
     if (cat === 'all') {
       setSearchParams({});
     } else {

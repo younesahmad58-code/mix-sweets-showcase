@@ -109,6 +109,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'stats.products': 'Produse',
     'stats.counties': 'Județe',
     'stats.partners': 'Parteneri',
+    'stats.storage': 'Capacitate de Depozitare',
+    'stats.clients': 'Clienți Mulțumiți',
     // Hero badge
     'hero.badge': '✦ Dulciuri Artizanale Premium ✦',
     // Empty states & actions
@@ -134,6 +136,27 @@ export const translations: Record<Language, Record<string, string>> = {
     'recent.details': 'Vezi Detalii',
     // Footer brand description
     'footer.brand.desc': 'Distribuitor autorizat de dulciuri premium pentru parteneri din retail, horeca și distribuție în toată România.',
+    // Ce Oferim section
+    'ceofferim.eyebrow': '✦ SERVICIILE NOASTRE ✦',
+    'ceofferim.title': 'Ce Oferim',
+    'ceofferim.item1': 'O combinație unică de expertiză, viziune și putere financiară',
+    'ceofferim.item2': 'Un depozit modern situat în București și sud-estul României',
+    'ceofferim.item3': 'Paletizare / încărcare manuală',
+    'ceofferim.item4': 'Monitorizarea performanței',
+    'ceofferim.item5': 'Personal profesionist în depozit',
+    'ceofferim.item6': 'Rapoarte zilnice de productivitate',
+    'ceofferim.cta': 'Doriți o Ofertă Personalizată?',
+    // About — De Ce Să Ne Alegeți
+    'about.why.eyebrow': '✦ DE CE NOI ✦',
+    'about.why.title': 'De Ce Să Ne Alegeți',
+    'about.why.card1.title': 'Distribuție Națională',
+    'about.why.card1.desc': 'Acoperim întreaga Românie — de la București la toate județele țării. Rețeaua noastră de distribuție garantează că produsele ajung la parteneri rapid și în condiții optime.',
+    'about.why.card2.title': 'Depozitare Modernă',
+    'about.why.card2.desc': 'Dispunem de un depozit modern de 4000 m² în zona București, echipat pentru păstrarea optimă a dulciurilor în condiții controlate de temperatură și umiditate.',
+    'about.why.card3.title': 'Clienți și Parteneri',
+    'about.why.card3.desc': 'Peste 1000 de clienți activi din retail, horeca și distribuție ne-au ales ca partener de încredere. Construim relații pe termen lung bazate pe seriozitate și calitate.',
+    'about.why.card4.title': 'Portofoliu Diversificat',
+    'about.why.card4.desc': 'Peste 1000 de produse din cele mai cunoscute branduri internaționale și locale. Mereu actualizăm oferta cu noutăți și produse la cerere.',
   },
   en: {
     'nav.home': 'Home',
@@ -230,6 +253,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'stats.products': 'Products',
     'stats.counties': 'Counties',
     'stats.partners': 'Partners',
+    'stats.storage': 'Storage Capacity',
+    'stats.clients': 'Satisfied Clients',
     // Hero badge
     'hero.badge': '✦ Premium Artisan Sweets ✦',
     // Empty states & actions
@@ -255,6 +280,27 @@ export const translations: Record<Language, Record<string, string>> = {
     'recent.details': 'View Details',
     // Footer brand description
     'footer.brand.desc': 'Authorized distributor of premium sweets for retail, horeca, and distribution partners throughout Romania.',
+    // Ce Oferim section
+    'ceofferim.eyebrow': '✦ OUR SERVICES ✦',
+    'ceofferim.title': 'What We Offer',
+    'ceofferim.item1': 'A unique combination of expertise, vision and financial strength',
+    'ceofferim.item2': 'A modern warehouse located in Bucharest and south-east Romania',
+    'ceofferim.item3': 'Palletizing / manual loading',
+    'ceofferim.item4': 'Performance monitoring',
+    'ceofferim.item5': 'Professional warehouse staff',
+    'ceofferim.item6': 'Daily productivity reports',
+    'ceofferim.cta': 'Would You Like a Custom Offer?',
+    // About — Why Choose Us
+    'about.why.eyebrow': '✦ WHY US ✦',
+    'about.why.title': 'Why Choose Us',
+    'about.why.card1.title': 'National Distribution',
+    'about.why.card1.desc': 'We cover all of Romania — from Bucharest to every county. Our distribution network guarantees products reach partners quickly and in optimal conditions.',
+    'about.why.card2.title': 'Modern Warehousing',
+    'about.why.card2.desc': 'We operate a modern 4000 m² warehouse in the Bucharest area, equipped for optimal storage of confections under controlled temperature and humidity conditions.',
+    'about.why.card3.title': 'Clients & Partners',
+    'about.why.card3.desc': 'Over 1000 active clients from retail, horeca and distribution have chosen us as a trusted partner. We build long-term relationships based on reliability and quality.',
+    'about.why.card4.title': 'Diversified Portfolio',
+    'about.why.card4.desc': 'Over 1000 products from the most well-known international and local brands. We continually update our offer with new arrivals and on-demand products.',
   },
   ar: {
     'nav.home': 'الرئيسية',
@@ -351,6 +397,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'stats.products': 'منتج',
     'stats.counties': 'محافظة',
     'stats.partners': 'شريك',
+    'stats.storage': 'سعة التخزين',
+    'stats.clients': 'عملاء راضون',
     // Hero badge
     'hero.badge': '✦ حلويات حرفية فاخرة ✦',
     // Empty states & actions
@@ -376,5 +424,26 @@ export const translations: Record<Language, Record<string, string>> = {
     'recent.details': 'عرض التفاصيل',
     // Footer brand description
     'footer.brand.desc': 'موزع معتمد للحلويات الفاخرة لشركاء التجزئة والمطاعم والتوزيع في جميع أنحاء رومانيا.',
+    // Ce Oferim section
+    'ceofferim.eyebrow': '✦ خدماتنا ✦',
+    'ceofferim.title': 'ما نقدمه',
+    'ceofferim.item1': 'مزيج فريد من الخبرة والرؤية والقوة المالية',
+    'ceofferim.item2': 'مستودع حديث يقع في بوخارست وجنوب شرق رومانيا',
+    'ceofferim.item3': 'رصف / تحميل يدوي',
+    'ceofferim.item4': 'مراقبة الأداء',
+    'ceofferim.item5': 'موظفون محترفون في المستودع',
+    'ceofferim.item6': 'تقارير إنتاجية يومية',
+    'ceofferim.cta': 'هل تريد عرضًا مخصصًا؟',
+    // About — De Ce Să Ne Alegeți
+    'about.why.eyebrow': '✦ لماذا نحن ✦',
+    'about.why.title': 'لماذا تختارنا',
+    'about.why.card1.title': 'توزيع وطني',
+    'about.why.card1.desc': 'نغطي جميع أنحاء رومانيا — من بوخارست إلى كل محافظة. تضمن شبكة التوزيع لدينا وصول المنتجات إلى الشركاء بسرعة وفي أفضل الظروف.',
+    'about.why.card2.title': 'تخزين حديث',
+    'about.why.card2.desc': 'نمتلك مستودعًا حديثًا بمساحة 4000 م² في منطقة بوخارست، مجهزًا للحفاظ على الحلويات في ظروف درجة حرارة ورطوبة مُتحكَّم بها.',
+    'about.why.card3.title': 'العملاء والشركاء',
+    'about.why.card3.desc': 'اختارنا أكثر من 1000 عميل نشط من قطاعات التجزئة والمطاعم والتوزيع شريكًا موثوقًا. نبني علاقات طويلة الأمد مبنية على الجدية والجودة.',
+    'about.why.card4.title': 'محفظة متنوعة ومتكاملة',
+    'about.why.card4.desc': 'أكثر من 1000 منتج من أشهر العلامات التجارية الدولية والمحلية. نحدّث عروضنا باستمرار بأحدث المنتجات وما يطلبه العملاء.',
   },
 };

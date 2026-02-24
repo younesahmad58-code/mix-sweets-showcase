@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Heart, Shield, Quote, Globe } from 'lucide-react';
+import { Award, Heart, Shield, Quote } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
 import FloatingBlobs from '@/components/FloatingBlobs';
@@ -13,6 +13,13 @@ const About: React.FC = () => {
     { icon: Award, title: t('about.values.quality'), desc: t('about.values.quality.desc') },
     { icon: Heart, title: t('about.values.honesty'), desc: t('about.values.honesty.desc') },
     { icon: Shield, title: t('about.values.responsibility'), desc: t('about.values.responsibility.desc') },
+  ];
+
+  const whyChooseCards = [
+    { title: t('about.why.card1.title'), desc: t('about.why.card1.desc') },
+    { title: t('about.why.card2.title'), desc: t('about.why.card2.desc') },
+    { title: t('about.why.card3.title'), desc: t('about.why.card3.desc') },
+    { title: t('about.why.card4.title'), desc: t('about.why.card4.desc') },
   ];
 
   return (
@@ -33,15 +40,15 @@ const About: React.FC = () => {
       </section>
 
 
-      {/* Story */}
-      <section className="py-16 md:py-28 bg-background">
-        <div className="container mx-auto px-4 max-w-3xl">
+      {/* Povestea Noastră */}
+      <section className="py-8 md:py-12 bg-background">
+        <div className="container mx-auto px-4 max-w-4xl">
           <ScrollReveal>
             <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-6 md:mb-8" style={{ letterSpacing: '-0.03em' }}>
               {t('about.story.title')}
             </h2>
           </ScrollReveal>
-          {['about.story.p1', 'about.story.p2'].map((key, i) => (
+          {(['about.story.p1', 'about.story.p2'] as const).map((key, i) => (
             <ScrollReveal key={key} delay={i * 0.1}>
               <p className="text-muted-foreground leading-relaxed mb-4 md:mb-6 text-base md:text-lg">{t(key)}</p>
             </ScrollReveal>
@@ -49,33 +56,30 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Mission */}
-      <section className="pb-16 md:pb-20 bg-background">
+      {/* Misiunea Noastră */}
+      <section className="py-8 md:py-12 bg-background">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <ScrollReveal>
             <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('about.mission.eyebrow')}</span>
-            <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="mt-4 font-display text-2xl md:text-4xl font-bold text-foreground mb-6" style={{ letterSpacing: '-0.03em' }}>
               {t('about.mission.title')}
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <div className="mt-10 relative">
-              <div className="flex justify-center -mb-8 relative z-10">
-                <Icon3D icon={Quote} variant="crimson" size="lg" />
-              </div>
-              <div className="card-3d pt-16 pb-10 px-8 md:px-12 border-t-2 border-t-gold/30">
-                <blockquote className="font-display text-xl md:text-2xl text-foreground/80 italic leading-relaxed">
-                  {t('about.mission.quote')}
-                </blockquote>
-              </div>
+          <div className="relative mt-8 max-w-2xl mx-auto">
+            <div className="flex justify-center -mb-8 relative z-10">
+              <Icon3D icon={Quote} variant="crimson" size="lg" />
             </div>
-          </ScrollReveal>
+            <div className="card-3d pt-16 pb-10 px-8 md:px-10 border-t-2 border-t-gold/30">
+              <blockquote className="font-display text-xl md:text-2xl text-foreground/80 italic leading-relaxed">
+                {t('about.mission.quote')}
+              </blockquote>
+            </div>
+          </div>
         </div>
       </section>
 
-      
 
-      {/* Values */}
+      {/* Values — unchanged */}
       <section className="py-16 md:py-28 bg-cocoa-warm">
         <div className="container mx-auto px-4">
           <ScrollReveal>
@@ -100,27 +104,33 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      
 
-      {/* Distribution Reach */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
+      {/* De Ce Să Ne Alegeți — numbered 2×2 grid */}
+      <section className="py-16 md:py-28 bg-background">
+        <div className="container mx-auto px-4">
           <ScrollReveal>
-            <div className="text-center">
-              <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('about.reach.eyebrow')}</span>
-              <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
-                {t('about.reach.title')}
-              </h2>
+            <div className="text-center mb-4">
+              <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('about.why.eyebrow')}</span>
             </div>
+            <h2 className="font-display text-2xl md:text-4xl font-bold text-center text-foreground mb-10 md:mb-16" style={{ letterSpacing: '-0.03em' }}>
+              {t('about.why.title')}
+            </h2>
           </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <div className="mt-12 card-3d p-10 md:p-14 text-center">
-              <Icon3D icon={Globe} variant="crimson" size="lg" className="mx-auto mb-6" />
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
-                {t('about.reach.desc')}
-              </p>
-            </div>
-          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+            {whyChooseCards.map((card, i) => (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div className="card-3d p-6 md:p-8 flex gap-5 md:gap-6 items-start h-full">
+                  <span className="font-display text-5xl md:text-6xl font-bold text-crimson shrink-0 leading-none select-none">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-base md:text-xl font-semibold text-foreground mb-2 md:mb-3">{card.title}</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
     </main>

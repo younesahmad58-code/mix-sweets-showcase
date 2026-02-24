@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Award, Sparkles, Truck, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Award, Sparkles, Truck, ShieldCheck, ArrowRight, Lightbulb, Warehouse, Package, BarChart2, Users, ClipboardList } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
 import FloatingBlobs from '@/components/FloatingBlobs';
@@ -38,9 +38,8 @@ const Index: React.FC = () => {
 
   const heroImages = [
     'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=1920&q=80',
-    'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1920&q=80',
+    'https://images.unsplash.com/photo-1511381939415-e44015466834?w=1600&q=80',
     'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=1920&q=80',
-    'https://images.unsplash.com/photo-1612201535116-ead35a9f5a4a?w=1920&q=80',
   ];
 
   React.useEffect(() => {
@@ -107,19 +106,20 @@ const Index: React.FC = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }}
-            className="mt-14 flex items-center justify-center gap-6 md:gap-10"
+            className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 max-w-xl mx-auto"
           >
             {[
-              { value: '30+', label: t('stats.years') },
-              { value: '500+', label: t('stats.products') },
+              { number: '30', suffix: '+', label: t('stats.years') },
+              { number: '1000', suffix: '+', label: t('stats.products') },
+              { number: '4000', suffix: ' m²', label: t('stats.storage') },
+              { number: '1000', suffix: '+', label: t('stats.clients') },
             ].map((stat, i) => (
-              <React.Fragment key={i}>
-                {i > 0 && <div className="w-px h-8 bg-cream/15" />}
-                <div className="text-center">
-                  <span className="font-display text-gold text-lg md:text-xl font-semibold">{stat.value}</span>
-                  <span className="block text-cream/40 text-[11px] tracking-[0.1em] uppercase mt-0.5">{stat.label}</span>
-                </div>
-              </React.Fragment>
+              <div key={i} className="text-center">
+                <span className="font-display text-gold text-lg md:text-xl font-semibold">
+                  {stat.number}{stat.suffix}
+                </span>
+                <span className="block text-cream/40 text-[11px] tracking-[0.1em] uppercase mt-0.5">{stat.label}</span>
+              </div>
             ))}
           </motion.div>
         </div>
@@ -162,7 +162,7 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      
+
 
       {/* ─── Categories ─── */}
       <section className="py-16 md:py-28 bg-cocoa-warm">
@@ -210,48 +210,48 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-
-      {/* ─── Recent Products ─── */}
-      <section className="py-16 md:py-28 bg-background">
+      {/* ─── Ce Oferim ─── */}
+      <section className="py-10 md:py-16 bg-background">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-4">
-              <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('recent.eyebrow')}</span>
+              <span className="text-gold text-[11px] font-medium tracking-[0.2em] uppercase">{t('ceofferim.eyebrow')}</span>
             </div>
             <h2 className="font-display text-2xl md:text-5xl font-bold text-center text-foreground mb-10 md:mb-16" style={{ letterSpacing: '-0.03em' }}>
-              {t('recent.title')}
+              {t('ceofferim.title')}
             </h2>
           </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8 max-w-6xl mx-auto">
-            {demoProducts.filter(p => p.badges.includes('new')).slice(0, 3).map((product, i) => {
-              const category = categories.find(c => c.id === product.category);
-              return (
-                <SquishyCard key={product.id} delay={i * 0.1}>
-                  <Link to={`/products/${product.slug}`} className="group block">
-                    <div className="card-3d overflow-hidden hover:shadow-[0_8_32px_rgba(201,168,76,0.15)] transition-all duration-500">
-                      <div className="aspect-[4/3] overflow-hidden relative">
-                        <img src={product.images[0]} alt={product.name[lang]} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      </div>
-                      <div className="p-4 md:p-6">
-                        <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-[10px] font-medium tracking-widest uppercase rounded-full mb-3">{category?.label[lang]}</span>
-                        <h3 className="font-display text-base md:text-xl font-semibold text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">{product.name[lang]}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">{product.description[lang]}</p>
-                        <span className="inline-flex items-center gap-1 text-[11px] text-gold tracking-[0.12em] uppercase font-medium group-hover:gap-2 group-hover:underline transition-all duration-300">
-                          {t('recent.details')} <ArrowRight size={12} />
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </SquishyCard>
-              );
-            })}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-14">
+            {([
+              { key: 'ceofferim.item1' as const, icon: Lightbulb },
+              { key: 'ceofferim.item2' as const, icon: Warehouse },
+              { key: 'ceofferim.item3' as const, icon: Package },
+              { key: 'ceofferim.item4' as const, icon: BarChart2 },
+              { key: 'ceofferim.item5' as const, icon: Users },
+              { key: 'ceofferim.item6' as const, icon: ClipboardList },
+            ]).map(({ key, icon: IconComponent }, i) => (
+              <SquishyCard key={i} delay={i * 0.08} className="h-full">
+                <div className="card-3d p-6 md:p-8 h-full flex flex-col items-center text-center">
+                  <Icon3D icon={IconComponent} variant="crimson" size="md" delay={i * 0.08} className="mb-4 md:mb-5" />
+                  <p className="text-muted-foreground text-sm md:text-base leading-relaxed">{t(key)}</p>
+                </div>
+              </SquishyCard>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link
+              to="/contact"
+              className="shine-auto relative inline-flex items-center justify-center px-10 py-4 bg-crimson text-cream font-semibold rounded-full hover:shadow-[0_0_24px_rgba(176,18,42,0.3)] transition-all duration-500 text-sm tracking-wide active:scale-[0.97]"
+            >
+              {t('ceofferim.cta')}
+            </Link>
           </div>
         </div>
       </section>
 
+
       {/* ─── Seasonal / New Products ─── */}
-      <section className="py-16 md:py-28 bg-background">
+      <section className="py-10 md:py-16 bg-background">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center">
@@ -262,12 +262,12 @@ const Index: React.FC = () => {
               <p className="mt-4 text-muted-foreground max-w-xl mx-auto">{t('seasonal.subtitle')}</p>
             </div>
           </ScrollReveal>
-          <div className="mt-10 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+          <div className="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
             {seasonalProducts.slice(0, 3).map((product, i) => (
-              <SquishyCard key={product.id} delay={i * 0.1}>
-                <Link to={`/products/${product.slug}`} className="group block">
-                  <div className="card-3d">
-                    <div className="aspect-[4/3] bg-muted flex items-center justify-center relative overflow-hidden">
+              <SquishyCard key={product.id} delay={i * 0.1} className="h-full">
+                <Link to={`/products/${product.slug}`} className="group block h-full">
+                  <div className="card-3d h-full flex flex-col">
+                    <div className="h-48 md:h-56 bg-muted relative overflow-hidden">
                       <img
                         src={product.images[0]}
                         alt={product.name[lang]}
@@ -282,7 +282,7 @@ const Index: React.FC = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="p-4 md:p-6">
+                    <div className="p-4 md:p-6 flex-1">
                       <h3 className="font-display text-lg font-semibold text-foreground">{product.name[lang]}</h3>
                       <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{product.description[lang]}</p>
                       <p className="mt-3 text-xs text-muted-foreground">{product.grammage[lang]}</p>
@@ -313,15 +313,17 @@ const Index: React.FC = () => {
             <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0">
               {[
                 { value: 30, suffix: '+', label: t('stats.years') },
-                { value: 500, suffix: '+', label: t('stats.products') },
+                { value: 1000, suffix: '+', label: t('stats.products') },
+                { value: 4000, suffix: ' m²', label: t('stats.storage') },
+                { value: 1000, suffix: '+', label: t('stats.clients') },
               ].map((stat, i) => (
                 <ScrollReveal key={i} delay={i * 0.1}>
-                  <div className="card-3d-dark p-6 text-center">
+                  <div className="card-3d-dark p-6 text-center min-h-[90px] flex flex-col items-center justify-center">
                     <CountUpStat
                       value={stat.value}
                       suffix={stat.suffix}
                       label={stat.label}
-                      className="[&>span:first-child]:text-[40px] [&>span:first-child]:font-bold"
+                      className="[&>span:first-child]:text-[40px] [&>span:first-child]:font-bold [&>span:first-child]:leading-none"
                     />
                   </div>
                 </ScrollReveal>
@@ -334,7 +336,7 @@ const Index: React.FC = () => {
       
 
       {/* ─── CTA Strip (premium glass on cream) ─── */}
-      <section className="py-24 bg-background">
+      <section className="py-14 md:py-20 bg-background">
         <div className="container mx-auto px-4">
           <div
             className="rounded-[24px] px-8 py-16 md:px-16 md:py-20 text-center relative overflow-hidden"

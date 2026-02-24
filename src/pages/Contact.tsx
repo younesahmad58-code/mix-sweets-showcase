@@ -184,7 +184,7 @@ const Contact: React.FC = () => {
             <ScrollReveal delay={0.15}>
               <div className="rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] h-full min-h-[400px] border border-gold/[0.15]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2847.8!2d26.12!3d44.49!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDTCsDI5JzI0LjAiTiAyNsKwMDcnMTIuMCJF!5e0!3m2!1sen!2sro!4v1"
+                  src="https://maps.google.com/maps?q=Bulevardul+Voluntari+86,+Voluntari,+Ilfov,+077190,Romania&output=embed&z=16"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

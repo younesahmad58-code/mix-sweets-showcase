@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Icon3D from '@/components/Icon3D';
-import logo from '@/assets/logo_2.png';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -17,11 +16,10 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-5">
-            <div className="flex items-center gap-3">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-1.5 inline-block">
-                <img src={logo} alt="MIX SWEETS" className="h-10 w-auto rounded-xl" />
+            <div className="flex items-center">
+              <div style={{ background: 'white', borderRadius: '8px', padding: '6px', display: 'inline-block' }}>
+                <img src="/logo.jpeg" alt="MIX SWEETS" className="h-16 w-auto block" />
               </div>
-              <span className="font-display text-xl font-bold text-cream">MIX SWEETS</span>
             </div>
             <div className="w-12 h-px bg-gold/10 mt-4" />
             <p className="text-sm text-cream/50 leading-relaxed">
