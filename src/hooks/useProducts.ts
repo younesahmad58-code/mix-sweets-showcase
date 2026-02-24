@@ -15,6 +15,9 @@ export interface DBProduct {
   grammage: string;
   badges: string[];
   variants: string[];
+  cutie_box: string;
+  buc_cutie: string;
+  baxuri_palet: string;
 }
 
 export const useProducts = () => {
