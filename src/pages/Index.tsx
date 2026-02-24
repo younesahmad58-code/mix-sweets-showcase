@@ -310,7 +310,7 @@ const Index: React.FC = () => {
                 <p className="mt-3 md:mt-4 text-cream/60 leading-relaxed text-base md:text-lg">{t('tradition.p2')}</p>
               </ScrollReveal>
             </div>
-            <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0">
+            <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0 auto-rows-fr">
               {[
                 { value: 30, suffix: '+', label: t('stats.years') },
                 { value: 1000, suffix: '+', label: t('stats.products') },
