@@ -317,8 +317,8 @@ const Index: React.FC = () => {
                 { value: 4000, suffix: ' m²', label: t('stats.storage') },
                 { value: 1000, suffix: '+', label: t('stats.clients') },
               ].map((stat, i) => (
-                <ScrollReveal key={i} delay={i * 0.1}>
-                  <div className="card-3d-dark p-6 text-center min-h-[90px] flex flex-col items-center justify-center">
+                <ScrollReveal key={i} delay={i * 0.1} className="h-full">
+                  <div className="card-3d-dark p-6 text-center min-h-[90px] flex flex-col items-center justify-center h-full">
                     <CountUpStat
                       value={stat.value}
                       suffix={stat.suffix}
