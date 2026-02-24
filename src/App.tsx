@@ -34,6 +34,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => (
   </>
 );
 
+// App root
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
