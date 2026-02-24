@@ -53,8 +53,11 @@ export type Database = {
       products: {
         Row: {
           badges: string[]
+          baxuri_palet: string
+          buc_cutie: string
           category: string
           created_at: string
+          cutie_box: string
           description_ar: string
           description_en: string
           description_ro: string
@@ -70,8 +73,11 @@ export type Database = {
         }
         Insert: {
           badges?: string[]
+          baxuri_palet?: string
+          buc_cutie?: string
           category?: string
           created_at?: string
+          cutie_box?: string
           description_ar?: string
           description_en?: string
           description_ro?: string
@@ -87,8 +93,11 @@ export type Database = {
         }
         Update: {
           badges?: string[]
+          baxuri_palet?: string
+          buc_cutie?: string
           category?: string
           created_at?: string
+          cutie_box?: string
           description_ar?: string
           description_en?: string
           description_ro?: string
