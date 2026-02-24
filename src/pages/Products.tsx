@@ -3,20 +3,21 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
-import { demoProducts, categories } from '@/data/products';
+import { categories } from '@/data/products';
+import { useProducts } from '@/hooks/useProducts';
 import ScrollReveal from '@/components/ScrollReveal';
 import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import { motion } from 'framer-motion';
 
-const ProductImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+const ProductImage: React.FC<{ src: string; alt: string; slug: string }> = ({ src, alt, slug }) => {
   const [failed, setFailed] = useState(false);
 
-  if (failed) {
+  if (failed || !src) {
     return (
       <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
         <span className="text-cream font-display font-bold text-2xl md:text-3xl">
-          {cod}
+          {slug}
         </span>
       </div>
     );
@@ -38,14 +39,21 @@ const Products: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState('');
   const activeCategory = searchParams.get('category') || 'all';
+  const { products, loading } = useProducts();
+
+  const getName = (p: any) => {
+    if (lang === 'en' && p.name_en) return p.name_en;
+    if (lang === 'ar' && p.name_ar) return p.name_ar;
+    return p.name_ro;
+  };
 
   const filtered = useMemo(() => {
-    return demoProducts.filter(p => {
+    return products.filter(p => {
       const matchCat = activeCategory === 'all' || p.category === activeCategory;
-      const matchSearch = !search || p.name[lang].toLowerCase().includes(search.toLowerCase());
+      const matchSearch = !search || getName(p).toLowerCase().includes(search.toLowerCase());
       return matchCat && matchSearch;
     });
-  }, [activeCategory, search, lang]);
+  }, [activeCategory, search, lang, products]);
 
   const setCategory = (cat: string) => {
     window.scrollTo(0, 0);
@@ -68,10 +76,7 @@ const Products: React.FC = () => {
             {t('products.title')}
           </h1>
         </div>
-
       </section>
-
-
 
       <section className="py-8 md:py-16 bg-background">
         <div className="container mx-auto px-4">
@@ -120,7 +125,9 @@ const Products: React.FC = () => {
 
             {/* Product grid */}
             <div className="flex-1">
-              {filtered.length === 0 ? (
+              {loading ? (
+                <p className="text-muted-foreground text-center py-16">Loading...</p>
+              ) : filtered.length === 0 ? (
                 <p className="text-muted-foreground text-center py-16">{t('products.empty')}</p>
               ) : (
                 <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
@@ -130,18 +137,18 @@ const Products: React.FC = () => {
                         <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
                           <div className="aspect-[4/3] bg-muted relative overflow-hidden">
                             <ProductImage
-                              src={product.images[0]}
-                              alt={product.name[lang]}
-                              cod={product.cod}
+                              src={product.images[0] || ''}
+                              alt={getName(product)}
+                              slug={product.slug}
                             />
                           </div>
                           <div className="p-3 md:p-5">
-                            <h3 className="font-display text-sm md:text-lg font-semibold text-foreground">{product.name[lang]}</h3>
+                            <h3 className="font-display text-sm md:text-lg font-semibold text-foreground">{getName(product)}</h3>
                             <div className="mt-3 flex items-center justify-between">
                               <div className="flex flex-col gap-0.5">
-                                <span className="text-xs text-muted-foreground">COD: {product.cod}</span>
-                                {product.weight && (
-                                  <span className="text-xs text-muted-foreground">{product.weight}</span>
+                                <span className="text-xs text-muted-foreground">COD: {product.slug}</span>
+                                {product.grammage && (
+                                  <span className="text-xs text-muted-foreground">{product.grammage}</span>
                                 )}
                               </div>
                               <span className="text-sm font-medium text-primary">{t('products.details')} →</span>

@@ -3,18 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
-import { demoProducts } from '@/data/products';
+import { useProducts } from '@/hooks/useProducts';
+import { useAuth } from '@/hooks/useAuth';
+import AdminEditButton from '@/components/AdminEditButton';
 import ScrollReveal from '@/components/ScrollReveal';
 import SquishyCard from '@/components/SquishyCard';
 
-const DetailImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+const DetailImage: React.FC<{ src: string; alt: string; slug: string }> = ({ src, alt, slug }) => {
   const [failed, setFailed] = useState(false);
 
-  if (failed) {
+  if (failed || !src) {
     return (
       <div className="w-full h-[400px] md:h-[600px] bg-gradient-to-br from-primary to-crimson flex items-center justify-center rounded-[20px]">
         <span className="text-cream font-display font-bold text-6xl md:text-8xl">
-          {cod}
+          {slug}
         </span>
       </div>
     );
@@ -34,8 +36,21 @@ const ProductDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t, language } = useLanguage();
   const lang = language as Language;
+  const { products, loading, refetch } = useProducts();
+  const { isAdmin } = useAuth();
 
-  const product = demoProducts.find(p => p.slug === slug);
+  const getName = (p: any) => {
+    if (lang === 'en' && p.name_en) return p.name_en;
+    if (lang === 'ar' && p.name_ar) return p.name_ar;
+    return p.name_ro;
+  };
+
+  const product = products.find(p => p.slug === slug);
+
+  if (loading) {
+    return <main className="pt-20 min-h-screen flex items-center justify-center"><p className="text-muted-foreground">Loading...</p></main>;
+  }
+
   if (!product) {
     return (
       <main className="pt-20 min-h-screen flex items-center justify-center">
@@ -47,25 +62,18 @@ const ProductDetail: React.FC = () => {
     );
   }
 
-  const related = demoProducts.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
+  const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
 
-  const infoRows: { label: string; value: string | number }[] = [];
-  infoRows.push({ label: t('products.cod'), value: product.cod });
-  if (product.weight) {
-    infoRows.push({ label: t('products.weight'), value: product.weight });
-  }
-  if (product.cutieBox != null) {
-    infoRows.push({ label: t('products.cutieBox'), value: product.cutieBox });
-  }
-  if (product.bucCutie != null) {
-    infoRows.push({ label: t('products.bucCutie'), value: product.bucCutie });
-  }
-  if (product.baxuriPalet != null) {
-    infoRows.push({ label: t('products.baxuriPalet'), value: product.baxuriPalet });
+  const infoRows: { label: string; value: string }[] = [];
+  infoRows.push({ label: t('products.cod'), value: product.slug });
+  if (product.grammage) {
+    infoRows.push({ label: t('products.weight'), value: product.grammage });
   }
 
   return (
     <main className="pt-20">
+      {isAdmin && <AdminEditButton product={product} onSaved={refetch} />}
+
       <section className="py-8 md:py-16 bg-background">
         <div className="container mx-auto px-4">
           <Link to="/products" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6 md:mb-8">
@@ -77,9 +85,9 @@ const ProductDetail: React.FC = () => {
             <ScrollReveal>
               <div className="rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15] bg-white">
                 <DetailImage
-                  src={product.images[0]}
-                  alt={product.name[lang]}
-                  cod={product.cod}
+                  src={product.images[0] || ''}
+                  alt={getName(product)}
+                  slug={product.slug}
                 />
               </div>
             </ScrollReveal>
@@ -88,7 +96,7 @@ const ProductDetail: React.FC = () => {
             <ScrollReveal delay={0.1}>
               <div className="lg:sticky lg:top-28">
                 <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground" style={{ letterSpacing: '-0.03em' }}>
-                  {product.name[lang]}
+                  {getName(product)}
                 </h1>
 
                 <div className="mt-8">
@@ -125,11 +133,11 @@ const ProductDetail: React.FC = () => {
                     <Link to={`/products/${p.slug}`} className="group block">
                       <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
                         <div className="aspect-[4/3] bg-muted overflow-hidden">
-                          <RelatedImage src={p.images[0]} alt={p.name[lang]} cod={p.cod} />
+                          <RelatedImage src={p.images[0] || ''} alt={getName(p)} slug={p.slug} />
                         </div>
                         <div className="p-5">
-                          <h3 className="font-display text-base font-semibold text-foreground">{p.name[lang]}</h3>
-                          <p className="text-xs text-muted-foreground mt-1">{p.weight}</p>
+                          <h3 className="font-display text-base font-semibold text-foreground">{getName(p)}</h3>
+                          <p className="text-xs text-muted-foreground mt-1">{p.grammage}</p>
                         </div>
                       </div>
                     </Link>
@@ -144,13 +152,13 @@ const ProductDetail: React.FC = () => {
   );
 };
 
-const RelatedImage: React.FC<{ src: string; alt: string; cod: number }> = ({ src, alt, cod }) => {
+const RelatedImage: React.FC<{ src: string; alt: string; slug: string }> = ({ src, alt, slug }) => {
   const [failed, setFailed] = useState(false);
 
-  if (failed) {
+  if (failed || !src) {
     return (
       <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
-        <span className="text-cream font-display font-bold text-2xl">{cod}</span>
+        <span className="text-cream font-display font-bold text-2xl">{slug}</span>
       </div>
     );
   }
