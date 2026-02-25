@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Icon3D from '@/components/Icon3D';
-import footerLogo from '@/assets/logo_footer.jpeg';
+import footerLogo from '@/assets/logo_footer.png';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
