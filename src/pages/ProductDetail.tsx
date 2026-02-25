@@ -9,10 +9,12 @@ import AdminEditButton from '@/components/AdminEditButton';
 import ScrollReveal from '@/components/ScrollReveal';
 import SquishyCard from '@/components/SquishyCard';
 
-const DetailImage: React.FC<{ src: string; alt: string; slug: string }> = ({ src, alt, slug }) => {
+const DetailImage: React.FC<{ alt: string; slug: string }> = ({ alt, slug }) => {
+  const base = import.meta.env.BASE_URL;
+  const [imgSrc, setImgSrc] = useState(`${base}products/${slug}.jpg`);
   const [failed, setFailed] = useState(false);
 
-  if (failed || !src) {
+  if (failed) {
     return (
       <div className="w-full h-[400px] md:h-[600px] bg-gradient-to-br from-primary to-crimson flex items-center justify-center rounded-[20px]">
         <span className="text-cream font-display font-bold text-6xl md:text-8xl">
@@ -24,10 +26,20 @@ const DetailImage: React.FC<{ src: string; alt: string; slug: string }> = ({ src
 
   return (
     <img
-      src={src}
+      src={imgSrc}
       alt={alt}
       className="w-full h-auto object-contain max-h-[600px] mx-auto"
-      onError={() => setFailed(true)}
+      onError={() => {
+        if (imgSrc.endsWith('.jpg')) {
+          setImgSrc(`${base}products/${slug}.jpeg`);
+        } else if (imgSrc.endsWith('.jpeg')) {
+          setImgSrc(`${base}products/${slug}.png`);
+        } else if (imgSrc.endsWith('.png')) {
+          setImgSrc(`${base}products/${slug}.avif`);
+        } else {
+          setFailed(true);
+        }
+      }}
     />
   );
 };
@@ -94,7 +106,7 @@ const ProductDetail: React.FC = () => {
             <ScrollReveal>
               <div className="rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-gold/[0.15] bg-white">
                 <DetailImage
-                  src={product.images[0] || ''}
+                  key={product.slug}
                   alt={getName(product)}
                   slug={product.slug}
                 />
@@ -141,8 +153,8 @@ const ProductDetail: React.FC = () => {
                   <SquishyCard key={p.id} delay={i * 0.1}>
                     <Link to={`/products/${p.slug}`} className="group block">
                       <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
-                        <div className="aspect-[4/3] bg-muted overflow-hidden">
-                          <RelatedImage src={p.images[0] || ''} alt={getName(p)} slug={p.slug} />
+                        <div className="aspect-[4/3] bg-white overflow-hidden">
+                          <RelatedImage alt={getName(p)} slug={p.slug} />
                         </div>
                         <div className="p-5">
                           <h3 className="font-display text-base font-semibold text-foreground">{getName(p)}</h3>
@@ -161,10 +173,12 @@ const ProductDetail: React.FC = () => {
   );
 };
 
-const RelatedImage: React.FC<{ src: string; alt: string; slug: string }> = ({ src, alt, slug }) => {
+const RelatedImage: React.FC<{ alt: string; slug: string }> = ({ alt, slug }) => {
+  const base = import.meta.env.BASE_URL;
+  const [imgSrc, setImgSrc] = useState(`${base}products/${slug}.jpg`);
   const [failed, setFailed] = useState(false);
 
-  if (failed || !src) {
+  if (failed) {
     return (
       <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
         <span className="text-cream font-display font-bold text-2xl">{slug}</span>
@@ -174,10 +188,20 @@ const RelatedImage: React.FC<{ src: string; alt: string; slug: string }> = ({ sr
 
   return (
     <img
-      src={src}
+      src={imgSrc}
       alt={alt}
-      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-      onError={() => setFailed(true)}
+      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+      onError={() => {
+        if (imgSrc.endsWith('.jpg')) {
+          setImgSrc(`${base}products/${slug}.jpeg`);
+        } else if (imgSrc.endsWith('.jpeg')) {
+          setImgSrc(`${base}products/${slug}.png`);
+        } else if (imgSrc.endsWith('.png')) {
+          setImgSrc(`${base}products/${slug}.avif`);
+        } else {
+          setFailed(true);
+        }
+      }}
     />
   );
 };

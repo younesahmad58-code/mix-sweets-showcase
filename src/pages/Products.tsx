@@ -10,10 +10,12 @@ import FloatingBlobs from '@/components/FloatingBlobs';
 import SquishyCard from '@/components/SquishyCard';
 import { motion } from 'framer-motion';
 
-const ProductImage: React.FC<{ src: string; alt: string; slug: string }> = ({ src, alt, slug }) => {
+const ProductImage: React.FC<{ alt: string; slug: string }> = ({ alt, slug }) => {
+  const base = import.meta.env.BASE_URL;
+  const [imgSrc, setImgSrc] = useState(`${base}products/${slug}.jpg`);
   const [failed, setFailed] = useState(false);
 
-  if (failed || !src) {
+  if (failed) {
     return (
       <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
         <span className="text-cream font-display font-bold text-2xl md:text-3xl">
@@ -25,10 +27,20 @@ const ProductImage: React.FC<{ src: string; alt: string; slug: string }> = ({ sr
 
   return (
     <img
-      src={src}
+      src={imgSrc}
       alt={alt}
-      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-      onError={() => setFailed(true)}
+      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+      onError={() => {
+        if (imgSrc.endsWith('.jpg')) {
+          setImgSrc(`${base}products/${slug}.jpeg`);
+        } else if (imgSrc.endsWith('.jpeg')) {
+          setImgSrc(`${base}products/${slug}.png`);
+        } else if (imgSrc.endsWith('.png')) {
+          setImgSrc(`${base}products/${slug}.avif`);
+        } else {
+          setFailed(true);
+        }
+      }}
     />
   );
 };
@@ -135,9 +147,8 @@ const Products: React.FC = () => {
                     <SquishyCard key={product.id} delay={i * 0.04}>
                       <Link to={`/products/${product.slug}`} className="group block">
                         <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
-                          <div className="aspect-[4/3] bg-muted relative overflow-hidden">
+                          <div className="aspect-[4/3] bg-white relative overflow-hidden">
                             <ProductImage
-                              src={product.images[0] || ''}
                               alt={getName(product)}
                               slug={product.slug}
                             />

@@ -25,23 +25,35 @@ const categoryEmoji: Record<string, string> = {
   'altele': '🎁',
 };
 
-const FeaturedImage: React.FC<{ src: string; alt: string; cod: string }> = ({ src, alt, cod }) => {
+const FeaturedImage: React.FC<{ alt: string; slug: string }> = ({ alt, slug }) => {
+  const base = import.meta.env.BASE_URL;
+  const [imgSrc, setImgSrc] = useState(`${base}products/${slug}.jpg`);
   const [failed, setFailed] = useState(false);
 
   if (failed) {
     return (
       <div className="w-full h-full bg-gradient-to-br from-primary to-crimson flex items-center justify-center">
-        <span className="text-cream font-display font-bold text-3xl">{cod}</span>
+        <span className="text-cream font-display font-bold text-3xl">{slug}</span>
       </div>
     );
   }
 
   return (
     <img
-      src={src}
+      src={imgSrc}
       alt={alt}
-      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-      onError={() => setFailed(true)}
+      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+      onError={() => {
+        if (imgSrc.endsWith('.jpg')) {
+          setImgSrc(`${base}products/${slug}.jpeg`);
+        } else if (imgSrc.endsWith('.jpeg')) {
+          setImgSrc(`${base}products/${slug}.png`);
+        } else if (imgSrc.endsWith('.png')) {
+          setImgSrc(`${base}products/${slug}.avif`);
+        } else {
+          setFailed(true);
+        }
+      }}
     />
   );
 };
@@ -78,7 +90,10 @@ const Index: React.FC = () => {
   ];
 
   const { products: allProducts } = useProducts();
-  const featuredProducts = allProducts.slice(0, 3);
+  const FEATURED_SLUGS = ['1102', '185', '1018'];
+  const featuredProducts = FEATURED_SLUGS
+    .map(slug => allProducts.find(p => p.slug === slug))
+    .filter(Boolean) as typeof allProducts;
 
   return (
     <main>
@@ -281,11 +296,10 @@ const Index: React.FC = () => {
               <SquishyCard key={product.id} delay={i * 0.1} className="h-full">
                 <Link to={`/products/${product.slug}`} className="group block h-full">
                   <div className="card-3d h-full flex flex-col">
-                    <div className="h-48 md:h-56 bg-muted relative overflow-hidden">
+                    <div className="h-48 md:h-56 bg-white relative overflow-hidden">
                       <FeaturedImage
-                        src={product.images[0] || ''}
                         alt={product.name_ro}
-                        cod={product.slug}
+                        slug={product.slug}
                       />
                     </div>
                     <div className="p-4 md:p-6 flex-1">
