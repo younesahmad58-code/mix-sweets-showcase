@@ -18,9 +18,7 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="space-y-5">
             <div className="flex items-center">
-              <div style={{ background: 'white', borderRadius: '8px', padding: '6px', display: 'inline-block' }}>
-                <img src={footerLogo} alt="MIX SWEETS" className="h-16 w-auto block" />
-              </div>
+              <img src={footerLogo} alt="MIX SWEETS" className="h-16 w-auto block" />
             </div>
             <div className="w-12 h-px bg-gold/10 mt-4" />
             <p className="text-sm text-cream/50 leading-relaxed">
