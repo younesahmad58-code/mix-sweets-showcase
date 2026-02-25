@@ -59,8 +59,7 @@ const Icon3D: React.FC<Icon3DProps> = ({ icon: IconComponent, variant = 'gold', 
       whileInView={{ scale: 1, opacity: 1 }}
       viewport={{ once: true }}
       transition={{ type: 'spring', stiffness: 300, damping: 20, delay }}
-      whileHover={{ y: -3, scale: 1.08 }}
-      className={`relative flex items-center justify-center shrink-0 ${className}`}
+      className={`relative flex items-center justify-center shrink-0 hover:-translate-y-1 hover:scale-105 transition-transform duration-300 ${className}`}
       style={{
         width: dim.container,
         height: dim.container,
@@ -68,10 +67,8 @@ const Icon3D: React.FC<Icon3DProps> = ({ icon: IconComponent, variant = 'gold', 
         background: style.bg,
         border: style.border,
         boxShadow: style.shadow,
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
       }}
     >
-      {/* Inner glossy highlight */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

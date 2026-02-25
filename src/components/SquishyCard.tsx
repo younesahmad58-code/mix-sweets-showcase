@@ -13,11 +13,7 @@ const SquishyCard: React.FC<SquishyCardProps> = ({ children, className = '', del
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: '-60px' }}
     transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-    whileHover={{
-      y: -8,
-      transition: { type: 'spring', stiffness: 200, damping: 18 },
-    }}
-    className={className}
+    className={`hover:-translate-y-2 transition-transform duration-300 ${className}`}
   >
     {children}
   </motion.div>
