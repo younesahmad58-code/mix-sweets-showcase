@@ -82,7 +82,7 @@ const AdminEditButton: React.FC<Props> = ({ product, onSaved }) => {
           <div className="flex flex-wrap gap-2 mb-3">
             {product.images.map((img, i) => (
               <div key={i} className="relative w-20 h-20 rounded-lg overflow-hidden border border-border">
-                <img src={img} alt="" className="w-full h-full object-cover" />
+                <img src={img} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <button onClick={() => removeImage(i)} className="absolute top-0.5 right-0.5 bg-destructive text-destructive-foreground rounded-full p-0.5">
                   <X className="w-3 h-3" />
                 </button>

@@ -42,6 +42,8 @@ const FeaturedImage: React.FC<{ alt: string; slug: string }> = ({ alt, slug }) =
     <img
       src={imgSrc}
       alt={alt}
+      loading="lazy"
+      decoding="async"
       className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
       onError={() => {
         if (imgSrc.endsWith('.jpg')) {
@@ -105,7 +107,7 @@ const Index: React.FC = () => {
             className="absolute inset-0 transition-opacity duration-[1500ms]"
             style={{ opacity: index === currentImageIndex ? 1 : 0, zIndex: 0 }}
           >
-            <img src={img} alt="" className="w-full h-full object-cover animate-ken-burns" style={{ animationDuration: '15s' }} />
+            <img src={img} alt="" decoding="async" className="w-full h-full object-cover animate-ken-burns" style={{ animationDuration: '15s' }} />
           </div>
         ))}
         <div className="absolute inset-0 bg-[rgba(18,8,4,0.82)] z-[0]" />
