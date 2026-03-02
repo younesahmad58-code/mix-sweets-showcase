@@ -1,34 +1,49 @@
 
 
-## Simplify SquishyCard Animation
+## Disable SquishyCard Animation on Mobile
 
-**File:** `src/components/SquishyCard.tsx` -- replace the bouncy spring animation with a clean fade-in + slide-up.
+**File:** `src/components/SquishyCard.tsx` -- one small change to skip entrance animation on mobile.
 
-### Current code
+### Change
+
+Detect mobile viewport at the top of the component and conditionally disable framer-motion entrance animation while keeping the hover CSS effect.
+
+### Updated code
+
 ```tsx
-<motion.div
-  initial={{ opacity: 0, y: 30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: '-60px' }}
-  transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-  className={`hover:-translate-y-2 transition-transform duration-300 ${className}`}
->
-```
+import React from 'react';
+import { motion } from 'framer-motion';
 
-### New code
-```tsx
-<motion.div
-  initial={{ opacity: 0, y: 16 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: '-60px' }}
-  transition={{ duration: 0.3, delay, ease: 'easeOut' }}
-  className={`hover:-translate-y-2 transition-transform duration-300 ${className}`}
->
+interface SquishyCardProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+const SquishyCard: React.FC<SquishyCardProps> = ({ children, className = '', delay = 0 }) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  return (
+    <motion.div
+      initial={isMobile ? false : { opacity: 0, y: 16 }}
+      whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={isMobile ? undefined : { duration: 0.3, delay, ease: 'easeOut' }}
+      className={`hover:-translate-y-2 transition-transform duration-300 ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export default SquishyCard;
 ```
 
 ### What changes
-- `y: 30` to `y: 16` -- shorter slide distance, less perceived movement
-- `duration: 0.7` to `duration: 0.3` -- snappier, no time for visible bounce
-- `ease: [0.22, 1, 0.36, 1]` (custom cubic bezier with overshoot) to `ease: 'easeOut'` -- simple deceleration, no spring/bounce effect
-- Everything else stays identical: `viewport`, `delay` prop, hover effect, className passthrough
+- Component becomes a function body (not arrow expression) so we can add the `isMobile` check
+- `isMobile` reads `window.innerWidth < 768` at render time -- no state/effect needed since it's a snapshot check
+- `initial={false}` on mobile tells framer-motion to skip the initial animation entirely
+- `whileInView` and `transition` are `undefined` on mobile, so no animation runs
+- Hover CSS effect (`hover:-translate-y-2`) remains on all devices
+- No other files or styling changes
 
