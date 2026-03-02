@@ -18,6 +18,7 @@ export interface DBProduct {
   cutie_box: string;
   buc_cutie: string;
   baxuri_palet: string;
+  is_gama_magic: boolean;
 }
 
 export const useProducts = () => {

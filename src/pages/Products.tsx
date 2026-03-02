@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { categories } from '@/data/products';
@@ -67,7 +67,9 @@ const Products: React.FC = () => {
 
   const filtered = useMemo(() => {
     return products.filter(p => {
-      const matchCat = activeCategory === 'all' || p.category === activeCategory;
+      const matchCat =
+        activeCategory === 'all' ||
+        (activeCategory === 'gama-magic' ? (p as any).is_gama_magic : p.category === activeCategory);
       const q = search.toLowerCase();
       const matchSearch = !search || getName(p).toLowerCase().includes(q) || p.slug.toLowerCase().includes(q);
       return matchCat && matchSearch;
@@ -117,7 +119,55 @@ const Products: React.FC = () => {
                 />
               </div>
 
-              <div className="flex flex-wrap lg:flex-col gap-2">
+              {/* Mobile: horizontal scroll */}
+              <div className="lg:hidden relative">
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('cat-scroll');
+                      if (el) el.scrollBy({ left: -150, behavior: 'smooth' });
+                    }}
+                    className="shrink-0 p-1.5 rounded-full bg-muted border border-border text-muted-foreground hover:text-foreground"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <div id="cat-scroll" className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth">
+                    <motion.button
+                      onClick={() => setCategory('all')}
+                      whileTap={{ scale: 0.95 }}
+                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all ${
+                        activeCategory === 'all' ? 'bg-primary text-cream' : 'bg-muted text-foreground border border-border'
+                      }`}
+                    >
+                      {t('products.all')}
+                    </motion.button>
+                    {categories.map(cat => (
+                      <motion.button
+                        key={cat.id}
+                        onClick={() => setCategory(cat.id)}
+                        whileTap={{ scale: 0.95 }}
+                        className={`shrink-0 px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+                          activeCategory === cat.id ? 'bg-primary text-cream' : 'bg-muted text-foreground border border-border'
+                        }`}
+                      >
+                        {cat.label[lang]}
+                      </motion.button>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('cat-scroll');
+                      if (el) el.scrollBy({ left: 150, behavior: 'smooth' });
+                    }}
+                    className="shrink-0 p-1.5 rounded-full bg-muted border border-border text-muted-foreground hover:text-foreground"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Desktop: vertical list */}
+              <div className="hidden lg:flex flex-col gap-2">
                 <motion.button
                   onClick={() => setCategory('all')}
                   whileHover={{ scale: 1.02 }}
