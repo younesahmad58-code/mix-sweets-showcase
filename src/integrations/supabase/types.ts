@@ -64,6 +64,7 @@ export type Database = {
           grammage: string
           id: string
           images: string[]
+          is_gama_magic: boolean | null
           name_ar: string
           name_en: string
           name_ro: string
@@ -84,6 +85,7 @@ export type Database = {
           grammage?: string
           id?: string
           images?: string[]
+          is_gama_magic?: boolean | null
           name_ar?: string
           name_en?: string
           name_ro?: string
@@ -104,6 +106,7 @@ export type Database = {
           grammage?: string
           id?: string
           images?: string[]
+          is_gama_magic?: boolean | null
           name_ar?: string
           name_en?: string
           name_ro?: string
