@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -31,6 +31,7 @@ const ProductImage: React.FC<{ alt: string; slug: string }> = ({ alt, slug }) =>
       alt={alt}
       loading="lazy"
       decoding="async"
+      sizes="(min-width: 1280px) 33vw, 50vw"
       className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
       onError={() => {
         if (imgSrc.endsWith('.jpg')) {
@@ -54,6 +55,9 @@ const Products: React.FC = () => {
   const [search, setSearch] = useState('');
   const activeCategory = searchParams.get('category') || 'all';
   const { products, loading } = useProducts();
+  const [visibleCount, setVisibleCount] = useState(24);
+
+  useEffect(() => { setVisibleCount(24); }, [search, activeCategory]);
 
   const getName = (p: any) => {
     if (lang === 'en' && p.name_en) return p.name_en;
@@ -70,8 +74,12 @@ const Products: React.FC = () => {
     });
   }, [activeCategory, search, lang, products]);
 
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
   const setCategory = (cat: string) => {
     window.scrollTo(0, 0);
+    setVisibleCount(24);
     if (cat === 'all') {
       setSearchParams({});
     } else {
@@ -145,34 +153,48 @@ const Products: React.FC = () => {
               ) : filtered.length === 0 ? (
                 <p className="text-muted-foreground text-center py-16">{t('products.empty')}</p>
               ) : (
-                <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                  {filtered.map((product, i) => (
-                    <SquishyCard key={product.id} delay={i * 0.04}>
-                      <Link to={`/products/${product.slug}`} className="group block">
-                        <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
-                          <div className="aspect-[4/3] bg-white relative overflow-hidden p-2 md:p-3">
-                            <ProductImage
-                              alt={getName(product)}
-                              slug={product.slug}
-                            />
-                          </div>
-                          <div className="p-3 md:p-5">
-                            <h3 className="font-display text-sm md:text-lg font-semibold text-foreground">{getName(product)}</h3>
-                            <div className="mt-3 flex items-center justify-between">
-                              <div className="flex flex-col gap-0.5">
-                                <span className="text-xs text-muted-foreground">COD: {product.slug}</span>
-                                {product.grammage && (
-                                  <span className="text-xs text-muted-foreground">{product.grammage}</span>
-                                )}
+                <>
+                  <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+                    {visible.map((product, i) => (
+                      <SquishyCard key={product.id} delay={Math.min(i * 0.04, 0.4)}>
+                        <Link to={`/products/${product.slug}`} className="group block">
+                          <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
+                            <div className="aspect-[4/3] bg-white relative overflow-hidden p-2 md:p-3">
+                              <ProductImage
+                                alt={getName(product)}
+                                slug={product.slug}
+                              />
+                            </div>
+                            <div className="p-3 md:p-5">
+                              <h3 className="font-display text-sm md:text-lg font-semibold text-foreground">{getName(product)}</h3>
+                              <div className="mt-3 flex items-center justify-between">
+                                <div className="flex flex-col gap-0.5">
+                                  <span className="text-xs text-muted-foreground">COD: {product.slug}</span>
+                                  {product.grammage && (
+                                    <span className="text-xs text-muted-foreground">{product.grammage}</span>
+                                  )}
+                                </div>
+                                <span className="text-sm font-medium text-primary">{t('products.details')} →</span>
                               </div>
-                              <span className="text-sm font-medium text-primary">{t('products.details')} →</span>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    </SquishyCard>
-                  ))}
-                </div>
+                        </Link>
+                      </SquishyCard>
+                    ))}
+                  </div>
+                  {hasMore && (
+                    <div className="flex justify-center mt-8">
+                      <motion.button
+                        onClick={() => setVisibleCount(prev => prev + 24)}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="px-8 py-3 bg-primary text-cream rounded-full font-medium text-sm hover:shadow-[0_0_24px_rgba(176,18,42,0.2)] transition-all duration-300"
+                      >
+                        Încarcă mai multe ({visibleCount} / {filtered.length})
+                      </motion.button>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
