@@ -1,22 +1,34 @@
 
 
-## Equal Height Product Cards
+## Simplify SquishyCard Animation
 
-**File:** `src/pages/Products.tsx` -- 3 small class changes, no other modifications.
+**File:** `src/components/SquishyCard.tsx` -- replace the bouncy spring animation with a clean fade-in + slide-up.
 
-### Changes
+### Current code
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-60px' }}
+  transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+  className={`hover:-translate-y-2 transition-transform duration-300 ${className}`}
+>
+```
 
-1. **Link element** (~line 151): Add `h-full` so the link stretches to fill the SquishyCard
-   - From: `className="group block"`
-   - To: `className="group block h-full"`
+### New code
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 16 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-60px' }}
+  transition={{ duration: 0.3, delay, ease: 'easeOut' }}
+  className={`hover:-translate-y-2 transition-transform duration-300 ${className}`}
+>
+```
 
-2. **Inner card div** (~line 152): Add `flex flex-col h-full` so the card fills the link and uses flexbox layout
-   - From: `className="bg-card rounded-[20px] overflow-hidden shadow-[...] transition-all duration-500 border border-gold/[0.15]"`
-   - To: `className="bg-card rounded-[20px] overflow-hidden shadow-[...] transition-all duration-500 border border-gold/[0.15] flex flex-col h-full"`
-
-3. **Text content div** (~line 157): Add `flex flex-col flex-1` so the text area expands to fill remaining space, pushing the bottom row down uniformly
-   - From: `className="p-3 md:p-5"`
-   - To: `className="p-3 md:p-5 flex flex-col flex-1"`
-
-These three additions ensure all cards in each grid row share the same height regardless of product name length.
+### What changes
+- `y: 30` to `y: 16` -- shorter slide distance, less perceived movement
+- `duration: 0.7` to `duration: 0.3` -- snappier, no time for visible bounce
+- `ease: [0.22, 1, 0.36, 1]` (custom cubic bezier with overshoot) to `ease: 'easeOut'` -- simple deceleration, no spring/bounce effect
+- Everything else stays identical: `viewport`, `delay` prop, hover effect, className passthrough
 
