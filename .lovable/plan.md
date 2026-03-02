@@ -1,73 +1,22 @@
 
 
-## Performance Optimization for Products Page
+## Equal Height Product Cards
 
-### What changes
+**File:** `src/pages/Products.tsx` -- 3 small class changes, no other modifications.
 
-Only `src/pages/Products.tsx` will be modified. No design, layout, colors, or functionality changes.
+### Changes
 
-### 1. "Load More" button (progressive rendering)
+1. **Link element** (~line 151): Add `h-full` so the link stretches to fill the SquishyCard
+   - From: `className="group block"`
+   - To: `className="group block h-full"`
 
-- Add a `visibleCount` state, starting at 24
-- Slice `filtered` to only render the first `visibleCount` items
-- Show an "Incarc&#259; mai multe" button below the grid when there are more products to show
-- When category/search changes, reset `visibleCount` back to 24 and scroll to top
-- The button shows a count like "Incarc&#259; mai multe (showing 24 of 120)"
+2. **Inner card div** (~line 152): Add `flex flex-col h-full` so the card fills the link and uses flexbox layout
+   - From: `className="bg-card rounded-[20px] overflow-hidden shadow-[...] transition-all duration-500 border border-gold/[0.15]"`
+   - To: `className="bg-card rounded-[20px] overflow-hidden shadow-[...] transition-all duration-500 border border-gold/[0.15] flex flex-col h-full"`
 
-### 2. Remove per-card stagger animation delay
+3. **Text content div** (~line 157): Add `flex flex-col flex-1` so the text area expands to fill remaining space, pushing the bottom row down uniformly
+   - From: `className="p-3 md:p-5"`
+   - To: `className="p-3 md:p-5 flex flex-col flex-1"`
 
-- Currently each card gets `delay={i * 0.04}` on `SquishyCard`, which with 279 cards means the last card animates after 11+ seconds
-- Change to `delay={Math.min(i * 0.04, 0.4)}` so max stagger is capped at 400ms -- keeps the cascade effect for visible cards but doesn't penalize cards loaded later
-
-### 3. Image sizing hint
-
-- Add `sizes="(min-width: 1280px) 33vw, 50vw"` to the `<img>` tag so the browser knows the display size and can optimize loading
-- `loading="lazy"` and `decoding="async"` are already present -- no change needed there
-
-### Technical details
-
-**State additions in Products component:**
-```typescript
-const [visibleCount, setVisibleCount] = useState(24);
-```
-
-**Reset on filter/search change:**
-```typescript
-// Inside setCategory:
-setVisibleCount(24);
-
-// Add useEffect to reset on search change:
-useEffect(() => { setVisibleCount(24); }, [search, activeCategory]);
-```
-
-**Slicing filtered results:**
-```typescript
-const visible = filtered.slice(0, visibleCount);
-const hasMore = visibleCount < filtered.length;
-```
-
-**Load More button** (placed after the grid div, styled to match existing design):
-```tsx
-{hasMore && (
-  <div className="flex justify-center mt-8">
-    <button
-      onClick={() => setVisibleCount(prev => prev + 24)}
-      className="px-8 py-3 bg-primary text-cream rounded-full font-medium text-sm 
-                 hover:shadow-[0_0_24px_rgba(176,18,42,0.2)] transition-all duration-300"
-    >
-      Incarc&#259; mai multe ({visibleCount} / {filtered.length})
-    </button>
-  </div>
-)}
-```
-
-**SquishyCard delay cap:**
-```tsx
-<SquishyCard key={product.id} delay={Math.min(i * 0.04, 0.4)}>
-```
-
-**Image sizes attribute:**
-```tsx
-<img ... sizes="(min-width: 1280px) 33vw, 50vw" />
-```
+These three additions ensure all cards in each grid row share the same height regardless of product name length.
 
