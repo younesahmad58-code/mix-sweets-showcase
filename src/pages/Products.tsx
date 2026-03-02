@@ -64,7 +64,8 @@ const Products: React.FC = () => {
   const filtered = useMemo(() => {
     return products.filter(p => {
       const matchCat = activeCategory === 'all' || p.category === activeCategory;
-      const matchSearch = !search || getName(p).toLowerCase().includes(search.toLowerCase());
+      const q = search.toLowerCase();
+      const matchSearch = !search || getName(p).toLowerCase().includes(q) || p.slug.toLowerCase().includes(q);
       return matchCat && matchSearch;
     });
   }, [activeCategory, search, lang, products]);
