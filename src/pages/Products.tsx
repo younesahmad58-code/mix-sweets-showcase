@@ -131,7 +131,7 @@ const Products: React.FC = () => {
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
-                  <div id="cat-scroll" className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth">
+                  <div id="cat-scroll" className="flex gap-2 overflow-x-auto scroll-smooth no-scrollbar">
                     <motion.button
                       onClick={() => setCategory('all')}
                       whileTap={{ scale: 0.95 }}
