@@ -150,7 +150,7 @@ const Products: React.FC = () => {
                     <SquishyCard key={product.id} delay={i * 0.04}>
                       <Link to={`/products/${product.slug}`} className="group block">
                         <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15]">
-                          <div className="aspect-[4/3] bg-white relative overflow-hidden">
+                          <div className="aspect-[4/3] bg-white relative overflow-hidden p-2 md:p-3">
                             <ProductImage
                               alt={getName(product)}
                               slug={product.slug}
