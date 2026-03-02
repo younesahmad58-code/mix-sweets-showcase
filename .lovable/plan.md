@@ -1,40 +1,18 @@
 
 
-## Plan: Lazy Loading + Mobile Overflow Fix
+## Delete 67 Products from Database
 
-### Issue 1 — Lazy Loading for Product Images
+All 67 product codes have been verified and exist in the database. The deletion will be done using a single SQL DELETE statement.
 
-Add `loading="lazy"` and `decoding="async"` to all product image `<img>` tags across 3 files:
+### Products to Remove (67 total)
+1179, 1180, 1322, 1323, 1324, 1025, 730, 1160, 1161, 962, 1123, 1020, 1413, 383, 1021, 1358, 1329, 1040, 1133, 951, 1135, 1132, 942, 977, 1150, 1149, 278, 234, 1325, 1122, 644, 1023, 960, 837, 137, 431, 1327, 1328, 678, 994, 736, 941, 952, 966, 990, 939, 1218, 1224, 1225, 1014, 1195, 1234, 1236, 1128, 1130, 1257, 1255, 1261, 1433, 1434, 1137, 997, 936, 1239, 197, 438, 402, 1390, 1294, 1078
 
-**1. `src/pages/Products.tsx`** — `ProductImage` component (line 30)
-- Add `loading="lazy"` and `decoding="async"` to the img tag
+### Action
+- Run a single `DELETE FROM products WHERE slug IN (...)` query to remove all 67 products at once
+- No code changes needed -- the app already fetches products dynamically from the database
 
-**2. `src/pages/Index.tsx`** — `FeaturedImage` component (line 43)
-- Add `loading="lazy"` and `decoding="async"` to the img tag
-- Also add to hero images (line 108) with `decoding="async"` (hero images can keep eager loading since they're above the fold, but decoding async still helps)
+### Technical Details
+- The deletion requires admin authentication (RLS policy enforces `has_role(auth.uid(), 'admin')`)
+- The database tool will handle this with service-level access
+- Product images in the `/public/products/` folder will remain but won't be referenced anymore
 
-**3. `src/pages/ProductDetail.tsx`** — `DetailImage` and `RelatedImage` components
-- Add `loading="lazy"` and `decoding="async"` to both img tags
-
-**4. `src/components/AdminEditButton.tsx`** — image thumbnails in edit modal
-- Add `loading="lazy"` and `decoding="async"` to the thumbnail img tag
-
-### Issue 2 — Mobile Horizontal Overflow
-
-Add overflow-x hidden to prevent the white bar on mobile:
-
-**1. `src/index.css`** — Add to the base layer:
-```css
-html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-```
-
-**2. `src/pages/Index.tsx`** — The hero section has a 600px wide radial gradient div (line 113) that could cause overflow. The trust strip marquee (line 167) may also cause issues. Both parent sections already have `overflow-hidden`, so the CSS fix on html/body should be sufficient.
-
-### Technical Summary
-
-- **Files modified**: 5 files (`Products.tsx`, `Index.tsx`, `ProductDetail.tsx`, `AdminEditButton.tsx`, `index.css`)
-- **No design/layout/color changes** — only adding native HTML attributes and overflow constraint
-- **No new dependencies needed**
