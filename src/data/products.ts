@@ -30,7 +30,8 @@ export const categories = [
   { id: 'marshmallow', label: { ro: 'Marshmallow', en: 'Marshmallow', ar: 'مارشميلو' } },
   { id: 'guma', label: { ro: 'Gumă', en: 'Gum', ar: 'علكة' } },
   { id: 'sucuri-spray', label: { ro: 'Sucuri Spray', en: 'Drinks & Spray', ar: 'مشروبات ورذاذ' } },
-  { id: 'caramele-drops', label: { ro: 'Caramele & Drops', en: 'Caramels & Drops', ar: 'كراميل ودروبس' } },
+  { id: 'caramele', label: { ro: 'Caramele', en: 'Caramels', ar: 'كراميل' } },
+  { id: 'drops', label: { ro: 'Drops', en: 'Drops', ar: 'دروبس' } },
 ];
 
 function categorizeProduct(name: string): string {
