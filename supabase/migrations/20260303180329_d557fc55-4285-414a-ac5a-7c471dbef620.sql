@@ -1,0 +1,1 @@
+UPDATE products SET baxuri_palet = '40' WHERE slug = '929';
