@@ -98,7 +98,7 @@ const Index: React.FC = () => {
   ];
 
   const { products: allProducts } = useProducts();
-  const gamaMagicProducts = allProducts.filter(p => p.is_gama_magic).slice(0, 6);
+  const gamaMagicProducts = allProducts.filter(p => p.is_gama_magic);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 });
 
@@ -307,7 +307,7 @@ const Index: React.FC = () => {
           <div className="mt-10 md:mt-16 overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex">
               {gamaMagicProducts.map((product, i) => (
-                <div key={product.id} className="embla__slide flex-[0_0_85%] md:flex-[0_0_33.33%] min-w-0 px-2 md:px-3">
+                <div key={product.id} className="embla__slide flex-[0_0_48%] md:flex-[0_0_25%] min-w-0 px-1.5 md:px-3">
                   <Link to={`/products/${product.slug}`} className="group block h-full">
                     <div className="card-3d h-full flex flex-col">
                       <div className="h-48 md:h-56 bg-black relative overflow-hidden">
