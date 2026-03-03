@@ -66,7 +66,7 @@ const Products: React.FC = () => {
   };
 
   const filtered = useMemo(() => {
-    return products.filter(p => {
+    const base = products.filter(p => {
       const matchCat =
         activeCategory === 'all' ||
         (activeCategory === 'gama-magic' ? (p as any).is_gama_magic : p.category === activeCategory);
@@ -74,6 +74,29 @@ const Products: React.FC = () => {
       const matchSearch = !search || getName(p).toLowerCase().includes(q) || p.slug.toLowerCase().includes(q);
       return matchCat && matchSearch;
     });
+    // When viewing Gama Magic, group napolitana variants together
+    if (activeCategory === 'gama-magic' && !search) {
+      const napolitanaOrder = ['ciocolata', 'fistic', 'lapte', 'strawberry'];
+      const isNapolitana = (p: any) =>
+        p.name_ro.toLowerCase().includes('napolitana magic') &&
+        !p.name_ro.toLowerCase().includes('glz');
+      const napolitanas = napolitanaOrder
+        .map(variant => base.find(p => isNapolitana(p) && p.name_ro.toLowerCase().includes(variant)))
+        .filter(Boolean) as typeof base;
+      // GLZ variants right after
+      const glzOrder = ['ciocolata', 'vanilie'];
+      const isGlz = (p: any) => p.name_ro.toLowerCase().includes('napolitana magic glz');
+      const glzVariants = glzOrder
+        .map(variant => base.find(p => isGlz(p) && p.name_ro.toLowerCase().includes(variant)))
+        .filter(Boolean) as typeof base;
+      const grouped = new Set([...napolitanas, ...glzVariants].map(p => p.id));
+      const rest = base.filter(p => !grouped.has(p.id));
+      const noImageSlugs = new Set(['1523', '1524', '1525', '1578', '1580']);
+      const withImg = rest.filter(p => !noImageSlugs.has(p.slug));
+      const noImg = rest.filter(p => noImageSlugs.has(p.slug));
+      return [...napolitanas, ...glzVariants, ...withImg, ...noImg];
+    }
+    return base;
   }, [activeCategory, search, lang, products]);
 
   const visible = filtered.slice(0, visibleCount);
