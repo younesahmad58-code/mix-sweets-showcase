@@ -1,31 +1,38 @@
 
 
-## Actualizare emoji-uri categorii pe pagina principala
+## Transformare sectiune "Noutati" in "Produse de Top" cu carousel Gama Magic
 
-### Problema
-Harta `categoryEmoji` din `src/pages/Index.tsx` (linia 16-26) foloseste ID-uri vechi de categorii care nu se potrivesc cu cele actuale. Rezultat: aproape toate categoriile afiseaza emoji-ul default "gift box" in loc de unul specific.
+### Ce se schimba
 
-### Solutia
-Actualizam obiectul `categoryEmoji` cu ID-urile corecte din `categories` si emoji-uri unice si relevante pentru fiecare categorie:
+Sectiunea "Noutati si Produse Sezoniere" de pe homepage devine "Produse de Top" si va afisa produsele din Gama Magic intr-un carousel/slideshow automat.
 
-```text
-gama-magic       -> ✨ (stelute/magie)
-biscuiti         -> 🍪 (biscuit)
-napolitane       -> 🧇 (wafer/napolitana)
-prajituri-checuri -> 🎂 (tort/prajitura)
-ciocolata        -> 🍫 (ciocolata)
-jeleuri          -> 🐻 (ursuleti gummy)
-budinca          -> 🍮 (budinca/flan)
-acadele          -> 🍭 (acadea)
-drajeuri         -> 🍬 (bomboana)
-marshmallow      -> ☁️ (nor/pufos)
-guma             -> 🫧 (baloane/guma)
-sucuri-spray     -> 🧃 (suc)
-caramele         -> 🍯 (caramel/miere)
-drops            -> 💧 (picatura/drops)
-```
+### Modificari
 
-### Modificare tehnica
+**1. Traduceri (`src/i18n/translations.ts`)**
+- `seasonal.eyebrow`: "NOUTATI" -> "PRODUSE DE TOP" (ro), "TOP PRODUCTS" (en), "افضل المنتجات" (ar)
+- `seasonal.title`: "Noutati si Produse Sezoniere" -> "Produsele noastre de Top" (ro), "Our Top Products" (en), "منتجاتنا الأفضل" (ar)
+- `seasonal.subtitle`: text actualizat despre cele mai vandute produse din Gama Magic
 
-**Fisier: `src/pages/Index.tsx`** - inlocuim obiectul `categoryEmoji` (liniile 16-26) cu noile perechi cheie-emoji corecte. Restul codului ramane neschimbat, designul si stilul cardurilor raman identice.
+**2. Logica produse (`src/pages/Index.tsx`)**
+- In loc de 3 produse hardcodate (FEATURED_SLUGS), filtram produsele cu `is_gama_magic === true` si luam primele 6
+- Eliminam constanta FEATURED_SLUGS
 
+**3. Carousel cu Embla (`src/pages/Index.tsx`)**
+- Proiectul are deja `embla-carousel-react` instalat
+- Inlocuim grid-ul static cu un carousel Embla cu autoplay
+- Desktop: afiseaza 3 carduri vizibile simultan, se misca automat la ~4 secunde
+- Mobil: afiseaza 1.2 carduri (peek effect - se vede partial urmatorul card), aceeasi viteza
+- Loop infinit activat
+- Cardurile pastreaza acelasi design existent (card-3d, FeaturedImage, etc.)
+- Produsele Gama Magic vor avea `bg-black` pe containerul imaginii (consistent cu pagina Products)
+
+**4. Stilizare carousel**
+- Adaugam CSS minimal in `src/index.css` pentru spatiere slide-uri Embla
+- Fara butoane next/prev vizibile (optional dots indicator discret)
+- Tranzitie smooth intre slide-uri
+
+### Detalii tehnice
+
+- Embla autoplay se configureaza cu `embla-carousel-autoplay` plugin - verificam daca e instalat, altfel folosim `setInterval` + `scrollNext()`
+- Pe mobil, `slidesToScroll: 1`, `align: 'start'`, cu CSS gap pentru peek effect
+- Pe desktop, `slidesToScroll: 1`, afisam 3 slide-uri prin CSS `flex: 0 0 33.33%`
