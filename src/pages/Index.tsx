@@ -114,7 +114,7 @@ const Index: React.FC = () => {
     return [...napolitanas, ...withImg, ...noImg];
   }, [allProducts]);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1, direction: 'ltr' });
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -318,7 +318,7 @@ const Index: React.FC = () => {
               <p className="mt-4 text-muted-foreground max-w-xl mx-auto">{t('seasonal.subtitle')}</p>
             </div>
           </ScrollReveal>
-          <div className="mt-10 md:mt-16 overflow-hidden" ref={emblaRef}>
+          <div className="mt-10 md:mt-16 overflow-hidden" ref={emblaRef} dir="ltr">
             <div className="embla__container flex">
               {gamaMagicProducts.map((product, i) => (
                 <div key={product.id} className="embla__slide flex-[0_0_48%] md:flex-[0_0_25%] min-w-0 px-1.5 md:px-3">
