@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Award, Sparkles, Truck, ShieldCheck, ArrowRight, Lightbulb, Warehouse, Package, BarChart2, Users, ClipboardList } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
 import FloatingBlobs from '@/components/FloatingBlobs';
@@ -97,10 +98,15 @@ const Index: React.FC = () => {
   ];
 
   const { products: allProducts } = useProducts();
-  const FEATURED_SLUGS = ['1102', '185', '1018'];
-  const featuredProducts = FEATURED_SLUGS
-    .map(slug => allProducts.find(p => p.slug === slug))
-    .filter(Boolean) as typeof allProducts;
+  const gamaMagicProducts = allProducts.filter(p => p.is_gama_magic).slice(0, 6);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 });
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const interval = setInterval(() => { emblaApi.scrollNext(); }, 4000);
+    return () => clearInterval(interval);
+  }, [emblaApi]);
 
   return (
     <main>
@@ -298,26 +304,28 @@ const Index: React.FC = () => {
               <p className="mt-4 text-muted-foreground max-w-xl mx-auto">{t('seasonal.subtitle')}</p>
             </div>
           </ScrollReveal>
-          <div className="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
-            {featuredProducts.map((product, i) => (
-              <SquishyCard key={product.id} delay={i * 0.1} className="h-full">
-                <Link to={`/products/${product.slug}`} className="group block h-full">
-                  <div className="card-3d h-full flex flex-col">
-                    <div className="h-48 md:h-56 bg-white relative overflow-hidden">
-                      <FeaturedImage
-                        alt={product.name_ro}
-                        slug={product.slug}
-                      />
+          <div className="mt-10 md:mt-16 overflow-hidden" ref={emblaRef}>
+            <div className="embla__container flex">
+              {gamaMagicProducts.map((product, i) => (
+                <div key={product.id} className="embla__slide flex-[0_0_85%] md:flex-[0_0_33.33%] min-w-0 px-2 md:px-3">
+                  <Link to={`/products/${product.slug}`} className="group block h-full">
+                    <div className="card-3d h-full flex flex-col">
+                      <div className="h-48 md:h-56 bg-black relative overflow-hidden">
+                        <FeaturedImage
+                          alt={product.name_ro}
+                          slug={product.slug}
+                        />
+                      </div>
+                      <div className="p-4 md:p-6 flex-1">
+                        <h3 className="font-display text-lg font-semibold text-foreground">{lang === 'en' ? product.name_en : lang === 'ar' ? product.name_ar : product.name_ro}</h3>
+                        <p className="mt-2 text-xs text-muted-foreground">COD: {product.slug}</p>
+                        <p className="mt-1 text-xs text-muted-foreground">{product.grammage}</p>
+                      </div>
                     </div>
-                    <div className="p-4 md:p-6 flex-1">
-                      <h3 className="font-display text-lg font-semibold text-foreground">{lang === 'en' ? product.name_en : lang === 'ar' ? product.name_ar : product.name_ro}</h3>
-                      <p className="mt-2 text-xs text-muted-foreground">COD: {product.slug}</p>
-                      <p className="mt-1 text-xs text-muted-foreground">{product.grammage}</p>
-                    </div>
-                  </div>
-                </Link>
-              </SquishyCard>
-            ))}
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
