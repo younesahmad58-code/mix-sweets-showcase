@@ -14,15 +14,20 @@ import { useProducts } from '@/hooks/useProducts';
 import { Language } from '@/i18n/translations';
 
 const categoryEmoji: Record<string, string> = {
-  'biscuiti-napolitane': '🍪',
-  'prajituri-torturi': '🎂',
-  'jeleuri-pudding': '🐻',
-  'acadele-drajeuri': '🍬',
+  'gama-magic': '✨',
+  'biscuiti': '🍪',
+  'napolitane': '🧇',
+  'prajituri-checuri': '🎂',
+  'ciocolata': '🍫',
+  'jeleuri': '🐻',
+  'budinca': '🍮',
+  'acadele': '🍭',
+  'drajeuri': '🍬',
   'marshmallow': '☁️',
-  'sucuri-spray': '🧃',
   'guma': '🫧',
-  'caramele-drops': '🍭',
-  'altele': '🎁',
+  'sucuri-spray': '🧃',
+  'caramele': '🍯',
+  'drops': '💧',
 };
 
 const FeaturedImage: React.FC<{ alt: string; slug: string }> = ({ alt, slug }) => {
