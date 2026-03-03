@@ -1,38 +1,36 @@
 
 
-## Transformare sectiune "Noutati" in "Produse de Top" cu carousel Gama Magic
+## Optimizare performanta homepage - carousel si animatii
 
-### Ce se schimba
-
-Sectiunea "Noutati si Produse Sezoniere" de pe homepage devine "Produse de Top" si va afisa produsele din Gama Magic intr-un carousel/slideshow automat.
+### Problema
+Pagina de acasa merge greu pe telefon din cauza:
+- Toate cele ~24 produse Gama Magic sunt renderizate cu animatii framer-motion (SquishyCard) in carousel - inutil deoarece carousel-ul le gestioneaza deja vizibilitatea
+- FeaturedImage incearca multiple formate de imagine prin cascada de erori (jpg -> jpeg -> png -> avif)
+- GoldParticles ruleaza 10 animatii CSS continue in hero
+- FloatingBlobs adauga elemente blur costisitoare
 
 ### Modificari
 
-**1. Traduceri (`src/i18n/translations.ts`)**
-- `seasonal.eyebrow`: "NOUTATI" -> "PRODUSE DE TOP" (ro), "TOP PRODUCTS" (en), "افضل المنتجات" (ar)
-- `seasonal.title`: "Noutati si Produse Sezoniere" -> "Produsele noastre de Top" (ro), "Our Top Products" (en), "منتجاتنا الأفضل" (ar)
-- `seasonal.subtitle`: text actualizat despre cele mai vandute produse din Gama Magic
+**1. Elimina SquishyCard din slide-urile carousel-ului (`src/pages/Index.tsx`)**
+- Slide-urile carousel-ului NU au nevoie de wrapping in framer-motion - Embla gestioneaza deja tranzitiile
+- Eliminam orice animatie per-slide, pastram doar structura HTML simpla
 
-**2. Logica produse (`src/pages/Index.tsx`)**
-- In loc de 3 produse hardcodate (FEATURED_SLUGS), filtram produsele cu `is_gama_magic === true` si luam primele 6
-- Eliminam constanta FEATURED_SLUGS
+**2. Optimizeaza FeaturedImage (`src/pages/Index.tsx`)**
+- Adaugam `loading="lazy"` si `decoding="async"` (deja exista) dar si `fetchpriority="low"` pentru imaginile din carousel care nu sunt vizibile initial
 
-**3. Carousel cu Embla (`src/pages/Index.tsx`)**
-- Proiectul are deja `embla-carousel-react` instalat
-- Inlocuim grid-ul static cu un carousel Embla cu autoplay
-- Desktop: afiseaza 3 carduri vizibile simultan, se misca automat la ~4 secunde
-- Mobil: afiseaza 1.2 carduri (peek effect - se vede partial urmatorul card), aceeasi viteza
-- Loop infinit activat
-- Cardurile pastreaza acelasi design existent (card-3d, FeaturedImage, etc.)
-- Produsele Gama Magic vor avea `bg-black` pe containerul imaginii (consistent cu pagina Products)
+**3. Reduce GoldParticles pe mobil (`src/components/GoldParticles.tsx`)**
+- Pe mobil, reducem de la 10 particule la 5 (sau le dezactivam complet) pentru a economisi resurse GPU
 
-**4. Stilizare carousel**
-- Adaugam CSS minimal in `src/index.css` pentru spatiere slide-uri Embla
-- Fara butoane next/prev vizibile (optional dots indicator discret)
-- Tranzitie smooth intre slide-uri
+**4. Adaugam `will-change: auto` si reducem blur pe FloatingBlobs pe mobil (`src/components/FloatingBlobs.tsx`)**
+- `blur-3xl` este foarte costisitor pe mobil - reducem la `blur-xl` pe mobil
+
+**5. Memoizeaza `gamaMagicProducts` cu `useMemo` (`src/pages/Index.tsx`)**
+- Logica de sortare se recalculeaza la fiecare render - o invelim in `useMemo`
 
 ### Detalii tehnice
 
-- Embla autoplay se configureaza cu `embla-carousel-autoplay` plugin - verificam daca e instalat, altfel folosim `setInterval` + `scrollNext()`
-- Pe mobil, `slidesToScroll: 1`, `align: 'start'`, cu CSS gap pentru peek effect
-- Pe desktop, `slidesToScroll: 1`, afisam 3 slide-uri prin CSS `flex: 0 0 33.33%`
+- In `GoldParticles.tsx`: verificam `window.innerWidth < 768` si generam doar 4 particule pe mobil
+- In `Index.tsx`: inlocuim `SquishyCard` wrapper din carousel cu un simplu `div`, pastram `card-3d` styling
+- In `Index.tsx`: `gamaMagicProducts` devine `useMemo(() => { ... }, [allProducts])`
+- Aceste schimbari nu afecteaza designul vizual, doar elimina overhead-ul de animatie si rendering
+
