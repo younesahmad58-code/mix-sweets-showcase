@@ -1,6 +1,9 @@
 import React from 'react';
 
-const particles = Array.from({ length: 10 }, (_, i) => ({
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+const particleCount = isMobile ? 4 : 10;
+
+const particles = Array.from({ length: particleCount }, (_, i) => ({
   left: `${Math.random() * 100}%`,
   size: 2 + Math.random() * 1.5,
   opacity: 0.4 + Math.random() * 0.3,
