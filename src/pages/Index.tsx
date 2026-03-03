@@ -98,7 +98,24 @@ const Index: React.FC = () => {
   ];
 
   const { products: allProducts } = useProducts();
-  const gamaMagicProducts = allProducts.filter(p => p.is_gama_magic);
+  const gamaMagicProducts = (() => {
+    const magic = allProducts.filter(p => p.is_gama_magic);
+    // Slugs that have no image file in public/products/
+    const noImageSlugs = new Set(['1523', '1524', '1525', '1578', '1580']);
+    // Group napolitana magic variants together in order
+    const napolitanaOrder = ['ciocolata', 'fistic', 'lapte', 'strawberry'];
+    const isNapolitana = (p: typeof magic[0]) =>
+      p.name_ro.toLowerCase().includes('napolitana magic') &&
+      !p.name_ro.toLowerCase().includes('glz');
+    const napolitanas = napolitanaOrder
+      .map(variant => magic.find(p => isNapolitana(p) && p.name_ro.toLowerCase().includes(variant)))
+      .filter(Boolean) as typeof magic;
+    const rest = magic.filter(p => !napolitanas.includes(p));
+    // Products with images first, without last
+    const withImg = rest.filter(p => !noImageSlugs.has(p.slug));
+    const noImg = rest.filter(p => noImageSlugs.has(p.slug));
+    return [...napolitanas, ...withImg, ...noImg];
+  })();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 });
 
