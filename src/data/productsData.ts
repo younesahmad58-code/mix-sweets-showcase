@@ -301,7 +301,7 @@ export const productsData: Product[] = [
   { cod: 958, name: "LOVA FRUIT JAM", weight: "20G", cutieBox: 12, bucCutie: 30, baxuriPalet: null },
   { cod: 1014, name: "SUPER CAR GUMMY", weight: "20G", cutieBox: 12, bucCutie: 20, baxuriPalet: null },
   { cod: 870, name: "JELLY PIZZA", weight: "50G", cutieBox: 10, bucCutie: 30, baxuriPalet: null },
-  { cod: 1195, name: "WATERMELON JELLY", weight: "55G", cutieBox: 12, bucCutie: 20, baxuriPalet: null },
+  { cod: 1195, name: "WATERMELON JELLY", weight: "55G", cutieBox: 12, bucCutie: 20, baxuriPalet: 40 },
   { cod: 1389, name: "JELEU SKULL", weight: "52G", cutieBox: 10, bucCutie: 30, baxuriPalet: null },
   { cod: 272, name: "JELLY TRAFFIC LIGHT MARE", weight: "45G", cutieBox: 12, bucCutie: 20, baxuriPalet: null },
   { cod: 1234, name: "JELEU TRAFFIC LIGHT MINI", weight: "12G", cutieBox: 20, bucCutie: 30, baxuriPalet: null },
