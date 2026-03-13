@@ -203,7 +203,7 @@ export const productsData: Product[] = [
   { cod: 1161, name: "ACADELE HARMONICA & FISH", weight: "3G", cutieBox: 12, bucCutie: 60, baxuriPalet: null },
   { cod: 1164, name: "ACADELE LANTERNA", weight: "4.5G", cutieBox: 12, bucCutie: 20, baxuriPalet: null },
   { cod: 962, name: "ACADELE WINDMILL", weight: "8G", cutieBox: 18, bucCutie: 30, baxuriPalet: null },
-  { cod: 1200, name: "ACADELE CRAZY POPPING", weight: "10G", cutieBox: 12, bucCutie: 12, baxuriPalet: null },
+  { cod: 1200, name: "ACADELE CRAZY POPPING STAND", weight: "10G", cutieBox: 12, bucCutie: 12, baxuriPalet: 30 },
   { cod: 1119, name: "ACADELE MINI SHOOTER", weight: "3G", cutieBox: 12, bucCutie: 24, baxuriPalet: null },
   { cod: 1123, name: "ACADELE OCHI SKELET", weight: "10G", cutieBox: 20, bucCutie: 30, baxuriPalet: null },
   { cod: 582, name: "ACADELE MONSTER PRESTIGE", weight: "15G", cutieBox: 20, bucCutie: 30, baxuriPalet: null },
