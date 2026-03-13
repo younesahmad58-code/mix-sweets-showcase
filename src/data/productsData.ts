@@ -311,7 +311,7 @@ export const productsData: Product[] = [
   { cod: 1128, name: "JELEU BOL CAPSUNI", weight: "18G", cutieBox: 6, bucCutie: 50, baxuriPalet: null },
   { cod: 1129, name: "JELEU BOL RATA", weight: "18G", cutieBox: 6, bucCutie: 50, baxuriPalet: null },
   { cod: 1130, name: "JELEU BOL PEPENE", weight: "18G", cutieBox: 6, bucCutie: 50, baxuriPalet: null },
-  { cod: 1256, name: "JELEU GUMMY 3D OCHI", weight: "8G", cutieBox: 12, bucCutie: 50, baxuriPalet: null },
+  { cod: 1256, name: "JELEU GUMMY 3D OCHI", weight: "8G", cutieBox: 12, bucCutie: 50, baxuriPalet: 55 },
   { cod: 1257, name: "JELEU GUMMY BIRDS", weight: "8G", cutieBox: 12, bucCutie: 50, baxuriPalet: null },
   { cod: 1255, name: "JELEU GUMMY KT CAT", weight: "8G", cutieBox: 12, bucCutie: 50, baxuriPalet: null },
   { cod: 1261, name: "JELEU GUMMY TENNIS", weight: "8G", cutieBox: 12, bucCutie: 50, baxuriPalet: null },
