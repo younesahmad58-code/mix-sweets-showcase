@@ -18,15 +18,20 @@ export interface Product {
 }
 
 export const categories = [
-  { id: 'biscuiti-napolitane', label: { ro: 'Biscuiți & Napolitane', en: 'Biscuits & Wafers', ar: 'بسكويت وويفر' } },
-  { id: 'prajituri-torturi', label: { ro: 'Prăjituri & Torturi', en: 'Cakes & Pastries', ar: 'كعك ومعجنات' } },
-  { id: 'jeleuri-pudding', label: { ro: 'Jeleuri & Pudding', en: 'Jellies & Pudding', ar: 'جيلي وبودنغ' } },
-  { id: 'acadele-drajeuri', label: { ro: 'Acadele & Drajeuri', en: 'Lollipops & Dragees', ar: 'مصاصات ودراجي' } },
+  { id: 'gama-magic', label: { ro: 'Gama Magic', en: 'Magic Range', ar: 'مجموعة ماجيك' } },
+  { id: 'biscuiti', label: { ro: 'Biscuiți', en: 'Biscuits', ar: 'بسكويت' } },
+  { id: 'napolitane', label: { ro: 'Napolitane', en: 'Wafers', ar: 'ويفر' } },
+  { id: 'prajituri-checuri', label: { ro: 'Prăjituri & Checuri', en: 'Cakes & Pastries', ar: 'كعك ومعجنات' } },
+  { id: 'ciocolata', label: { ro: 'Ciocolată', en: 'Chocolate', ar: 'شوكولاتة' } },
+  { id: 'jeleuri', label: { ro: 'Jeleuri', en: 'Jellies', ar: 'جيلي' } },
+  { id: 'budinca', label: { ro: 'Budincă', en: 'Pudding', ar: 'بودنغ' } },
+  { id: 'acadele', label: { ro: 'Acadele', en: 'Lollipops', ar: 'مصاصات' } },
+  { id: 'drajeuri', label: { ro: 'Drajeuri', en: 'Dragees', ar: 'دراجي' } },
   { id: 'marshmallow', label: { ro: 'Marshmallow', en: 'Marshmallow', ar: 'مارشميلو' } },
-  { id: 'sucuri-spray', label: { ro: 'Sucuri & Spray', en: 'Drinks & Spray', ar: 'مشروبات ورذاذ' } },
   { id: 'guma', label: { ro: 'Gumă', en: 'Gum', ar: 'علكة' } },
-  { id: 'caramele-drops', label: { ro: 'Caramele & Drops', en: 'Caramels & Drops', ar: 'كراميل ودروبس' } },
-  { id: 'altele', label: { ro: 'Altele', en: 'Other', ar: 'أخرى' } },
+  { id: 'sucuri-spray', label: { ro: 'Sucuri Spray', en: 'Drinks & Spray', ar: 'مشروبات ورذاذ' } },
+  { id: 'caramele', label: { ro: 'Caramele', en: 'Caramels', ar: 'كراميل' } },
+  { id: 'drops', label: { ro: 'Drops', en: 'Drops', ar: 'دروبس' } },
 ];
 
 function categorizeProduct(name: string): string {

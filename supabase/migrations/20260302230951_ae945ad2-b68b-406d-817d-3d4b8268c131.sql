@@ -1,0 +1,1 @@
+ALTER TABLE products ADD COLUMN is_gama_magic BOOLEAN DEFAULT FALSE;

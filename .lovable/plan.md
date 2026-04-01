@@ -1,49 +1,36 @@
 
 
-## Disable SquishyCard Animation on Mobile
+## Optimizare performanta homepage - carousel si animatii
 
-**File:** `src/components/SquishyCard.tsx` -- one small change to skip entrance animation on mobile.
+### Problema
+Pagina de acasa merge greu pe telefon din cauza:
+- Toate cele ~24 produse Gama Magic sunt renderizate cu animatii framer-motion (SquishyCard) in carousel - inutil deoarece carousel-ul le gestioneaza deja vizibilitatea
+- FeaturedImage incearca multiple formate de imagine prin cascada de erori (jpg -> jpeg -> png -> avif)
+- GoldParticles ruleaza 10 animatii CSS continue in hero
+- FloatingBlobs adauga elemente blur costisitoare
 
-### Change
+### Modificari
 
-Detect mobile viewport at the top of the component and conditionally disable framer-motion entrance animation while keeping the hover CSS effect.
+**1. Elimina SquishyCard din slide-urile carousel-ului (`src/pages/Index.tsx`)**
+- Slide-urile carousel-ului NU au nevoie de wrapping in framer-motion - Embla gestioneaza deja tranzitiile
+- Eliminam orice animatie per-slide, pastram doar structura HTML simpla
 
-### Updated code
+**2. Optimizeaza FeaturedImage (`src/pages/Index.tsx`)**
+- Adaugam `loading="lazy"` si `decoding="async"` (deja exista) dar si `fetchpriority="low"` pentru imaginile din carousel care nu sunt vizibile initial
 
-```tsx
-import React from 'react';
-import { motion } from 'framer-motion';
+**3. Reduce GoldParticles pe mobil (`src/components/GoldParticles.tsx`)**
+- Pe mobil, reducem de la 10 particule la 5 (sau le dezactivam complet) pentru a economisi resurse GPU
 
-interface SquishyCardProps {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}
+**4. Adaugam `will-change: auto` si reducem blur pe FloatingBlobs pe mobil (`src/components/FloatingBlobs.tsx`)**
+- `blur-3xl` este foarte costisitor pe mobil - reducem la `blur-xl` pe mobil
 
-const SquishyCard: React.FC<SquishyCardProps> = ({ children, className = '', delay = 0 }) => {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+**5. Memoizeaza `gamaMagicProducts` cu `useMemo` (`src/pages/Index.tsx`)**
+- Logica de sortare se recalculeaza la fiecare render - o invelim in `useMemo`
 
-  return (
-    <motion.div
-      initial={isMobile ? false : { opacity: 0, y: 16 }}
-      whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={isMobile ? undefined : { duration: 0.3, delay, ease: 'easeOut' }}
-      className={`hover:-translate-y-2 transition-transform duration-300 ${className}`}
-    >
-      {children}
-    </motion.div>
-  );
-};
+### Detalii tehnice
 
-export default SquishyCard;
-```
-
-### What changes
-- Component becomes a function body (not arrow expression) so we can add the `isMobile` check
-- `isMobile` reads `window.innerWidth < 768` at render time -- no state/effect needed since it's a snapshot check
-- `initial={false}` on mobile tells framer-motion to skip the initial animation entirely
-- `whileInView` and `transition` are `undefined` on mobile, so no animation runs
-- Hover CSS effect (`hover:-translate-y-2`) remains on all devices
-- No other files or styling changes
+- In `GoldParticles.tsx`: verificam `window.innerWidth < 768` si generam doar 4 particule pe mobil
+- In `Index.tsx`: inlocuim `SquishyCard` wrapper din carousel cu un simplu `div`, pastram `card-3d` styling
+- In `Index.tsx`: `gamaMagicProducts` devine `useMemo(() => { ... }, [allProducts])`
+- Aceste schimbari nu afecteaza designul vizual, doar elimina overhead-ul de animatie si rendering
 

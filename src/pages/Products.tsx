@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
 import { categories } from '@/data/products';
@@ -66,12 +66,37 @@ const Products: React.FC = () => {
   };
 
   const filtered = useMemo(() => {
-    return products.filter(p => {
-      const matchCat = activeCategory === 'all' || p.category === activeCategory;
+    const base = products.filter(p => {
+      const matchCat =
+        activeCategory === 'all' ||
+        (activeCategory === 'gama-magic' ? (p as any).is_gama_magic : p.category === activeCategory);
       const q = search.toLowerCase();
       const matchSearch = !search || getName(p).toLowerCase().includes(q) || p.slug.toLowerCase().includes(q);
       return matchCat && matchSearch;
     });
+    // When viewing Gama Magic, group napolitana variants together
+    if (activeCategory === 'gama-magic' && !search) {
+      const napolitanaOrder = ['ciocolata', 'fistic', 'lapte', 'strawberry'];
+      const isNapolitana = (p: any) =>
+        p.name_ro.toLowerCase().includes('napolitana magic') &&
+        !p.name_ro.toLowerCase().includes('glz');
+      const napolitanas = napolitanaOrder
+        .map(variant => base.find(p => isNapolitana(p) && p.name_ro.toLowerCase().includes(variant)))
+        .filter(Boolean) as typeof base;
+      // GLZ variants right after
+      const glzOrder = ['ciocolata', 'vanilie'];
+      const isGlz = (p: any) => p.name_ro.toLowerCase().includes('napolitana magic glz');
+      const glzVariants = glzOrder
+        .map(variant => base.find(p => isGlz(p) && p.name_ro.toLowerCase().includes(variant)))
+        .filter(Boolean) as typeof base;
+      const grouped = new Set([...napolitanas, ...glzVariants].map(p => p.id));
+      const rest = base.filter(p => !grouped.has(p.id));
+      const noImageSlugs = new Set(['1523', '1524', '1525', '1578', '1580']);
+      const withImg = rest.filter(p => !noImageSlugs.has(p.slug));
+      const noImg = rest.filter(p => noImageSlugs.has(p.slug));
+      return [...napolitanas, ...glzVariants, ...withImg, ...noImg];
+    }
+    return base;
   }, [activeCategory, search, lang, products]);
 
   const visible = filtered.slice(0, visibleCount);
@@ -117,7 +142,55 @@ const Products: React.FC = () => {
                 />
               </div>
 
-              <div className="flex flex-wrap lg:flex-col gap-2">
+              {/* Mobile: horizontal scroll */}
+              <div className="lg:hidden relative">
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('cat-scroll');
+                      if (el) el.scrollBy({ left: -150, behavior: 'smooth' });
+                    }}
+                    className="shrink-0 p-1.5 rounded-full bg-muted border border-border text-muted-foreground hover:text-foreground"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <div id="cat-scroll" className="flex gap-2 overflow-x-auto scroll-smooth no-scrollbar">
+                    <motion.button
+                      onClick={() => setCategory('all')}
+                      whileTap={{ scale: 0.95 }}
+                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all ${
+                        activeCategory === 'all' ? 'bg-primary text-cream' : 'bg-muted text-foreground border border-border'
+                      }`}
+                    >
+                      {t('products.all')}
+                    </motion.button>
+                    {categories.map(cat => (
+                      <motion.button
+                        key={cat.id}
+                        onClick={() => setCategory(cat.id)}
+                        whileTap={{ scale: 0.95 }}
+                        className={`shrink-0 px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+                          activeCategory === cat.id ? 'bg-primary text-cream' : 'bg-muted text-foreground border border-border'
+                        }`}
+                      >
+                        {cat.label[lang]}
+                      </motion.button>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('cat-scroll');
+                      if (el) el.scrollBy({ left: 150, behavior: 'smooth' });
+                    }}
+                    className="shrink-0 p-1.5 rounded-full bg-muted border border-border text-muted-foreground hover:text-foreground"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Desktop: vertical list */}
+              <div className="hidden lg:flex flex-col gap-2">
                 <motion.button
                   onClick={() => setCategory('all')}
                   whileHover={{ scale: 1.02 }}
@@ -159,7 +232,7 @@ const Products: React.FC = () => {
                       <SquishyCard key={product.id} delay={Math.min(i * 0.04, 0.4)}>
                         <Link to={`/products/${product.slug}`} className="group block h-full">
                           <div className="bg-card rounded-[20px] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.15)] transition-all duration-500 border border-gold/[0.15] flex flex-col h-full">
-                            <div className="aspect-[4/3] bg-white relative overflow-hidden p-2 md:p-3">
+                            <div className={`aspect-[4/3] relative overflow-hidden ${product.is_gama_magic ? 'bg-black' : 'bg-white p-2 md:p-3'}`}>
                               <ProductImage
                                 alt={getName(product)}
                                 slug={product.slug}
